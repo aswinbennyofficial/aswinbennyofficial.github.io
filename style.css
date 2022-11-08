@@ -114,6 +114,46 @@ margin-right: 30px;
     border-radius: 20px;
     max-width: 500px;
 }
+
+
+
+
+/* bars */
+
+  
+  .middle {
+    margin-top:10px;
+    float: left;
+    width: 70%;
+  }
+  
+  
+ 
+  
+  /* The bar container */
+  .bar-container {
+    width: 100%;
+    background-color: #f1f1f1;
+    text-align: center;
+    color: white;
+  }
+  
+  /* Individual bars */
+  .bar-5 {width: 80%; height: 18px; background-color: #04AA6D;}
+  .bar-4 {width: 60%; height: 18px; background-color: #04AA6D;}
+  .bar-3 {width: 10%; height: 18px; background-color: #04AA6D;}
+  .bar-2 {width: 35%; height: 18px; background-color: #04AA6D;}
+  .bar-1 {width: 30%; height: 18px; background-color: #04AA6D;}
+  .bar-6 {width: 25%; height: 18px; background-color: #04AA6D;}
+
+
+  .row{
+    min-width: 250px;
+  }
+  
+  /* Responsive layout - make the columns stack on top of each other instead of next to each other */
+  
+
 /* Disabled elements */
 
 /* h2{
