@@ -8,6 +8,7 @@ main{
     justify-content: center;
     margin: 20px;
     flex-direction: column;
+    align-items: center;
 }
 
 
@@ -26,7 +27,7 @@ main{
     align-items: center;
     padding: 20px;
     background-color: saddlebrown;
-    margin: 30px;
+    margin: 20px;
     border-radius: 20px;
     max-width: 500px;
 }
@@ -96,6 +97,23 @@ margin-right: 30px;
     text-align: justify;
   }
 
+  .fa-school{
+    font-size: 14px;
+  }
+
+ 
+
+.about-profile2 {
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: saddlebrown;
+    margin: 20px;
+    border-radius: 20px;
+    max-width: 500px;
+}
 /* Disabled elements */
 
 /* h2{
