@@ -39,9 +39,10 @@ margin-right: 30px;
 }
 
 .socio{
-    background-color: saddlebrown;
+    /* background-color: saddlebrown; */
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 @media only screen and (max-width:600px) {
@@ -50,15 +51,43 @@ margin-right: 30px;
 }
 
 .fab {  
-    padding: 20px;  
-    text-align: center;  
-    margin: 5px 2px;  
-    font-size: 30px;  
-    width: 50px;  
+    margin: 8px;
+    padding: 10px;
+    font-size: 30px;
+    width: 30px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 50%;
+    font-family: "Font Awesome 5 Brands"; 
   }  
 
   a{
     text-decoration: none;
+  }
+
+  .fa-discord{
+    color: #18359c;
+    background-color: rgba(240, 248, 255, 0.61);
+  }
+
+  .fa-twitter{
+    color: #18359c;
+    background-color: rgba(240, 248, 255, 0.61);
+  }
+
+  .fa-instagram{
+    color: #18359c;
+    background-color: rgba(240, 248, 255, 0.61);
+  }
+
+  .fa-github{
+    color: #18359c;
+    background-color: rgba(240, 248, 255, 0.61);
+  }
+
+  .fa-linkedin{
+    color: #18359c;
+    background-color: rgba(240, 248, 255, 0.61);
   }
 
 /* Disabled elements */
