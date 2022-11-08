@@ -28,6 +28,7 @@ main{
     background-color: saddlebrown;
     margin: 30px;
     border-radius: 20px;
+    max-width: 500px;
 }
 
 .about-profile > img{
@@ -35,6 +36,7 @@ border-radius: 250px;
 width: 150px;
 margin-left: 30px;
 margin-right: 30px;
+
 
 }
 
@@ -88,6 +90,10 @@ margin-right: 30px;
   .fa-linkedin{
     color: #18359c;
     background-color: rgba(240, 248, 255, 0.61);
+  }
+
+  .about-block>p{
+    text-align: justify;
   }
 
 /* Disabled elements */
