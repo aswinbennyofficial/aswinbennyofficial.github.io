@@ -48,10 +48,7 @@ margin-right: 30px;
     flex-wrap: wrap;
 }
 
-@media only screen and (max-width:600px) {
 
-    
-}
 
 .fab {  
     margin: 8px;
@@ -123,8 +120,7 @@ margin-right: 30px;
   
   .middle {
     margin-top:10px;
-    float: left;
-    width: 70%;
+    width: 100%;
   }
   
   
@@ -149,6 +145,21 @@ margin-right: 30px;
 
   .row{
     min-width: 250px;
+  }
+
+  .about{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+
+  @media only screen and (max-width:760px) {
+
+    .about{
+      display: flow-root;
+    }
+      
   }
   
   /* Responsive layout - make the columns stack on top of each other instead of next to each other */
