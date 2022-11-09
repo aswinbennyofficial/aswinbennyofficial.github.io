@@ -1,6 +1,8 @@
 
 body{
     margin: 0px; color: aliceblue; font-family: 'Poppins', sans-serif; background-color: rgb(22 22 22);
+    background-image:url(res/bg.png);
+  
 }
 
 main{
