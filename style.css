@@ -29,15 +29,15 @@ main{
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    background-color: saddlebrown;
+    /* background-color: saddlebrown; */
     margin: 20px;
     border-radius: 20px;
     max-width: 500px;
-    box-shadow: rgb(0 0 0 / 80%) 14px 19px 15px;
-    backdrop-filter: blur(23px);
+    /* box-shadow: rgb(0 0 0 / 80%) 14px 19px 15px;
+    backdrop-filter: blur(23px); */
 
-    /* backdrop-filter: blur(23px);
-    box-shadow: rgb(0 0 0 / 99%) 1px 1px 15px 13px; */
+    backdrop-filter: blur(23px);
+    box-shadow:rgb(179 49 49 / 71%) 1px 1px 15px 8px ;
 }
 
 .about-profile > img{
@@ -114,10 +114,13 @@ margin-right: 30px;
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    background-color: saddlebrown;
+    /* background-color: saddlebrown; */
     margin: 20px;
     border-radius: 20px;
     max-width: 500px;
+
+    backdrop-filter: blur(23px);
+    box-shadow:rgb(0 0 0 / 85%) 1px 1px 15px 7px;
 }
 
 
@@ -170,66 +173,4 @@ margin-right: 30px;
       
   }
   
-  /* Responsive layout - make the columns stack on top of each other instead of next to each other */
   
-
-/* Disabled elements */
-
-/* h2{
-    color: rgb(250, 142, 1); padding: 20px;
-} */
-
-
-/* header{
-    background-color: black;width: 100%; display: flex; flex-wrap: wrap; justify-content: space-between;
-}
-
-nav > ul > li
-{
-    color: aliceblue; list-style: none;
-}
-
-li > a{
-    color: aliceblue; text-decoration: none;
-}
-
-header > div > h1{
-    padding-left: 15px;
-}
-
-nav > ul{
-    display: flex;
-    flex-wrap: wrap;
-    
-}
-
-nav > ul > li{
-    padding-right: 30px;
-}
-
-nav{
-    align-self: center;
-}
-
-
-footer{
-    background-color: black;width: 100%; display: flex; flex-wrap: wrap; justify-content: space-between; margin-bottom: 0; position: static; bottom: 0px;
-}
-
-#cpr8{
-    padding-left: 20px;
-} 
-
-@media only screen and (max-width:600px) {
-
-     header{
-        flex-direction: column; align-content: space-around;
-    }
-    
-    footer{
-        align-items: center;flex-direction: column; align-content: space-around;
-    } 
-}
-
-
-*/
