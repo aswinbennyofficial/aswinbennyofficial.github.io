@@ -33,6 +33,11 @@ main{
     margin: 20px;
     border-radius: 20px;
     max-width: 500px;
+    box-shadow: rgb(0 0 0 / 80%) 14px 19px 15px;
+    backdrop-filter: blur(23px);
+
+    /* backdrop-filter: blur(23px);
+    box-shadow: rgb(0 0 0 / 99%) 1px 1px 15px 13px; */
 }
 
 .about-profile > img{
@@ -103,7 +108,7 @@ margin-right: 30px;
 
  
 
-.about-profile2 {
+.about-profile-two {
     display:flex;
     justify-content: center;
     flex-direction: column;
