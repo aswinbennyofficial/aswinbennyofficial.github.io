@@ -1,227 +1,141 @@
 
-body{
-    margin: 0px; color: aliceblue; font-family: 'Poppins', sans-serif; background-color: rgb(22 22 22);
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-main{
-    display: flex;
-    justify-content: center;
-    margin: 20px;
-    flex-direction: column;
-    align-items: center;
-}
-
-
-
-
-
-.about-block {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.about-profile {
-    display:flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    background-color: saddlebrown;
-    margin: 20px;
-    border-radius: 20px;
-    max-width: 500px;
-}
-
-.about-profile > img{
-border-radius: 250px;
-width: 150px;
-margin-left: 30px;
-margin-right: 30px;
-
-
-}
-
-.socio{
-    /* background-color: saddlebrown; */
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-
-
-.fab {  
-    margin: 8px;
-    padding: 10px;
-    font-size: 30px;
-    width: 30px;
-    text-align: center;
-    text-decoration: none;
-    border-radius: 50%;
-    font-family: "Font Awesome 5 Brands"; 
-  }  
-
-  a{
-    text-decoration: none;
-  }
-
-  .fa-discord{
-    color: #18359c;
-    background-color: rgba(240, 248, 255, 0.61);
-  }
-
-  .fa-twitter{
-    color: #18359c;
-    background-color: rgba(240, 248, 255, 0.61);
-  }
-
-  .fa-instagram{
-    color: #18359c;
-    background-color: rgba(240, 248, 255, 0.61);
-  }
-
-  .fa-github{
-    color: #18359c;
-    background-color: rgba(240, 248, 255, 0.61);
-  }
-
-  .fa-linkedin{
-    color: #18359c;
-    background-color: rgba(240, 248, 255, 0.61);
-  }
-
-  .about-block>p{
-    text-align: justify;
-  }
-
-  .fa-school{
-    font-size: 14px;
-  }
-
- 
-
-.about-profile2 {
-    display:flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    background-color: saddlebrown;
-    margin: 20px;
-    border-radius: 20px;
-    max-width: 500px;
-}
-
-
-
-
-/* bars */
-
-  
-  .middle {
-    margin-top:10px;
-    width: 100%;
-  }
-  
-  
- 
-  
-  /* The bar container */
-  .bar-container {
-    width: 100%;
-    background-color: #f1f1f1;
-    text-align: center;
-    color: white;
-  }
-  
-  /* Individual bars */
-  .bar-5 {width: 80%; height: 18px; background-color: #04AA6D;}
-  .bar-4 {width: 60%; height: 18px; background-color: #04AA6D;}
-  .bar-3 {width: 10%; height: 18px; background-color: #04AA6D;}
-  .bar-2 {width: 35%; height: 18px; background-color: #04AA6D;}
-  .bar-1 {width: 30%; height: 18px; background-color: #04AA6D;}
-  .bar-6 {width: 25%; height: 18px; background-color: #04AA6D;}
-
-
-  .row{
-    min-width: 250px;
-  }
-
-  .about{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-bottom: 30px;
-  }
-
-  @media only screen and (max-width:760px) {
-
-    .about{
-      display: flow-root;
-    }
-      
-  }
-  
-  /* Responsive layout - make the columns stack on top of each other instead of next to each other */
-  
-
-/* Disabled elements */
-
-/* h2{
-    color: rgb(250, 142, 1); padding: 20px;
-} */
-
-
-/* header{
-    background-color: black;width: 100%; display: flex; flex-wrap: wrap; justify-content: space-between;
-}
-
-nav > ul > li
-{
-    color: aliceblue; list-style: none;
-}
-
-li > a{
-    color: aliceblue; text-decoration: none;
-}
-
-header > div > h1{
-    padding-left: 15px;
-}
-
-nav > ul{
-    display: flex;
-    flex-wrap: wrap;
+    <!-- css -->
+    <link rel="stylesheet" href="style.css">
     
-}
 
-nav > ul > li{
-    padding-right: 30px;
-}
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
 
-nav{
-    align-self: center;
-}
-
-
-footer{
-    background-color: black;width: 100%; display: flex; flex-wrap: wrap; justify-content: space-between; margin-bottom: 0; position: static; bottom: 0px;
-}
-
-#cpr8{
-    padding-left: 20px;
-} 
-
-@media only screen and (max-width:600px) {
-
-     header{
-        flex-direction: column; align-content: space-around;
-    }
+    <!-- Fontawesome-->
+     
+     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"> 
     
-    footer{
-        align-items: center;flex-direction: column; align-content: space-around;
-    } 
-}
 
+    <title>Aswin Benny</title> <!-- change title-->
+</head>
+<header>
+    <!-- <div><h2> Aswin Benny</h2></div>
+    <nav>
+        <ul>
+            <li> <a href="../index.html">Home</a> </li>
+            <li> <a href="../pages/about.html">About</a> </li>
+            <li> <a href="../pages/blog.html">Blog</a> </li>
+        </ul>
+    </nav> -->
 
-*/
+</header>
+<main>
+    <div class="about-block">
+    <div class="about-profile">
+        <img src="../res/avatar1.jpeg">
+        <h1>Aswin Benny</h1>
+        <p>Being curious what makes something tick, I always had the habit of breaking things to the  tiny details and restoring them..<br>
+        Yes, for me tiny details matter..</p>
+        
+    </div>
+    </div>
+
+    
+    <div class="socio">
+        <div>
+        <a href="https://discordapp.com/users/863725040738369556" rel="nofollow" target="_blank" class="fab fa-discord"></a>
+        <a href="https://twitter.com/Aswinbenny_com" rel="nofollow" target="_blank" class="fab fa-twitter"></a>
+        <a href="https://www.instagram.com/aswinbenny.official" rel="nofollow" target="_blank" class="fab fa-instagram"></a>
+        </div>
+
+        <div>
+        <a href="https://github.com/aswinbennyofficial" rel="nofollow" target="_blank" class="fab fa-github"></a>
+        <a href="https://www.linkedin.com/in/aswinbenny/" rel="nofollow" target="_blank" class="fab fa-linkedin"></a>
+        </div>
+    </div>
+   
+   <div class="about"> 
+        <div class="about-profile2">
+            <p> <i class="fas fa-laptop-code"></i> Techphilic<br>
+            <i class="fas fa-map-marker-alt"></i> Wayanad, Kerala, India <br>
+                
+            <i class="fas fa-school"></i> Lovely Professional University, Punjab <br>
+            
+            </p> 
+            
+            
+        </div>
+
+        <div class="about-profile2">
+            
+            <div class="row">
+                
+                <div class="middle">
+                    HTML
+                  <div class="bar-container">
+                    <div class="bar-5"></div>
+                  </div>
+                </div>
+                
+                <div class="middle">
+                    CSS
+                  <div class="bar-container">
+                    <div class="bar-4"></div>
+                  </div>
+                </div>
+                
+                <div class="middle">
+                    React
+                  <div class="bar-container">
+                    <div class="bar-3"></div>
+                  </div>
+                </div>
+                
+                
+                <div class="middle">
+                    Java
+                  <div class="bar-container">
+                    <div class="bar-2"></div>
+                  </div>
+                </div>
+              
+                
+                <div class="middle">
+                    Python
+                  <div class="bar-container">
+                    <div class="bar-1"></div>
+                  </div>
+                </div>
+
+                <div class="middle">
+                    Linux
+                  <div class="bar-container">
+                    <div class="bar-6"></div>
+                  </div>
+                </div>
+                
+              </div>
+        </div>
+    </div>
+
+</main>
+
+<!-- <footer>
+    <div><p id="cpr8">&#169; copyright </p></div>
+    <nav>
+        <ul>
+            <li> <a href="../pages/contact.html">Contact Us</a> </li>
+            <li> <a href="../pages/feedback.html">Feedback</a> </li>
+            
+        </ul>
+    </nav>
+</footer> -->
+
+<body>
+    
+</body>
+</html>
