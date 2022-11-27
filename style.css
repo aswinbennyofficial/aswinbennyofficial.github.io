@@ -71,6 +71,7 @@ margin-right: 30px;
 
   a{
     text-decoration: none;
+    color: #f1f1f1;
   }
 
   .fa-discord{
@@ -181,4 +182,16 @@ margin-right: 30px;
 
   .about-profile-two > p{
     line-height: 35px;
+  }
+
+  button{
+    margin-top: 5px;
+    color: white;
+    background-color: transparent;
+    backdrop-filter: blur(10px);
+    box-shadow: rgb(179 49 49 / 71%) 0px 0 7px 1px;
+    border: 0px;
+    height: 35px;
+    width: 150px;
+    border-radius: 5px;
   }
