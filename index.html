@@ -1,153 +1,189 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link rel="shortcut icon" href="/res/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/res/favicon.ico" type="image/x-icon">
-
-    <!-- css -->
-    <link rel="stylesheet" href="style.css">
-    
-
-    <!-- fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
-
-    <!-- Fontawesome-->
-     
-     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"> 
-    
-    <!-- Feel free to use this theme. source is available at https://github.com/aswinbennyofficial -->
-    <title>Aswin Benny</title> <!-- change title-->
+    <title>Aswin Benny</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.9.4/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @media (max-width: 1023px) {
+            .drawer-content {
+                padding-top: 0;
+            }
+        }
+    </style>
 </head>
-<header>
-    
+<body class="bg-base-300 text-base-content">
+    <div class="drawer lg:drawer-open">
+        <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
+        <div class="drawer-content flex flex-col items-center p-4">
+            <!-- <label for="my-drawer-2" class="btn btn-primary drawer-button lg:hidden fixed top-2 left-2 z-50">
+                Menu
+            </label> -->
+            
+            <!-- Main content -->
+            <div class="max-w-4xl w-full space-y-8 mt-8 lg:mt-0">
+                <!-- Personal info - visible only on mobile -->
+                <div class="lg:hidden">
+                    <h1 class="text-3xl font-bold text-center mb-4">Aswin Benny</h1>
+                    <div class="flex flex-col items-center space-y-2 mb-8">
+                        <div class="avatar">
+                            <div class="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                                <img src="./res/avatar1.jpeg" alt="Aswin Benny" />
+                            </div>
+                        </div>
+                        <p class="text-lg"> Wayanad, Kerala, India</p>
+                        <div class="flex flex-wrap justify-center gap-2">
+                            <a href="https://linkedin.com/in/aswinbennyofficial" class="btn btn-sm btn-outline">LinkedIn</a>
+                            <a href="https://github.com/aswinbennyofficial" class="btn btn-sm btn-outline">GitHub</a>
+                            <a href="https://leetcode.com/aswinbenny/" class="btn btn-sm btn-outline">LeetCode</a>
+                            <a href="https://aswinbenny.in/" class="btn btn-sm btn-outline">Website</a>
+                            <a href="https://discordapp.com/users/863725040738369556" class="btn btn-sm btn-outline">Discord</a>
+                        </div>
+                        <a href="https://drive.google.com/uc?export=download&id=1CUWTsMKTp2AZn35K_V4wWzwChCv9miYg" class="btn btn-primary mt-4">Download Resume</a>
+                    </div>
+                </div>
 
-</header>
-<main>
-    <div class="about-block">
-    <div class="about-profile">
-        <img src="../res/avatar1.jpeg">
-        <h1>Aswin Benny</h1>
-        <p>Exploring Backend with Golang | Leetcode 195+ | GDSC LPU 
-          |<br> CSE'26 @ LPU</p>
+                <h2 id="work-experience" class="text-3xl font-bold mb-4">Work Experience</h2>
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <h3 class="card-title text-xl">Backend Intern at Asvatthi</h3>
+                        <p class="text-sm">February 2024 - Present</p>
+                        <ul class="list-disc list-inside text-sm mt-2">
+                            <li>Designed and integrated complete asynchronous processing infrastructure</li>
+                            <li>Developed resource-aware multi-node task dispatcher and load balancer</li>
+                            <li>Created real-time status update mechanism using SSE and Redis Streams</li>
+                            <li>Engineered distributed monitoring solution for server utilization</li>
+                            <li>Constructed worker pool system for task processing</li>
+                            <li>Developed email subsystem with template support and LRU caching</li>
+                            <li>Deployed system on Google Cloud Compute Engine</li>
+                            <li>Enhanced repository clone performance and resolved OAuth issues</li>
+                        </ul>
+                        <p class="text-sm mt-2"><strong>Technologies Used:</strong> Golang, Redis, Docker, MongoDB, Git, Stripe, SSE, Pub/Sub, GCloud, Redis Streams, ECR</p>
+                    </div>
+                </div>
 
+                <h2 id="education" class="text-3xl font-bold mb-4">Education</h2>
+                <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body">
+                            <h3 class="card-title text-xl">Lovely Professional University</h3>
+                            <p class="text-sm">Punjab, India</p>
+                            <p class="text-sm">Bachelor of Technology in Computer Science and Engineering</p>
+                            <p class="text-sm">CGPA: 8.79</p>
+                            <p class="text-sm">Aug. 2022 - May 2026</p>
+                        </div>
+                    </div>
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body">
+                            <h3 class="card-title text-xl">Sacred Hearts HS School</h3>
+                            <p class="text-sm">Wayanad, India</p>
+                            <p class="text-sm">Class 12 - 99.4%</p>
+                            <p class="text-sm">2019 - 2021</p>
+                        </div>
+                    </div>
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body">
+                            <h3 class="card-title text-xl">St Anne's Public School</h3>
+                            <p class="text-sm">Wayanad, India</p>
+                            <p class="text-sm">Class 10 - 93.5%</p>
+                            <p class="text-sm">2018 - 2019</p>
+                        </div>
+                    </div>
+                </div>
 
-        <button><a href="https://drive.google.com/uc?export=download&id=1A6o34fbbCrdNsv6w-RzQUsL_RtgA4o_f" rel="nofollow">Download Resume</a></button>
-        
-    </div>
-    </div>
+                <h2 id="projects" class="text-3xl font-bold mb-4">Personal Projects</h2>
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <h3 class="card-title text-xl">SuSHi</h3>
+                        <p class="text-sm"><em>Golang, PostgreSQL, DaisyUI, Websockets, Xterm.js</em></p>
+                        <div class="flex space-x-2 my-2">
+                            <a href="https://github.com/aswinbennyofficial/SuSHi" class="link link-primary">GitHub Link</a>
+                            <a href="https://sushi.aswinbenny.in/" class="link link-primary">Deployed Link</a>
+                        </div>
+                        <ul class="list-disc list-inside text-sm">
+                            <li>A web platform enabling users to save SSH credentials and access remote machines securely through a web-based terminal, providing SSH access even via smartphones.</li>
+                            <li>Implemented a client expiration mechanism using a time-based bucket system, periodic heartbeat checks, and goroutines.</li>
+                            <li>Secured private keys with a cryptographic key derived from a user-provided password and system-generated salt using PBKDF2 with 10,000 iterations.</li>
+                            <li>Introduced multi-tabbed terminal support to enhance user experience.</li>
+                        </ul>
+                        <div class="card-actions justify-end mt-4">
+                            <a href="https://github.com/aswinbennyofficial" class="btn btn-primary">More Projects</a>
+                        </div>
+                    </div>
+                </div>
 
-    
-    <div class="socio">
-        <div>
-        <a href="https://discordapp.com/users/863725040738369556" rel="nofollow" target="_blank" class="fab fa-discord"></a>
-        <a href="https://leetcode.com/aswinbenny" rel="nofollow" target="_blank" class="fab fas fa-code"></a>
-        <a href="https://www.instagram.com/aswinbenny.official" rel="nofollow" target="_blank" class="fab fa-instagram"></a>
+                <h2 id="skills" class="text-3xl font-bold mb-4">Technical Skills</h2>
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <ul class="list-none space-y-2">
+                            <li><strong>Programming Languages:</strong> C++, Go, Java</li>
+                            <li><strong>Database:</strong> MongoDB, PostgreSQL</li>
+                            <li><strong>Cloud and DevOps:</strong> Docker, EC2, docker compose, caddy</li>
+                            <li><strong>Tools and Technologies:</strong> Git, Linux, Pub/Sub, Redis</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h2 id="activities" class="text-3xl font-bold mb-4">Extra-Curricular Activities</h2>
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <ul class="list-none space-y-2">
+                            <li><strong>Core Team, Google Developer's Student Club</strong> (09/2022 – Present)</li>
+                            <li><strong>Community Counselor, Jupiter Money</strong> (06/2023 – 07/2024)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div> 
+
+        <!-- Sidebar -->
+        <div class="drawer-side z-40">
+            <label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"></label> 
+            <div class="menu p-4 w-96 min-h-full bg-base-200 text-base-content">
+                <div class="flex flex-col items-center space-y-4">
+                    <div class="avatar">
+                        <div class="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                            <img src="./res/avatar1.jpeg" alt="Aswin Benny" />
+                        </div>
+                    </div>
+                    <h1 class="text-2xl font-bold">Aswin Benny</h1>
+                    <p class="text-sm">Backend Intern | Lovely Professional University</p>
+                    <div class="flex flex-col flex-wrap items-center space-y-2">
+                        <a href="https://linkedin.com/in/aswinbennyofficial" class="btn btn-sm btn-outline">LinkedIn</a>
+                        <a href="https://github.com/aswinbennyofficial" class="btn btn-sm btn-outline">GitHub</a>
+                        <a href="https://leetcode.com/aswinbenny/" class="btn btn-sm btn-outline">LeetCode</a>
+                        <!-- <a href="https://aswinbenny.in/" class="btn btn-sm btn-outline">Website</a> -->
+                        <a href="https://discordapp.com/users/863725040738369556" class="btn btn-sm btn-outline">Discord</a>
+                    </div>
+                    <a href="https://drive.google.com/uc?export=download&id=1CUWTsMKTp2AZn35K_V4wWzwChCv9miYg" class="btn btn-primary mt-4">Download Resume</a>
+                </div>
+                <div class="divider my-4"></div>
+                <ul class="space-y-2">
+                    <li><a href="#work-experience" class="btn btn-ghost">Work Experience</a></li>
+                    <li><a href="#education" class="btn btn-ghost">Education</a></li>
+                    <li><a href="#projects" class="btn btn-ghost">Projects</a></li>
+                    <li><a href="#skills" class="btn btn-ghost">Skills</a></li>
+                    <li><a href="#activities" class="btn btn-ghost">Activities</a></li>
+                </ul>
+            </div>
         </div>
-
-        <div>
-        <a href="https://github.com/aswinbennyofficial" rel="nofollow" target="_blank" class="fab fa-github"></a>
-        <a href="https://www.linkedin.com/in/aswinbenny/" rel="nofollow" target="_blank" class="fab fa-linkedin"></a>
-        </div>
     </div>
-   
-   <div class="about"> 
-        <div class="about-profile-two">
-            <p> <i class="fas fa-laptop-code"></i> Technophilic<br>
-            <i class="fas fa-laptop"></i> Fedora 39 Gnome <br>
-            <i class="fas fa-cat"></i> Cat Lover <br>
-            <i class="fas fa-pastafarianism"></i> Cancer <br>
-            <i class="fas fa-location-arrow"></i> Wayanad, Kerala, India <br>
-                
-            <i class="fas fa-graduation-cap"></i> LPU, Punjab <br>
-            
-            
-            </p> 
-            
-            
-        </div>
 
-        <div class="about-profile-two">
-            
-            <div class="row">
-                
-                <div class="middle">
-                    Go
-                  <div class="bar-container">
-                    <div class="bar-1"></div>
-                  </div>
-                </div>
-                
-                <div class="middle">
-                    C++
-                  <div class="bar-container">
-                    <div class="bar-2"></div>
-                  </div>
-                </div>
-                
-                <div class="middle">
-                    Linux
-                  <div class="bar-container">
-                    <div class="bar-3"></div>
-                  </div>
-                </div>
-                
-                
-                <div class="middle">
-                    AWS Lambda
-                  <div class="bar-container">
-                    <div class="bar-4"></div>
-                  </div>
-                </div>
-              
-                
-                <div class="middle">
-                    MongoDB
-                  <div class="bar-container">
-                    <div class="bar-5"></div>
-                  </div>
-                </div>
-
-                <div class="middle">
-                    Docker
-                  <div class="bar-container">
-                    <div class="bar-6"></div>
-                  </div>
-                </div>
-
-                <div class="middle">
-                  Git
-                <div class="bar-container">
-                  <div class="bar-7"></div>
-                </div>
-              </div>
-                
-              <br>
-              </div>
-        </div>
-       
-        
-    </div>
-    <div class="grid-container">
-      <figure><embed src="https://wakatime.com/share/@aswinbenny/f64ae9c1-f6a2-4127-8800-c2469f6735fa.svg"></embed></figure>
-      <figure><embed src="https://wakatime.com/share/@aswinbenny/ba278887-6935-4599-8575-196b51754afc.svg"></embed></figure>
-      <figure><embed src="https://wakatime.com/share/@aswinbenny/45d6d5a1-745d-4946-8b58-e0ef0883361e.svg"></embed></figure>
-      <figure><embed src="https://wakatime.com/share/@aswinbenny/73d58662-40b1-45db-be62-e88943a0259a.svg"></embed></figure>
-      
-      <!-- Add your other figures here -->
-  </div>
-
-</main>
-
-
-
-<body>
-    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Smooth scroll for anchor links
+            const links = document.querySelectorAll('.menu a[href^="#"]');
+            links.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    document.querySelector(link.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
 </body>
 </html>
