@@ -23,137 +23,141 @@
 </head>
 <body>
     <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="profile">
-                    <img src="./res/avatar.jpg" alt="Aswin Benny">
-                    <div class="profile-info">
-                        <h1>Aswin Benny</h1>
-                        <p>Software Engineer | Backend | Golang</p>
+        <div class="layout-container">
+            <header class="sidebar">
+                <div class="sidebar-content">
+                    <div class="profile">
+                        <img src="./res/avatar.jpg" alt="Aswin Benny">
+                        <div class="profile-info">
+                            <h1>Aswin Benny</h1>
+                            <p>Software Engineer | Backend | Golang</p>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <!-- Social links remain the same -->
+                        <a href="mailto:portfolio@aswinbenny.anonaddy.com" class="button">
+                            <img src="https://api.iconify.design/lucide:mail.svg" alt="Email">
+                            Email
+                        </a>
+                        <a href="https://linkedin.com/in/aswinbennyofficial" target="_blank" rel="noopener noreferrer" class="button">
+                            <img src="https://api.iconify.design/lucide:linkedin.svg" alt="LinkedIn">
+                            LinkedIn
+                        </a>
+                        <a href="https://github.com/aswinbennyofficial" target="_blank" rel="noopener noreferrer" class="button">
+                            <img src="https://api.iconify.design/lucide:github.svg" alt="GitHub">
+                            GitHub
+                        </a>
+                        <a href="https://discordapp.com/users/863725040738369556" target="_blank" rel="noopener noreferrer" class="button">
+                            <img src="https://api.iconify.design/lucide:message-circle.svg" alt="Discord">
+                            Discord
+                        </a>
+                        <a href="https://blog.aswinbenny.in/" target="_blank" rel="noopener noreferrer" class="button">
+                            <img src="https://api.iconify.design/lucide:file-text.svg" alt="Blog">
+                            Blog
+                        </a>
                     </div>
                 </div>
-                <div class="social-links">
-                    <a href="mailto:portfolio@aswinbenny.anonaddy.com" class="button">
-                        <img src="https://api.iconify.design/lucide:mail.svg" alt="Email">
-                        Email
-                    </a>
-                    <a href="https://linkedin.com/in/aswinbennyofficial" target="_blank" rel="noopener noreferrer" class="button">
-                        <img src="https://api.iconify.design/lucide:linkedin.svg" alt="LinkedIn">
-                        LinkedIn
-                    </a>
+            </header>
+
+        <main class="container">
+            <section>
+                <h2>Summary</h2>
+                <div class="card">
+                    <p>Versatile engineer with a passion for scalable systems. Currently specializing in backend development with a focus on Golang. </p>
+                    <p>Developed asynchronous processing infrastructure at Asvatthi. </p>
+                    <p>Open-source contributor and creator of SuSHi, a web-based self hostable SSH client.</p>
+                    <p> Always eager to learn and tackle new challenges in software development.</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Work Experience</h2>
+                <div class="card">
+                    <h3 class="card-title">Backend Intern at Asvatthi</h3>
+                    <p class="card-subtitle">February 2024 – Present</p>
+                    <ul>
+                        <li>Designed and integrated the complete asynchronous processing infrastructure.</li>
+                        <li>Developed a resource-aware multi-node task dispatcher and load balancer.</li>
+                        <li>Created a real-time status update mechanism utilizing Server-Sent Events (SSE) and Redis Streams.</li>
+                        <li>Engineered a distributed monitoring solution for calculating P95 CPU and memory utilization.</li>
+                        <li>Constructed a worker pool system to process and reconstruct arrays of task metadata.</li>
+                        <li>Developed an email subsystem with template support and LRU caching.</li>
+                        <li>Deployed and integrated the entire system on Google Cloud Compute Engine.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h2>Projects</h2>
+                <div class="card">
+                    <h3 class="card-title">SuSHi</h3>
+                    <p class="card-subtitle">Golang, PostgreSQL, DaisyUI, Websockets, Xterm.js</p>
+                    <p>A web platform enabling users to save SSH credentials and access remote machines securely through a web-based terminal, providing SSH access even via smartphones.</p>
+                    <div style="margin-top: 20px;">
+                        <a href="https://github.com/aswinbennyofficial/SuSHi" target="_blank" rel="noopener noreferrer" class="button" style=" border-color: #333;">
+                            <img src="https://api.iconify.design/lucide:github.svg" alt="GitHub">
+                            GitHub
+                        </a>
+                        <a href="https://sushi.aswinbenny.in/" target="_blank" rel="noopener noreferrer" class="button" style=" border-color: #333;">
+                            <img src="https://api.iconify.design/lucide:external-link.svg" alt="Live Demo">
+                            Live Demo
+                        </a>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 20px;">
                     <a href="https://github.com/aswinbennyofficial" target="_blank" rel="noopener noreferrer" class="button">
-                        <img src="https://api.iconify.design/lucide:github.svg" alt="GitHub">
-                        GitHub
-                    </a>
-                    <a href="https://discordapp.com/users/863725040738369556" target="_blank" rel="noopener noreferrer" class="button">
-                        <img src="https://api.iconify.design/lucide:message-circle.svg" alt="Discord">
-                        Discord
-                    </a>
-                    <a href="https://blog.aswinbenny.in/" target="_blank" rel="noopener noreferrer" class="button">
-                        <img src="https://api.iconify.design/lucide:file-text.svg" alt="Blog">
-                        Blog
+                        Show More Projects
+                        <img src="https://api.iconify.design/lucide:chevron-right.svg" alt=">" style="margin-left: 8px;">
                     </a>
                 </div>
-            </div>
-        </div>
-    </header>
+            </section>
 
-    <main class="container">
-        <section>
-            <h2>Summary</h2>
-            <div class="card">
-                <p>Versatile engineer with a passion for scalable systems. Currently specializing in backend development with a focus on Golang. </p>
-                <p>Developed asynchronous processing infrastructure at Asvatthi. </p>
-                <p>Open-source contributor and creator of SuSHi, a web-based self hostable SSH client.</p>
-                <p> Always eager to learn and tackle new challenges in software development.</p>
-            </div>
-        </section>
-
-        <section>
-            <h2>Work Experience</h2>
-            <div class="card">
-                <h3 class="card-title">Backend Intern at Asvatthi</h3>
-                <p class="card-subtitle">February 2024 – Present</p>
-                <ul>
-                    <li>Designed and integrated the complete asynchronous processing infrastructure.</li>
-                    <li>Developed a resource-aware multi-node task dispatcher and load balancer.</li>
-                    <li>Created a real-time status update mechanism utilizing Server-Sent Events (SSE) and Redis Streams.</li>
-                    <li>Engineered a distributed monitoring solution for calculating P95 CPU and memory utilization.</li>
-                    <li>Constructed a worker pool system to process and reconstruct arrays of task metadata.</li>
-                    <li>Developed an email subsystem with template support and LRU caching.</li>
-                    <li>Deployed and integrated the entire system on Google Cloud Compute Engine.</li>
-                </ul>
-            </div>
-        </section>
-
-        <section>
-            <h2>Projects</h2>
-            <div class="card">
-                <h3 class="card-title">SuSHi</h3>
-                <p class="card-subtitle">Golang, PostgreSQL, DaisyUI, Websockets, Xterm.js</p>
-                <p>A web platform enabling users to save SSH credentials and access remote machines securely through a web-based terminal, providing SSH access even via smartphones.</p>
-                <div style="margin-top: 20px;">
-                    <a href="https://github.com/aswinbennyofficial/SuSHi" target="_blank" rel="noopener noreferrer" class="button" style=" border-color: #333;">
-                        <img src="https://api.iconify.design/lucide:github.svg" alt="GitHub">
-                        GitHub
-                    </a>
-                    <a href="https://sushi.aswinbenny.in/" target="_blank" rel="noopener noreferrer" class="button" style=" border-color: #333;">
-                        <img src="https://api.iconify.design/lucide:external-link.svg" alt="Live Demo">
-                        Live Demo
-                    </a>
+            <section>
+                <h2>Education</h2>
+                <div class="card">
+                    <h3 class="card-title">Lovely Professional University</h3>
+                    <p class="card-subtitle">Bachelor of Technology in Computer Science and Engineering</p>
+                    <p>CGPA: 8.79</p>
+                    <p>August 2022 – May 2026</p>
                 </div>
-            </div>
-            <div style="text-align: center; margin-top: 20px;">
-                <a href="https://github.com/aswinbennyofficial" target="_blank" rel="noopener noreferrer" class="button">
-                    Show More Projects
-                    <img src="https://api.iconify.design/lucide:chevron-right.svg" alt=">" style="margin-left: 8px;">
-                </a>
-            </div>
-        </section>
+                <div class="card">
+                    <h3 class="card-title">Sacred Hearts HS School</h3>
+                    <p class="card-subtitle">Class 12</p>
+                    <p>Percentage: 99.4%</p>
+                    <p>2019 – 2021</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">St Anne's Public School</h3>
+                    <p class="card-subtitle">Class 10</p>
+                    <p>Percentage: 93.5%</p>
+                    <p>2018 – 2019</p>
+                </div>
+            </section>
 
-        <section>
-            <h2>Education</h2>
-            <div class="card">
-                <h3 class="card-title">Lovely Professional University</h3>
-                <p class="card-subtitle">Bachelor of Technology in Computer Science and Engineering</p>
-                <p>CGPA: 8.79</p>
-                <p>August 2022 – May 2026</p>
-            </div>
-            <div class="card">
-                <h3 class="card-title">Sacred Hearts HS School</h3>
-                <p class="card-subtitle">Class 12</p>
-                <p>Percentage: 99.4%</p>
-                <p>2019 – 2021</p>
-            </div>
-            <div class="card">
-                <h3 class="card-title">St Anne's Public School</h3>
-                <p class="card-subtitle">Class 10</p>
-                <p>Percentage: 93.5%</p>
-                <p>2018 – 2019</p>
-            </div>
-        </section>
+            <section>
+                <h2>Skills</h2>
+                <div class="skillset">
+                    <span class="badge">C++</span>
+                    <span class="badge">Go</span>
+                    <span class="badge">Java</span>
+                    <span class="badge">MongoDB</span>
+                    <span class="badge">PostgreSQL</span>
+                    <span class="badge">Docker</span>
+                    <!-- <span class="badge">EC2</span> -->
+                    <span class="badge">Git</span>
+                    <span class="badge">Linux</span>
+                    <span class="badge">Redis</span>
+                </div>
+            </section>
+        </main>
 
-        <section>
-            <h2>Skills</h2>
-            <div>
-                <span class="badge">C++</span>
-                <span class="badge">Go</span>
-                <span class="badge">Java</span>
-                <span class="badge">MongoDB</span>
-                <span class="badge">PostgreSQL</span>
-                <span class="badge">Docker</span>
-                <span class="badge">EC2</span>
-                <span class="badge">Git</span>
-                <span class="badge">Linux</span>
-                <span class="badge">Redis</span>
+        <footer>
+            <div class="container">
+                <p>&copy; 2024 Aswin Benny. All rights reserved.</p>
             </div>
-        </section>
-    </main>
+        </footer>
+    </div>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 Aswin Benny. All rights reserved.</p>
-        </div>
-    </footer>
+    
 </body>
 </html>
