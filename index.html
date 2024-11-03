@@ -79,13 +79,17 @@
                     <h3 class="card-title">Backend Intern at Asvatthi</h3>
                     <p class="card-subtitle">February 2024 – Present</p>
                     <ul>
-                        <li>Designed and integrated the complete asynchronous processing infrastructure.</li>
+                        <!-- <li>Designed and integrated the complete asynchronous processing infrastructure.</li>
                         <li>Developed a resource-aware multi-node task dispatcher and load balancer.</li>
                         <li>Created a real-time status update mechanism utilizing Server-Sent Events (SSE) and Redis Streams.</li>
                         <li>Engineered a distributed monitoring solution for calculating P95 CPU and memory utilization.</li>
-                        <li>Constructed a worker pool system to process and reconstruct arrays of task metadata.</li>
+                        <li>Constructed a worker pool system to process and reconstruct arrays of task metadata.</li> -->
+                        <li>Designed and built the asynchronous processing pipeline in Asvatthi.</li>
+                        <li>Developed a queueing system and a flexible task dispatch setup that uses real-time pub/sub signals to coordinate tasks across multiple nodes, adjusting based on availability and workload.</li>
+                        <li>Set up worker pools to handle the parrallel processing of tasks and manage the flow of requests and responses smoothly.</li>
+                        <li>Created a status streaming subsystem that utilizes Redis Streams and Server-Sent Events (SSE) to push real-time responses and status updates  of the tasks to the frontend</li>
                         <li>Developed an email subsystem with template support and LRU caching.</li>
-                        <li>Deployed and integrated the entire system on Google Cloud Compute Engine.</li>
+                        <li>Managed the core backend services, actively participating in debugging and troubleshooting to enhance system performance and availability.</li>
                     </ul>
                 </div>
             </section>
