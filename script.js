@@ -204,10 +204,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const fileListOutput = document.createElement('div');
       fileListOutput.className = 'terminal-output';
       fileListOutput.innerHTML = `
-        
-        <div class="command-list">
-          <p>No files found...</p>
-        </div>
+        <p>No files found...</p>
       `;
 
 
