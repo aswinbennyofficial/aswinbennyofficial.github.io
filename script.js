@@ -178,9 +178,13 @@ document.addEventListener('DOMContentLoaded', function() {
             window.open('https://discordapp.com/users/863725040738369556', '_blank');
             showMessage('Opening Discord profile...', container);
             break;
+        
           case 'exit':
           case 'quit':
             showExitMessage(container);
+            break;
+        case 'fastfetch':
+            showSystemInfo(container);
             break;
           default:
             showUnknownCommand(command, container);
@@ -202,25 +206,11 @@ document.addEventListener('DOMContentLoaded', function() {
       fileListOutput.innerHTML = `
         
         <div class="command-list">
-          <p>Available commands:</p>
-          <div class="command-grid">
-            <a href="#" class="command-link" data-command="help">help</a>
-            <a href="#" class="command-link" data-command="about">about</a>
-            <a href="#" class="command-link" data-command="experience">experience</a>
-            <a href="#" class="command-link" data-command="projects">projects</a>
-            <a href="#" class="command-link" data-command="education">education</a>
-            <a href="#" class="command-link" data-command="skills">skills</a>
-            <a href="#" class="command-link" data-command="contact">contact</a>
-            <a href="#" class="command-link" data-command="resume">resume</a>
-            <a href="#" class="command-link" data-command="github">github</a>
-            <a href="#" class="command-link" data-command="linkedin">linkedin</a>
-            <a href="#" class="command-link" data-command="blog">blog</a>
-            <a href="#" class="command-link" data-command="discord">discord</a>
-            <a href="#" class="command-link" data-command="clear">clear</a>
-          </div>
+          <p>No files found...</p>
         </div>
       `;
-      
+
+
       container.appendChild(fileListOutput);
       
       // Add event listeners to the new command links
@@ -241,6 +231,44 @@ document.addEventListener('DOMContentLoaded', function() {
         link.addEventListener('click', folderClickHandler);
       });
     }
+
+
+    // Show the system information
+    function showSystemInfo(container) {
+        const systemInfo = `
+        <pre>
+                                             OS: Fedora Linux 41 (Workstation Edition) x86_64
+        .:cccccccccccccccccccccccccc:.       Host: HP Laptop 15-fd0xxx
+    .;ccccccccccccc;.:dddl:.;ccccccc;.       Kernel: Linux 6.13.9-200.fc41.x86_64
+    .:ccccccccccccc;OWMKOOXMWd;ccccccc:.     Uptime: 1 day, 23 hours, 50 mins
+    .:ccccccccccccc;KMMc;cc;xMMc;ccccccc:.   Packages: 2433 (rpm), 34 (flatpak)
+    ,cccccccccccccc;MMM.;cc;;WW:;cccccccc,   Shell: zsh 5.9
+    :cccccccccccccc;MMM.;cccccccccccccccc:   Display (CMN153B): 1920x1080 @ 60 Hz in 15" [Bu]
+    :ccccccc;oxOOOo;MMM000k.;cccccccccccc:   DE: GNOME 47.5
+    ccccc;0MMKxdd:;MMMkddc.;cccccccccccc;    WM: Mutter (Wayland)
+    ccccc;XMO';cccc;MMM.;cccccccccccccccc'   WM Theme: Adwaita-dark
+    ccccc;MMo;ccccc;MMW.;ccccccccccccccc;    Theme: Adwaita-dark [GTK2/3/4]
+    ccccc;0MNc.ccc.xMMd;ccccccccccccccc;     Icons: Adwaita [GTK2/3/4]
+    cccccc;dNMWXXXWM0:;cccccccccccccc:,      Font: Cantarell (11pt) [GTK2/3/4]
+    cccccccc;.:odl:.;cccccccccccccc:,.       Cursor: Adwaita (24px)
+    cccccccccccccccccccccccccccc:'.          Terminal: ghostty 1.1.3
+    :ccccccccccccccccccccccc:;,..            Terminal Font: JetBrainsMono Nerd Font (13pt)
+    ':cccccccccccccccc::;,.                  CPU: 12th Gen Intel(R) Core(TM) i5-1235U (12) @2.7GHz
+                                             GPU: Intel Iris Xe Graphics @ 1.20 GHz [Integrated]
+                                             Memory: 7.41 GiB / 15.26 GiB (49%)
+                                             Swap: 1.80 GiB / 8.00 GiB (23%)
+                                             Disk (/): 195.09 GiB / 401.74 GiB (49%) - btrfs
+                                             Local IP (wlo1): 192.168.162.2/24
+                                             Battery (Primary): 100% [AC Connected]
+                                             Locale: en_US.UTF-8
+        </pre>
+        `;
+        const systemInfoOutput = document.createElement('div');
+        systemInfoOutput.className = 'terminal-output';
+        systemInfoOutput.innerHTML = systemInfo;
+        container.appendChild(systemInfoOutput);
+    }
+
     
     // Function to handle command link clicks
     function commandLinkHandler(e) {
@@ -306,6 +334,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <a href="#" class="command-link" data-command="linkedin">linkedin</a>
             <a href="#" class="command-link" data-command="blog">blog</a>
             <a href="#" class="command-link" data-command="discord">discord</a>
+            <a href="#" class="command-link" data-command="fastfetch">fastfetch</a>
             <a href="#" class="command-link" data-command="clear">clear</a>
           </div>
         </div>
@@ -441,5 +470,9 @@ document.addEventListener('DOMContentLoaded', function() {
     terminalContent.insertBefore(initialContainer, interactive);
     
     // Show the file list in this container
-    showFileList(initialContainer);
+    showHelp(initialContainer);
   });
+
+
+
+ 

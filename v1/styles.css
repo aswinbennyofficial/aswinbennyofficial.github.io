@@ -195,4 +195,17 @@ li {
     flex: 1;
     padding: var(--spacing-xl);
   }
+
+  
 }
+
+
+
+/* if mobile then dont display version */
+@media (max-width: 768px) {
+  .version {
+    display: none;
+  }
+}
+
+
