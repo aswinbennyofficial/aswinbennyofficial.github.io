@@ -291,23 +291,22 @@ document.addEventListener('DOMContentLoaded', function() {
       const helpOutput = document.createElement('div');
       helpOutput.className = 'terminal-output';
       helpOutput.innerHTML = `
-        <div class="help-content">
+        <div class="command-list">
           <p>Available commands:</p>
           <div class="command-grid">
-            <a href="#" class="command-link" data-command="about">about</a> - Show about me
-            <a href="#" class="command-link" data-command="experience">experience</a> - Show work experience
-            <a href="#" class="command-link" data-command="projects">projects</a> - Show projects
-            <a href="#" class="command-link" data-command="education">education</a> - Show education
-            <a href="#" class="command-link" data-command="skills">skills</a> - Show skills
-            <a href="#" class="command-link" data-command="contact">contact</a> - Show contact information
-            <a href="#" class="command-link" data-command="resume">resume</a> - Download resume
-            <a href="#" class="command-link" data-command="github">github</a> - Visit GitHub profile
-            <a href="#" class="command-link" data-command="linkedin">linkedin</a> - Visit LinkedIn profile
-            <a href="#" class="command-link" data-command="blog">blog</a> - Visit blog
-            <a href="#" class="command-link" data-command="discord">discord</a> - Visit Discord profile
-            <a href="#" class="command-link" data-command="clear">clear</a> - Clear terminal
-            <a href="#" class="command-link" data-command="ls">ls</a> - List sections
-            <a href="#" class="command-link" data-command="cd ~">cd ~</a> - Go to home directory
+            <a href="#" class="command-link" data-command="help">help</a>
+            <a href="#" class="command-link" data-command="about">about</a>
+            <a href="#" class="command-link" data-command="experience">experience</a>
+            <a href="#" class="command-link" data-command="projects">projects</a>
+            <a href="#" class="command-link" data-command="education">education</a>
+            <a href="#" class="command-link" data-command="skills">skills</a>
+            <a href="#" class="command-link" data-command="contact">contact</a>
+            <a href="#" class="command-link" data-command="resume">resume</a>
+            <a href="#" class="command-link" data-command="github">github</a>
+            <a href="#" class="command-link" data-command="linkedin">linkedin</a>
+            <a href="#" class="command-link" data-command="blog">blog</a>
+            <a href="#" class="command-link" data-command="discord">discord</a>
+            <a href="#" class="command-link" data-command="clear">clear</a>
           </div>
         </div>
       `;
@@ -436,7 +435,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     const initialCommandLine = document.createElement('div');
     initialCommandLine.className = 'terminal-line-executed';
-    initialCommandLine.innerHTML = `<span class="prompt">aswin@portfolio:~$</span> <span class="command">ls -la</span>`;
+    initialCommandLine.innerHTML = `<span class="prompt">aswin@portfolio:~$</span> <span class="command">help</span>`;
     
     initialContainer.appendChild(initialCommandLine);
     terminalContent.insertBefore(initialContainer, interactive);
