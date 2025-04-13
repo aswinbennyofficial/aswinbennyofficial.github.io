@@ -326,16 +326,17 @@ document.addEventListener('DOMContentLoaded', function() {
             <a href="#" class="command-link" data-command="education">education</a>
             <a href="#" class="command-link" data-command="skills">skills</a>
             <a href="#" class="command-link" data-command="contact">contact</a>
-            <a href="#" class="command-link" data-command="resume">resume</a>
-            <a href="#" class="command-link" data-command="github">github</a>
-            <a href="#" class="command-link" data-command="linkedin">linkedin</a>
-            <a href="#" class="command-link" data-command="blog">blog</a>
-            <a href="#" class="command-link" data-command="discord">discord</a>
+            <a href="https://drive.google.com/uc?export=download&id=1CUWTsMKTp2AZn35K_V4wWzwChCv9miYg" class="command-link" data-command="resume">resume</a>
+            <a href="https://github.com/aswinbennyofficial/" class="command-link" data-command="github">github</a>
+            <a href="https://www.linkedin.com/in/aswinbenny/" class="command-link" data-command="linkedin">linkedin</a>
+            <a href="https://blog.aswinbenny.in/" class="command-link" data-command="blog">blog</a>
+            <a href="https://discord.com/users/863725040738369556" class="command-link" data-command="discord">discord</a>
             <a href="#" class="command-link" data-command="fastfetch">fastfetch</a>
             <a href="#" class="command-link" data-command="clear">clear</a>
           </div>
         </div>
       `;
+      
       
       container.appendChild(helpOutput);
       
