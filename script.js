@@ -183,9 +183,13 @@ document.addEventListener('DOMContentLoaded', function() {
           case 'quit':
             showExitMessage(container);
             break;
-        case 'fastfetch':
-            showSystemInfo(container);
-            break;
+          case 'fastfetch':
+              showSystemInfo(container);
+              break;
+          case 'imdb':
+              window.open('https://sh.aswinbenny.in/imdb', '_blank');
+              showMessage('Opening IMDb page...', container);
+              break;
           default:
             showUnknownCommand(command, container);
         }
@@ -332,6 +336,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <a href="https://blog.aswinbenny.in/" class="command-link" data-command="blog">blog</a>
             <a href="https://discord.com/users/863725040738369556" class="command-link" data-command="discord">discord</a>
             <a href="#" class="command-link" data-command="fastfetch">fastfetch</a>
+            <a href="https://sh.aswinbenny.in/imdb" class="command-link" data-command="imdb">imdb</a>
             <a href="#" class="command-link" data-command="clear">clear</a>
           </div>
         </div>
