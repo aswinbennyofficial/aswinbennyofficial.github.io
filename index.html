@@ -1,216 +1,267 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Aswin Benny | Developer Portfolio</title>
-    <meta name="description" content="Portfolio webpage of Aswin Benny. A versatile engineer with a passion for scalable systems. Currently specializing in backend development with a focus on Golang." />
+    <title>Aswin Benny</title>
+    <meta name="description" content="Aswin Benny, backend engineer. Animals run his server farm. Play the game to get the tea on him, then go feed the cat." />
     <meta name="author" content="Aswin Benny" />
+    <meta name="theme-color" content="#1e4a35" />
+    <link rel="icon" href="./res/favicon.ico" type="image/x-icon" />
 
-    <link rel="icon" href="../res/favicon.ico" type="image/x-icon">
+    <meta property="og:title" content="Aswin Benny" />
+    <meta property="og:description" content="Backend engineer. Animals run his server farm. Play to get the tea." />
 
-    <meta property="og:title" content="Aswin Benny | Developer Portfolio" />
-    <meta property="og:description" content="Portfolio webpage of Aswin Benny. A versatile engineer with a passion for scalable systems. Currently specializing in backend development with a focus on Golang." />
-
-
-
-    <!-- JetBrains Mono font for terminal aesthetics -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Big+Shoulders+Stencil+Display:wght@800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet" />
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q1WTDMWG74"></script>
     <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-Q1WTDMWG74');
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-Q1WTDMWG74');
     </script>
 
-    <link href="styles.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet" />
   </head>
 
   <body>
-    <div class="terminal">
-      <div class="terminal-header">
-        <div class="terminal-buttons">
-          <span class="terminal-button red"></span>
-          <span class="terminal-button yellow"></span>
-          <span class="terminal-button green"></span>
+    <a class="skip" href="#who">Skip to the trail</a>
+
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <symbol id="arrow" viewBox="0 0 40 24"><path d="M2 12h30M24 3l10 9-10 9" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="fish" viewBox="0 0 40 22"><path d="M4 11c6-8 18-9 26 0-8 9-20 8-26 0z" fill="currentColor"/><path d="M29 11l9-7v14z" fill="currentColor"/><circle cx="11" cy="9.5" r="1.8" fill="#1c1a16"/></symbol>
+      <symbol id="a-elephant" viewBox="0 0 92 80"><path d="M86 40l5 12" stroke="#7d796f" stroke-width="3" stroke-linecap="round"/><ellipse cx="54" cy="42" rx="32" ry="21" fill="#8e8a82"/><rect x="31" y="52" width="10" height="22" rx="4" fill="#7d796f"/><rect x="45" y="54" width="10" height="20" rx="4" fill="#8e8a82"/><rect x="62" y="54" width="10" height="20" rx="4" fill="#7d796f"/><rect x="74" y="52" width="10" height="22" rx="4" fill="#8e8a82"/><path d="M12 40q-8 14 3 26" stroke="#8e8a82" stroke-width="8" fill="none" stroke-linecap="round"/><circle cx="24" cy="36" r="16" fill="#8e8a82"/><ellipse cx="34" cy="36" rx="10" ry="13" fill="#a7a298"/><circle cx="18" cy="32" r="2.2" fill="#1c1a16"/><path d="M14 44q4 2 8 0" stroke="#f4efe2" stroke-width="2.4" fill="none" stroke-linecap="round"/><path d="M10 23a14 10 0 0 1 28 0h4v3H6v-3z" fill="#e9b23c"/></symbol>
+      <symbol id="a-cow" viewBox="0 0 92 80"><path d="M80 32q8 6 6 18" stroke="#e6dfcf" stroke-width="3" fill="none" stroke-linecap="round"/><rect x="24" y="26" width="58" height="30" rx="11" fill="#f4efe2"/><ellipse cx="46" cy="35" rx="9" ry="6" fill="#2a2620"/><ellipse cx="68" cy="46" rx="8" ry="5.5" fill="#2a2620"/><rect x="28" y="50" width="8" height="24" rx="3" fill="#e6dfcf"/><rect x="40" y="52" width="8" height="22" rx="3" fill="#f4efe2"/><rect x="60" y="52" width="8" height="22" rx="3" fill="#e6dfcf"/><rect x="72" y="50" width="8" height="24" rx="3" fill="#f4efe2"/><path d="M8 22l-5-8M28 22l5-8" stroke="#e9d9a8" stroke-width="3.5" stroke-linecap="round"/><rect x="5" y="19" width="26" height="28" rx="10" fill="#f4efe2"/><ellipse cx="2" cy="26" rx="5" ry="3" fill="#e6dfcf"/><ellipse cx="34" cy="26" rx="5" ry="3" fill="#e6dfcf"/><rect x="5" y="36" width="26" height="13" rx="6.5" fill="#f2b9a6"/><circle cx="12" cy="42" r="1.6" fill="#a45a4a"/><circle cx="24" cy="42" r="1.6" fill="#a45a4a"/><circle cx="12" cy="29" r="2.2" fill="#1c1a16"/><circle cx="24" cy="29" r="2.2" fill="#1c1a16"/><path d="M6 18a12 8 0 0 1 24 0h4v3H2v-3z" fill="#e9b23c"/></symbol>
+      <symbol id="a-goat" viewBox="0 0 92 80"><path d="M74 34l8-6" stroke="#cfc6b4" stroke-width="4" stroke-linecap="round"/><ellipse cx="52" cy="42" rx="26" ry="15" fill="#cfc6b4"/><rect x="34" y="50" width="6" height="24" rx="3" fill="#b9b1a1"/><rect x="44" y="52" width="6" height="22" rx="3" fill="#cfc6b4"/><rect x="60" y="52" width="6" height="22" rx="3" fill="#b9b1a1"/><rect x="68" y="50" width="6" height="24" rx="3" fill="#cfc6b4"/><path d="M26 22q8-14 18-6" stroke="#8a7a5c" stroke-width="4" fill="none" stroke-linecap="round"/><ellipse cx="22" cy="32" rx="11" ry="13" fill="#cfc6b4" transform="rotate(-18 22 32)"/><path d="M10 26l-8-2 6 7z" fill="#b9b1a1"/><path d="M14 42l2 12 5-10z" fill="#e6dfcf"/><circle cx="20" cy="28" r="2.2" fill="#1c1a16"/><path d="M11 21a11 8 0 0 1 22 0h3v3H8v-3z" fill="#e9b23c"/></symbol>
+      <symbol id="a-croc" viewBox="0 0 120 60"><path d="M100 36q14 2 18 10q-12 0-20-4z" fill="#4f7a3a"/><path d="M26 36q30-16 76-6v12q-40 10-76 2z" fill="#4f7a3a"/><path d="M40 26l4-6 4 6M54 24l4-6 4 6M68 24l4-6 4 6M82 26l4-6 4 6" fill="#3e6230"/><rect x="38" y="42" width="8" height="12" rx="3" fill="#3e6230"/><rect x="80" y="42" width="8" height="12" rx="3" fill="#3e6230"/><path d="M2 36q8-8 26-8v16q-18 0-26-8z" fill="#5d8b45"/><path d="M6 36l2.5 3.5 2.5-3.5 2.5 3.5 2.5-3.5 2.5 3.5 2.5-3.5 2.5 3.5" stroke="#f4efe2" stroke-width="1.6" fill="none" stroke-linejoin="round"/><circle cx="26" cy="27" r="5" fill="#5d8b45"/><circle cx="27" cy="26.5" r="2" fill="#1c1a16"/><path d="M17 21a10 7 0 0 1 20 0h3v3H14v-3z" fill="#e9b23c"/></symbol>
+      <symbol id="a-snake" viewBox="0 0 80 80"><ellipse cx="40" cy="66" rx="30" ry="9" fill="#4f7a3a"/><ellipse cx="40" cy="57" rx="24" ry="8" fill="#6f9e52"/><ellipse cx="40" cy="49" rx="17" ry="7" fill="#4f7a3a"/><circle cx="28" cy="57" r="2" fill="#e9b23c"/><circle cx="52" cy="57" r="2" fill="#e9b23c"/><circle cx="40" cy="66" r="2" fill="#e9b23c"/><path d="M50 47q12-16 0-26" stroke="#6f9e52" stroke-width="10" fill="none" stroke-linecap="round"/><ellipse cx="44" cy="20" rx="11" ry="8" fill="#6f9e52"/><circle cx="40" cy="17" r="2" fill="#1c1a16"/><circle cx="48" cy="17" r="2" fill="#1c1a16"/><path d="M34 23l-7 1m7-1l-7-3" stroke="#e0694c" stroke-width="1.6" stroke-linecap="round"/><path d="M33 12a11 7 0 0 1 22 0h3v3H30v-3z" fill="#e9b23c"/></symbol>
+      <symbol id="a-fox" viewBox="0 0 92 80"><path d="M66 46q22-8 22 12q-12 6-24-4z" fill="#d2662b"/><path d="M82 57q6 2 6 1q-4 4-10 1z" fill="#f4efe2"/><ellipse cx="48" cy="48" rx="22" ry="13" fill="#d2662b"/><rect x="32" y="54" width="6" height="20" rx="3" fill="#2a2620"/><rect x="42" y="56" width="6" height="18" rx="3" fill="#2a2620"/><rect x="54" y="56" width="6" height="18" rx="3" fill="#2a2620"/><rect x="62" y="54" width="6" height="20" rx="3" fill="#2a2620"/><path d="M11 26l3-16 9 9zM33 26l-3-16-9 9z" fill="#d2662b"/><path d="M14 23l1.5-8 4 4zM30 23l-1.5-8-4 4z" fill="#2a2620"/><path d="M6 34l16-14 16 14-16 12z" fill="#d2662b"/><path d="M6 34l16 12 3-7z" fill="#f4efe2"/><path d="M38 34l-16 12-3-7z" fill="#f4efe2"/><circle cx="6" cy="34" r="2.4" fill="#1c1a16"/><circle cx="17" cy="31" r="2" fill="#1c1a16"/><circle cx="27" cy="31" r="2" fill="#1c1a16"/><path d="M11 17a11 7 0 0 1 22 0h3v3H8v-3z" fill="#e9b23c"/></symbol>
+      <symbol id="a-gopher" viewBox="0 0 92 80"><ellipse cx="46" cy="76" rx="20" ry="3" fill="rgba(0,0,0,.25)"/><circle cx="31" cy="20" r="6" fill="#6fb7c4"/><circle cx="61" cy="20" r="6" fill="#6fb7c4"/><ellipse cx="46" cy="44" rx="23" ry="28" fill="#7fc8d6"/><ellipse cx="46" cy="52" rx="14" ry="16" fill="#c9eef3"/><circle cx="38" cy="32" r="7" fill="#fff"/><circle cx="54" cy="32" r="7" fill="#fff"/><circle cx="39.5" cy="33" r="3" fill="#1c1a16"/><circle cx="55.5" cy="33" r="3" fill="#1c1a16"/><ellipse cx="46" cy="40" rx="4" ry="3" fill="#5b4a35"/><rect x="43" y="43" width="6" height="5" rx="1" fill="#fff"/><path d="M30 18a16 10 0 0 1 32 0h4v3H26v-3z" fill="#e9b23c"/><path d="M26 70h40l-4-12H30z" fill="#3d372d"/><path d="M30 58h32l-2-10H32z" fill="#26221c"/><path d="M36 52l3 2-3 2M42 56h6" stroke="#6fcf7a" stroke-width="1.5" fill="none" stroke-linecap="round"/><ellipse cx="28" cy="66" rx="5" ry="4" fill="#7fc8d6"/><ellipse cx="64" cy="66" rx="5" ry="4" fill="#7fc8d6"/></symbol>
+    </svg>
+
+    <!-- Hero: the server farm, run by animals -->
+    <header class="hero" id="top">
+      <div class="camp-scene" id="scene">
+        <div class="world" id="world">
+          <div class="floor"></div>
+              <div class="rack" style="--x:24;--y:22" data-rack="0"><i class="f-top"></i><i class="f-front"></i><i class="f-left"></i><i class="f-right"></i><i class="f-back"></i></div>
+              <div class="rack" style="--x:108;--y:22" data-rack="1"><i class="f-top"></i><i class="f-front"></i><i class="f-left"></i><i class="f-right"></i><i class="f-back"></i></div>
+              <div class="rack" style="--x:192;--y:22" data-rack="2"><i class="f-top"></i><i class="f-front"></i><i class="f-left"></i><i class="f-right"></i><i class="f-back"></i></div>
+              <div class="rack" style="--x:276;--y:22" data-rack="3"><i class="f-top"></i><i class="f-front"></i><i class="f-left"></i><i class="f-right"></i><i class="f-back"></i></div>
+              <div class="rack" style="--x:360;--y:22" data-rack="4"><i class="f-top"></i><i class="f-front"></i><i class="f-left"></i><i class="f-right"></i><i class="f-back"></i></div>
+          <div class="namesign" style="--x:270;--y:4">
+            <div class="board">
+              <h1>Aswin Benny</h1>
+              <p class="board-sub">Backend engineer</p>
+            </div>
+            <span class="namesign-legs" aria-hidden="true"></span>
+          </div>
+          <button class="critter" type="button" data-who="elephant" style="--x:84;--y:226;--w:118px" aria-label="Postgres, the elephant: database"><svg viewBox="0 0 92 80"><use href="#a-elephant"/></svg><span><kbd>1</kbd>Postgres</span></button>
+          <button class="critter" type="button" data-who="cow" style="--x:250;--y:200;--w:104px" aria-label="Nginx, the cow: front door"><svg viewBox="0 0 92 80"><use href="#a-cow"/></svg><span><kbd>2</kbd>Nginx</span></button>
+          <button class="critter" type="button" data-who="goat" style="--x:372;--y:200;--w:92px" aria-label="GC, the goat: garbage collector"><svg viewBox="0 0 92 80"><use href="#a-goat"/></svg><span><kbd>3</kbd>GC</span></button>
+          <button class="critter" type="button" data-who="croc" style="--x:112;--y:352;--w:130px" aria-label="Redis, the crocodile: cache"><svg viewBox="0 0 120 60"><use href="#a-croc"/></svg><span><kbd>4</kbd>Redis</span></button>
+          <button class="critter" type="button" data-who="snake" style="--x:254;--y:346;--w:84px" aria-label="Kafka, the snake: event stream"><svg viewBox="0 0 80 80"><use href="#a-snake"/></svg><span><kbd>5</kbd>Kafka</span></button>
+          <button class="critter" type="button" data-who="fox" style="--x:368;--y:312;--w:100px" aria-label="Vault, the fox: security"><svg viewBox="0 0 92 80"><use href="#a-fox"/></svg><span><kbd>6</kbd>Vault</span></button>
+          <button class="critter" type="button" data-who="gopher" style="--x:418;--y:446;--w:86px" aria-label="Gopher, the Go dev: Go services"><svg viewBox="0 0 92 80"><use href="#a-gopher"/></svg><span><kbd>7</kbd>Gopher</span></button>
         </div>
-        <div class="terminal-title">aswin@portfolio:~</div>
+
+        <div class="hud" id="hud" hidden>
+          <p><span>Score</span><b id="score">0</b></p>
+          <p><span>Level</span><b id="level">1</b></p>
+          <p><span>Combo</span><b id="combo">x1</b></p>
+          <p class="lives"><span>Servers</span><b id="lives"></b></p>
+          <p class="next"><span>Next secret</span><b class="nextbar" id="nextbar" role="progressbar" aria-label="Fixes until the next secret" aria-valuemin="0" aria-valuemax="3" aria-valuenow="0"><i></i><i></i><i></i></b></p>
+        </div>
+
+        <div class="dialog" id="dialog">
+          <p class="dialog-who" id="who">Postgres the elephant · Database</p>
+          <p class="dialog-text" id="say"></p>
+          <p class="dialog-note" id="note"></p>
+          <div class="timer" id="timer" hidden><i id="timerbar"></i></div>
+          <div class="dialog-actions" id="actions"></div>
+        </div>
+
+        <button class="mute" id="mute" type="button" aria-pressed="false" aria-label="Mute sound effects"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path class="waves" d="M16 9q2 3 0 6M18.5 7q4 5 0 10" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg></button>
+        <p class="sr-only" id="live" aria-live="polite"></p>
       </div>
-      
-      <div class="terminal-content">
-        <div class="terminal-neofetch">
-          <div class="neofetch-output">
-            <div class="neofetch-logo">
-              <img src="./res/avatar.jpg" alt="Aswin Benny" class="avatar">
-            </div>
-            <div class="neofetch-info">
-              <div class="neofetch-title">
-                <span class="username">aswin</span>@<span class="hostname">portfolio</span>
-              </div>
-              <div class="neofetch-separator">--------------------------</div>
-              <div class="neofetch-item">
-                <span class="label">Name:</span> Aswin Benny
-              </div>
-              <div class="neofetch-item">
-                <span class="label">Title:</span> Software Engineer | Backend
-              </div>
-              <div class="neofetch-item">
-                <span class="label">Education:</span> B.Tech CSE (2022-2026)
-              </div>
-              <div class="neofetch-item">
-                <span class="label">Tech:</span> Go, C++, Java, PostgreSQL, Redis, MongoDB
-              </div>
-              <div class="neofetch-item">
-                <span class="label">Email:</span> portfolio@aswinbenny.anonaddy.com
-              </div>
-              <div class="neofetch-item">
-                <span class="label">Links:</span> <a href="https://github.com/aswinbennyofficial" target="_blank">GitHub</a> • <a href="https://linkedin.com/in/aswinbenny" target="_blank">LinkedIn</a> • <a href="https://blog.aswinbenny.in/" target="_blank">Blog</a>
-              </div>
-            </div>
+
+      <nav class="plates" aria-label="Trail">
+        <a class="plate" href="#who"><span>Who's this guy</span><em>0.2 km</em><svg><use href="#arrow"/></svg></a>
+        <a class="plate plate-rust" href="#trail"><span>Work era</span><em>0.8 km</em><svg><use href="#arrow"/></svg></a>
+        <a class="plate plate-mustard" href="#cat"><span>Feed the cat</span><em>1.4 km</em><svg><use href="#arrow"/></svg></a>
+        <a class="plate" href="#find"><span>Say hi</span><em>1.9 km</em><svg><use href="#arrow"/></svg></a>
+      </nav>
+    </header>
+
+    <main class="trail">
+      <!-- me on my hybrid bike, riding the trail as you scroll -->
+      <div class="rider" id="rider" aria-hidden="true">
+        <svg viewBox="0 0 72 52">
+          <g class="wheel" id="wheelR"><circle cx="15" cy="38" r="12" fill="none" stroke="#f4efe2" stroke-width="3"/><path d="M15 26v24M3 38h24M6.5 29.5l17 17M6.5 46.5l17-17" stroke="#b9b1a1" stroke-width="1.2"/></g>
+          <g class="wheel" id="wheelF"><circle cx="57" cy="38" r="12" fill="none" stroke="#f4efe2" stroke-width="3"/><path d="M57 26v24M45 38h24M48.5 29.5l17 17M48.5 46.5l17-17" stroke="#b9b1a1" stroke-width="1.2"/></g>
+          <path d="M15 38l17 0 -5-17h21l9 17M32 38l16-17M27 21l-1-4M48 21l-2-6h6" fill="none" stroke="#2e7a5a" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M22 16h9" stroke="#1c1a16" stroke-width="3.5" stroke-linecap="round"/>
+          <path d="M28 15l8-10 12 9M36 5l-3 14 0 0M33 19l-1 19" fill="none" stroke="#e9b23c" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="39" cy="2" r="4.6" fill="#b03f24"/>
+        </svg>
+      </div>
+      <!-- Who -->
+      <section id="who" class="stop">
+        <span class="stamp" aria-hidden="true"><b>Hello</b></span>
+        <h2>Hi, I'm Aswin.</h2>
+        <p class="lead">I build the backend bits nobody notices until they break: queues, pipelines, and the plumbing that moves money and messages around.</p>
+        <p>When I'm not doing that, I'm probably at one of these:</p>
+
+        <ul class="wayside" aria-label="Things I like">
+          <li class="w-green"><div class="sign-face"><h3>Treks</h3><p>Uphill, sweaty, worth it for the view.</p></div></li>
+          <li class="w-mustard"><div class="sign-face"><h3>Cats</h3><p>I will stop mid-sentence to say hi to one.</p></div></li>
+          <li class="w-rust"><div class="sign-face"><h3>Solo travel</h3><p>One backpack, a loose plan, zero arguments.</p></div></li>
+          <li class="w-green"><div class="sign-face"><h3>Cycling</h3><p>Early rides before the city wakes up.</p></div></li>
+          <li class="w-rust"><div class="sign-face"><h3>Long walks</h3><p>Where most of my bugs get solved.</p></div></li>
+          <li class="w-mustard"><div class="sign-face"><h3>All the animals</h3><p>All cute. Crocodiles and snakes included. No exceptions.</p></div></li>
+          <li class="w-green w-movies"><div class="sign-face"><h3>Movies</h3><p>Way too many. Fantastic Mr. Fox is up there. <a href="https://sh.aswinbenny.in/imdb" target="_blank" rel="noopener">My ratings</a></p></div></li>
+          <li class="w-green"><div class="sign-face"><h3>Tech</h3><p>How things work under the hood, usually found out by breaking them first.</p></div></li>
+        </ul>
+      </section>
+
+      <!-- Work trail -->
+      <section id="trail" class="stop">
+        <span class="stamp" aria-hidden="true"><b>Work</b></span>
+        <h2>The work era.</h2>
+        <p>Short version. The long one is on <a href="https://linkedin.com/in/aswinbenny" target="_blank" rel="noopener">LinkedIn</a>.</p>
+
+        <ol class="posts">
+          <li>
+            <span class="post-when">2022</span>
+            <div><h3>Computer Science at LPU</h3><p>B.Tech at Lovely Professional University, Punjab. Done in 2026.</p></div>
+          </li>
+          <li>
+            <span class="post-when">2024</span>
+            <div><h3>Backend at a stealth startup</h3><p>Worker pools, async pipelines, and live updates over Redis Streams, so the frontend could stop asking "done yet?"</p></div>
+          </li>
+          <li>
+            <span class="post-when">2025</span>
+            <div><h3>GreedyGame (PubScale)</h3><p>Came in as an intern, stayed as an Associate Software Engineer. I work on the backend of a rewarded-ads platform: offers, rewards, payouts. Highlights: a pipeline that eats <strong>7M+ events a day</strong>, a <strong>30M-row</strong> Postgres table moved without anyone noticing, and <strong>2nd place</strong> at the company hackathon with a prototype built in 3 days.</p></div>
+          </li>
+        </ol>
+
+        <article class="sushi">
+          <div>
+            <h3>SuSHi</h3>
+            <p>My side project. Save your SSH logins and open a real terminal in the browser, even from your phone.</p>
+          </div>
+          <div class="sushi-links">
+            <a class="btn" href="https://github.com/aswinbennyofficial/SuSHi" target="_blank" rel="noopener">See it on GitHub</a>
+          </div>
+        </article>
+      </section>
+
+      <!-- Cat queue -->
+      <section id="cat" class="stop">
+        <span class="stamp" aria-hidden="true"><b>Cat</b></span>
+        <h2>Feed the trail cat.</h2>
+        <p>Basically my day job, but with fish. You toss, they queue, she eats them in order. Toss too many and watch the line back up.</p>
+
+        <div class="cat-yard">
+          <ol class="queue" id="queue" aria-label="Fish waiting in line"></ol>
+
+          <div class="cat-spot">
+            <p class="bubble" id="bubble" aria-hidden="true"></p>
+            <div class="hearts" id="hearts" aria-hidden="true"></div>
+            <button class="cat-btn" id="catbtn" type="button" aria-label="Pet the cat">
+              <svg class="cat" id="catsvg" viewBox="0 0 140 130" aria-hidden="true">
+                <path class="tail" d="M92 108c22 0 34-12 30-30" fill="none" stroke="#d9952a" stroke-width="9" stroke-linecap="round"/>
+                <ellipse cx="70" cy="92" rx="30" ry="30" fill="#e9a93a"/>
+                <path d="M52 82q18 8 36 0M50 96q20 8 40 0" stroke="#c47a1e" stroke-width="4" fill="none" stroke-linecap="round"/>
+                <g class="head">
+                  <path d="M46 38l4-24 16 14zM94 38l-4-24-16 14z" fill="#e9a93a"/>
+                  <path d="M51 32l2-11 8 7zM89 32l-2-11-8 7z" fill="#f2b9a6"/>
+                  <circle cx="70" cy="46" r="25" fill="#e9a93a"/>
+                  <path d="M58 26q12 6 24 0" stroke="#c47a1e" stroke-width="4" fill="none" stroke-linecap="round"/>
+                  <g class="eyes-open"><g class="pupils"><ellipse cx="60" cy="45" rx="3.5" ry="5" fill="#1c1a16"/><ellipse cx="80" cy="45" rx="3.5" ry="5" fill="#1c1a16"/></g></g>
+                  <path class="eyes-shut" d="M55 46q5 4 10 0M75 46q5 4 10 0" stroke="#1c1a16" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+                  <path d="M67 54h6l-3 3z" fill="#b03f24"/>
+                  <ellipse class="mouth" cx="70" cy="61" rx="3.2" ry="3.6" fill="#5b2414"/>
+                  <path d="M46 52l-14-2M46 56l-14 3M94 52l14-2M94 56l14 3" stroke="#f4efe2" stroke-width="1.5" stroke-linecap="round"/>
+                </g>
+                <g class="zzz" fill="#b9b1a1" font-family="Big Shoulders Display, sans-serif" font-weight="800"><text x="98" y="22" font-size="14">z</text><text x="108" y="12" font-size="10">z</text></g>
+                <path d="M36 118h68l-8 10H44z" fill="#b03f24"/>
+                <ellipse cx="70" cy="118" rx="34" ry="5" fill="#a63a22"/>
+              </svg>
+            </button>
           </div>
         </div>
-        
-        <!-- <div class="terminal-line">
-          <span class="prompt">aswin@portfolio:~$</span>
-          <span class="command">ls -la</span>
-        </div> -->
-        
-        <!-- <div class="terminal-output">
-          <div class="file-list">
-            <div class="file"><a href="#" class="folder" data-section="about">about/</a></div>
-            <div class="file"><a href="#" class="folder" data-section="experience">experience/</a></div>
-            <div class="file"><a href="#" class="folder" data-section="projects">projects/</a></div>
-            <div class="file"><a href="#" class="folder" data-section="education">education/</a></div>
-            <div class="file"><a href="#" class="folder" data-section="skills">skills/</a></div>
-            <div class="file"><a href="https://drive.google.com/uc?export=download&id=1CUWTsMKTp2AZn35K_V4wWzwChCv9miYg" class="file-link">resume.pdf</a></div>
-          </div>
-        </div> -->
-        
-        <div class="terminal-sections">
-          <section id="about" class="terminal-section">
-            <div class="terminal-line">
-              <span class="prompt">aswin@portfolio:~/about$</span>
-              <span class="command">cat summary.txt</span>
-            </div>
-            <div class="terminal-output">
-              <p>Hi, I'm Aswin Benny, a backend developer with one year of experience and a 2026 Computer Science and Engineering graduate.</p>
-            </div>
-          </section>
-          
-          <section id="experience" class="terminal-section">
-            <div class="terminal-line">
-              <span class="prompt">aswin@portfolio:~/experience$</span>
-              <span class="command">cat work_history.md</span>
-            </div>
-            <div class="terminal-output">
-              <h3>Engineering at Asvatthi</h3>
-              <p class="subtle">February 2024 – Present</p>
-              <ul>
-                <li>Built an asynchronous processing and reporting infrastructure with worker pools and streams for the cloning and parsing subsystems, improving system reliability by 45%.</li>
-                <li>Developed a queueing system and a flexible task dispatch setup that uses pub/sub signals to coordinate tasks across multiple nodes, adjusting based on availability and workload.</li>
-                <li>Created a status streaming subsystem that utilizes Redis Streams and Server-Sent Events (SSE) to push real-time responses and status updates of the tasks to the frontend.</li>
-                <li>Built a file-sharing system with public/private sharing and RBAC (Role-Based Access Control) support, using Cassandra for scalable metadata storage.</li>
-                <li>Optimized the repository cloning process for the benchmark repository, reducing the clone time by 87% and the clone size by 75%, resulting in faster and more efficient cloning.</li>
-                <li>Designed the database schema for Stripe payment integration and oversaw its development to ensure it met requirements.</li>
-                <li>Developed the email subsystem with template support and LRU caching.</li>
-                <li>Managed the core backend services, actively participating in debugging and troubleshooting to enhance system performance and availability.</li>
-              </ul>
-            </div>
-          </section>
-          
-          <section id="projects" class="terminal-section">
-            <div class="terminal-line">
-              <span class="prompt">aswin@portfolio:~/projects$</span>
-              <span class="command">cat sushi.md</span>
-            </div>
-            <div class="terminal-output">
-              <h3>SuSHi</h3>
-              <p class="subtle">Golang, PostgreSQL, DaisyUI, Websockets, Xterm.js</p>
-              <p>A web platform enabling users to save SSH credentials and access remote machines securely through a web-based terminal, providing SSH access even via smartphones.</p>
-              <div class="links">
-                <a href="https://github.com/aswinbennyofficial/SuSHi" target="_blank" class="btn">GitHub</a>
-                <a href="https://sushi.aswinbenny.in/" target="_blank" class="btn">Live Demo</a>
-              </div>
-              <div class="more-projects">
-                <a href="https://github.com/aswinbennyofficial" target="_blank" class="btn">More Projects</a>
-              </div>
-            </div>
-          </section>
-          
-          <section id="education" class="terminal-section">
-            <div class="terminal-line">
-              <span class="prompt">aswin@portfolio:~/education$</span>
-              <span class="command">cat academic_history.md</span>
-            </div>
-            <div class="terminal-output">
-              <h3>Lovely Professional University</h3>
-              <p class="subtle">August 2022 – May 2026</p>
-              <ul>
-                <li>Bachelor of Technology in Computer Science and Engineering</li>
-                <li>CGPA: 8.79</li>
-              </ul>
-          
-              <h3>Sacred Hearts HS School</h3>
-              <p class="subtle">2019 – 2021</p>
-              <ul>
-                <li>Class 12</li>
-                <li>Percentage: 99.4%</li>
-              </ul>
-          
-              <h3>St Anne's Public School</h3>
-              <p class="subtle">2018 – 2019</p>
-              <ul>
-                <li>Class 10</li>
-                <li>Percentage: 93.5%</li>
-              </ul>
-            </div>
-          </section>
-          
-          
-          <section id="skills" class="terminal-section">
-            <div class="terminal-line">
-              <span class="prompt">aswin@portfolio:~/skills$</span>
-              <span class="command">ls -la | grep -v "obsolete"</span>
-            </div>
-            <div class="terminal-output">
-              <div class="skills-list">
-                <span class="skill">C++</span>
-                <span class="skill">Go</span>
-                <span class="skill">Java</span>
-                <span class="skill">MongoDB</span>
-                <span class="skill">PostgreSQL</span>
-                <span class="skill">Docker</span>
-                <span class="skill">Cassandra</span>
-                <span class="skill">Git</span>
-                <span class="skill">Linux</span>
-                <span class="skill">Redis</span>
-              </div>
-            </div>
-          </section>
+
+        <dl class="cat-stats">
+          <div><dt>Mood</dt><dd id="mood">Hungry</dd></div>
+          <div><dt>Eaten</dt><dd id="eaten">0</dd></div>
+          <div><dt>In line</dt><dd><span id="qcount">0</span>/8</dd></div>
+          <div><dt>Pets</dt><dd id="pets">0</dd></div>
+        </dl>
+
+        <div class="cat-controls">
+          <button class="btn" id="toss" type="button"><svg aria-hidden="true"><use href="#fish"/></svg>Toss a fish</button>
+          <button class="btn btn-quiet" id="burst" type="button">Toss 12 at once</button>
         </div>
-        
-        <div class="terminal-interactive">
-          <div class="terminal-line">
-            <span class="prompt">aswin@portfolio:~$</span>
-            <span class="command-input" contenteditable="true" spellcheck="false"></span>
-            <span class="cursor"></span>
-          </div>
-          <div class="terminal-help">
-            <p class="help-text">Type <span class="command-hint">help</span> for available commands</p>
-          </div>
+        <p class="cat-status" id="status" role="status" aria-live="polite">She's hungry. Tap her, or toss a fish.</p>
+
+        <h3 class="badges-title">Stamps collected <span id="badgecount">0</span>/6</h3>
+        <ul class="badges" id="badges">
+          <li data-badge="first"><b>First bite</b><span>Feed her once</span></li>
+          <li data-badge="purr"><b>Purr</b><span>10 pets. She's obsessed.</span></li>
+          <li data-badge="golden"><b>Golden</b><span>She eats a golden one</span></li>
+          <li data-badge="backpressure"><b>Backpressure</b><span>Overflow the line. Oops.</span></li>
+          <li data-badge="nap"><b>Nap time</b><span>Ignore her till she naps</span></li>
+          <li data-badge="regular"><b>Regular</b><span>50 fish. Certified regular.</span></li>
+        </ul>
+      </section>
+
+      <!-- Find me -->
+      <section id="find" class="stop stop-end">
+        <span class="stamp" aria-hidden="true"><b>Summit</b></span>
+        <h2>Say hi.</h2>
+        <div class="signpost">
+          <a class="sign s1" href="https://github.com/aswinbennyofficial" target="_blank" rel="noopener">GitHub<svg aria-hidden="true"><use href="#arrow"/></svg></a>
+          <a class="sign s2" href="https://blog.aswinbenny.in/" target="_blank" rel="noopener">Blog<svg aria-hidden="true"><use href="#arrow"/></svg></a>
+          <a class="sign s3" href="https://linkedin.com/in/aswinbenny" target="_blank" rel="noopener">LinkedIn<svg aria-hidden="true"><use href="#arrow"/></svg></a>
+          <a class="sign s5" href="https://sh.aswinbenny.in/imdb" target="_blank" rel="noopener">Movie ratings<svg aria-hidden="true"><use href="#arrow"/></svg></a>
+          <a class="sign s4" href="https://leetcode.com/aswinbenny" target="_blank" rel="noopener">LeetCode<svg aria-hidden="true"><use href="#arrow"/></svg></a>
+          <span class="pole" aria-hidden="true"></span>
         </div>
+        <p class="mail-line">Or email me: <a href="mailto:portfolio@aswinbenny.anonaddy.com">portfolio@aswinbenny.anonaddy.com</a></p>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <p>© 2026 Aswin Benny. Past eras: <a href="./v2/index.html">the terminal one</a> · <a href="./v1/index.html">the OG one</a></p>
+    </footer>
+
+
+    <!-- fake captcha: a vibe check on first visit, always skippable -->
+    <div class="captcha" id="captcha" role="dialog" aria-modal="true" aria-labelledby="capTitle" aria-describedby="capSub" hidden>
+      <div class="captcha-card">
+        <h2 class="captcha-title" id="capTitle">Sus traffic detected</h2>
+        <p class="captcha-sub" id="capSub">Quick vibe check: build this PC to prove you're not a bot. Pick a part, then tap the slot it fits.</p>
+        <div class="mobo" id="mobo">
+          <button type="button" class="slot slot-cpu" data-slot="cpu" aria-label="Square socket"></button>
+          <button type="button" class="slot slot-ram" data-slot="ram" aria-label="Long thin slot"></button>
+          <button type="button" class="slot slot-gpu" data-slot="gpu" aria-label="Wide slot"></button>
+          <button type="button" class="slot slot-ssd" data-slot="ssd" aria-label="Short slot"></button>
+        </div>
+        <div class="tray" id="tray">
+          <button type="button" class="part" data-part="ram"><svg viewBox="0 0 120 30" aria-hidden="true"><rect x="2" y="4" width="116" height="20" rx="2" fill="#1e4a35"/><rect x="10" y="8" width="14" height="12" fill="#1c1a16"/><rect x="30" y="8" width="14" height="12" fill="#1c1a16"/><rect x="50" y="8" width="14" height="12" fill="#1c1a16"/><rect x="70" y="8" width="14" height="12" fill="#1c1a16"/><rect x="90" y="8" width="14" height="12" fill="#1c1a16"/><path d="M6 24v4M14 24v4M22 24v4M30 24v4M38 24v4M46 24v4M54 24v4M66 24v4M74 24v4M82 24v4M90 24v4M98 24v4M106 24v4M114 24v4" stroke="#e9b23c" stroke-width="2"/></svg><span>RAM</span></button>
+          <button type="button" class="part" data-part="gpu"><svg viewBox="0 0 120 50" aria-hidden="true"><rect x="2" y="4" width="116" height="38" rx="3" fill="#3a342b"/><circle cx="36" cy="23" r="14" fill="#1c1a16"/><circle cx="84" cy="23" r="14" fill="#1c1a16"/><path d="M36 11v24M24 23h24M84 11v24M72 23h24" stroke="#5c564b" stroke-width="3"/><rect x="10" y="42" width="60" height="6" fill="#e9b23c"/></svg><span>GPU</span></button>
+          <button type="button" class="part" data-part="cpu"><svg viewBox="0 0 60 60" aria-hidden="true"><rect x="8" y="8" width="44" height="44" rx="3" fill="#b9b1a1"/><rect x="18" y="18" width="24" height="24" fill="#6d6a62"/><path d="M14 4v4M22 4v4M30 4v4M38 4v4M46 4v4M14 52v4M22 52v4M30 52v4M38 52v4M46 52v4M4 14h4M4 22h4M4 30h4M4 38h4M4 46h4M52 14h4M52 22h4M52 30h4M52 38h4M52 46h4" stroke="#e9b23c" stroke-width="2"/></svg><span>CPU</span></button>
+          <button type="button" class="part" data-part="ssd"><svg viewBox="0 0 80 24" aria-hidden="true"><rect x="2" y="4" width="72" height="16" rx="2" fill="#1e4a35"/><rect x="10" y="7" width="22" height="10" fill="#1c1a16"/><rect x="38" y="7" width="22" height="10" fill="#1c1a16"/><rect x="72" y="8" width="6" height="8" fill="#e9b23c"/></svg><span>SSD</span></button>
+        </div>
+        <p class="captcha-msg" id="capMsg" role="status" aria-live="polite"></p>
+        <button type="button" class="captcha-skip" id="capSkip">I'm a bot, let me in anyway</button>
       </div>
     </div>
-    <footer>
-      <p>&copy; 2025 Aswin Benny. <a href="./v1/index.html">View older version</a> </p>
-    </footer>
     <script src="script.js"></script>
   </body>
 </html>

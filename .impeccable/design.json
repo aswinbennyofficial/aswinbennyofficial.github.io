@@ -1,0 +1,502 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-01T12:00:00Z",
+  "title": "Design System: Aswin Benny",
+  "extensions": {
+    "colorMeta": {
+      "board": {
+        "role": "primary",
+        "displayName": "Forest Department Enamel",
+        "canonical": "oklch(37.1% 0.061 160)",
+        "tonalRamp": [
+          "#010f07",
+          "#022c1b",
+          "#1e4a35",
+          "#3d6852",
+          "#5c8971",
+          "#7dab92",
+          "#a2d1b7",
+          "#ccfce1"
+        ]
+      },
+      "mustard": {
+        "role": "secondary",
+        "displayName": "Mustard Trail Paint",
+        "canonical": "oklch(79.4% 0.143 82)",
+        "tonalRamp": [
+          "#110a01",
+          "#312100",
+          "#533b04",
+          "#795701",
+          "#a0750c",
+          "#ca9403",
+          "#f2ba46",
+          "#ffecca"
+        ]
+      },
+      "rust": {
+        "role": "tertiary",
+        "displayName": "Rust Plate",
+        "canonical": "oklch(52.2% 0.153 35)",
+        "tonalRamp": [
+          "#1c0200",
+          "#450d02",
+          "#741a03",
+          "#a23115",
+          "#c75439",
+          "#ed775a",
+          "#fdad99",
+          "#fde9e4"
+        ]
+      },
+      "rust-ink": {
+        "role": "tertiary",
+        "displayName": "Rust Ink",
+        "canonical": "oklch(65.9% 0.155 35)",
+        "tonalRamp": [
+          "#1c0300",
+          "#460c00",
+          "#751900",
+          "#a23012",
+          "#c85337",
+          "#ee7658",
+          "#fead98",
+          "#ffe9e3"
+        ]
+      },
+      "ground": {
+        "role": "neutral",
+        "displayName": "Trail Loam",
+        "canonical": "oklch(21.9% 0.008 85)",
+        "tonalRamp": [
+          "#0d0b07",
+          "#262420",
+          "#423f3b",
+          "#605d58",
+          "#7f7d78",
+          "#a19e99",
+          "#c6c4be",
+          "#f1eee8"
+        ]
+      },
+      "ground-2": {
+        "role": "neutral",
+        "displayName": "Shaded Loam",
+        "canonical": "oklch(25.7% 0.012 85)",
+        "tonalRamp": [
+          "#0d0b06",
+          "#27241e",
+          "#433f39",
+          "#615d56",
+          "#807d75",
+          "#a29e96",
+          "#c8c4bc",
+          "#f2eee6"
+        ]
+      },
+      "paint": {
+        "role": "neutral",
+        "displayName": "Board Paint",
+        "canonical": "oklch(95.2% 0.018 89)",
+        "tonalRamp": [
+          "#0e0b04",
+          "#27241a",
+          "#433f35",
+          "#625d52",
+          "#817d71",
+          "#a39e92",
+          "#c9c4b7",
+          "#f3eee1"
+        ]
+      },
+      "stone": {
+        "role": "neutral",
+        "displayName": "Weathered Stone",
+        "canonical": "oklch(76.3% 0.024 85)",
+        "tonalRamp": [
+          "#100a02",
+          "#292316",
+          "#463f31",
+          "#645d4e",
+          "#847c6d",
+          "#a59e8e",
+          "#cbc3b3",
+          "#f6eedd"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Trail Edge",
+        "canonical": "oklch(38.9% 0.018 81)",
+        "tonalRamp": [
+          "#0f0a04",
+          "#29231a",
+          "#453f35",
+          "#635d52",
+          "#837c71",
+          "#a49d92",
+          "#cac3b7",
+          "#f5ede1"
+        ]
+      },
+      "post-wood": {
+        "role": "neutral",
+        "displayName": "Post Timber",
+        "canonical": "oklch(42.1% 0.040 72)",
+        "tonalRamp": [
+          "#130901",
+          "#30210d",
+          "#4d3c28",
+          "#6c5a45",
+          "#8c7a63",
+          "#ae9b84",
+          "#d5c1a8",
+          "#feebd6"
+        ]
+      },
+      "rim": {
+        "role": "neutral",
+        "displayName": "Worn Rut",
+        "canonical": "oklch(33.2% 0.016 80)",
+        "tonalRamp": [
+          "#0e0a04",
+          "#28231b",
+          "#3a342b",
+          "#5f584d",
+          "#7f786c",
+          "#a19a8d",
+          "#c7bfb2",
+          "#f2eadd"
+        ]
+      },
+      "panel": {
+        "role": "neutral",
+        "displayName": "Night Panel",
+        "canonical": "rgba(20,19,16,.88)",
+        "tonalRamp": [
+          "#0a0907",
+          "#141310",
+          "#2a2823",
+          "#46433c",
+          "#65615a",
+          "#87837b",
+          "#ada9a1",
+          "#d8d4cc"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The name on the enamel board, which stands as a billboard in the hero scene."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "One per trail stop, with the carved extrusion."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Timeline entries, project board, wayside sign names."
+      },
+      "sign": {
+        "displayName": "Sign",
+        "purpose": "Signpost link labels; plates use the same face at 22-28px."
+      },
+      "button": {
+        "displayName": "Button",
+        "purpose": "Button labels."
+      },
+      "stencil": {
+        "displayName": "Stencil",
+        "purpose": "Things struck or carved: checkpoint stamps, year posts, badge names."
+      },
+      "value": {
+        "displayName": "Value",
+        "purpose": "Game and stat numbers: HUD, cat stats, checkpoint counter."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Stat and HUD terms, plate distances, counter caption; speaker names and nameplates at 800."
+      },
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "First paragraph of a stop, in paint."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Prose in stone, 58-62ch."
+      }
+    },
+    "shadows": [
+      {
+        "name": "board-lift",
+        "value": "0 2px 0 rgba(0,0,0,.25), 0 18px 40px -18px rgba(0,0,0,.7)",
+        "purpose": "Trailhead board and cream project board standing off the ground."
+      },
+      {
+        "name": "sign-lift",
+        "value": "0 2px 0 rgba(0,0,0,.25), 0 16px 30px -16px rgba(0,0,0,.7)",
+        "purpose": "Wayside sign faces."
+      },
+      {
+        "name": "plate-drop",
+        "value": "drop-shadow(0 10px 14px rgba(0,0,0,.45))",
+        "purpose": "Arrow plates; applied as filter because clip-path cuts box-shadow."
+      },
+      {
+        "name": "stamp-ring",
+        "value": "inset 0 0 0 4px #1c1a16, inset 0 0 0 5px #e0694c",
+        "purpose": "Inner second ring of rubber stamps and collected badges."
+      },
+      {
+        "name": "stake-bevel",
+        "value": "inset -3px 0 0 rgba(0,0,0,.25)",
+        "purpose": "Shaded side of a wayside stake."
+      },
+      {
+        "name": "carved-extrusion",
+        "value": "1px 1px 0 #4a443a, 2px 2px 0 #3a342b, 3px 3px 0 #2c2822, 4px 4px 0 #24211c, 6px 8px 12px rgba(0,0,0,.45)",
+        "purpose": "text-shadow on stop headlines only; never on boxes."
+      },
+      {
+        "name": "panel-drop",
+        "value": "0 20px 40px -14px rgba(0,0,0,.8)",
+        "purpose": "Game dialog; notice card uses 0 30px 60px -20px rgba(0,0,0,.8)."
+      },
+      {
+        "name": "figure-drop",
+        "value": "drop-shadow(0 6px 4px rgba(0,0,0,.45))",
+        "purpose": "Animals and rider standing on the ground (filter)."
+      },
+      {
+        "name": "floor-rim",
+        "value": "0 0 0 10px #3a342b, 0 0 0 12px #5b4a35, 0 0 80px 30px rgba(0,0,0,.6)",
+        "purpose": "Scene floor's timber edge and dark falloff."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease",
+        "value": "cubic-bezier(.16, 1, .3, 1)",
+        "purpose": "Every object movement: plate and sign slides, button lift, bubble, stamp entrance."
+      },
+      {
+        "name": "slide",
+        "value": ".35s",
+        "purpose": "Plate and signpost hover slide."
+      },
+      {
+        "name": "lift",
+        "value": ".3s",
+        "purpose": "Button hover lift."
+      },
+      {
+        "name": "fade",
+        "value": ".2s",
+        "purpose": "Opacity and colour changes."
+      },
+      {
+        "name": "camera",
+        "value": ".9s",
+        "purpose": "Scene camera moves and stops rising into place (rise: rotateX(-16deg) translateY(36px) to rest; motion only)."
+      },
+      {
+        "name": "sway",
+        "value": ".6s",
+        "purpose": "Wayside signs settling after scroll wind (rotateY up to 22deg, bottom-hinged)."
+      },
+      {
+        "name": "stamp-flip",
+        "value": ".8s",
+        "purpose": "Checkpoint stamp flips down (rotateY 180deg, scale 1.4) when a stop is reached."
+      },
+      {
+        "name": "stamp-down",
+        "value": ".5s",
+        "purpose": "Collected badges and counter marks strike in (scale 1.8, rotate -20deg)."
+      },
+      {
+        "name": "tilt",
+        "value": ".25s ease-out",
+        "purpose": "Pointer tilt up to 10deg on wayside signs, project board, signpost signs, cat yard; fine pointers only."
+      },
+      {
+        "name": "led",
+        "value": "1.6s / 2.3s steps(2)",
+        "purpose": "Rack LED blink; alarm pulses at .5s."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "animation: none; transition: none",
+        "purpose": "All motion removed under prefers-reduced-motion; scripted tilt, sway, camera drift and stamp flip not attached."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "md",
+        "value": "860px"
+      },
+      {
+        "name": "sm",
+        "value": "520px"
+      },
+      {
+        "name": "pointer-fine",
+        "value": "(pointer: fine)"
+      },
+      {
+        "name": "pointer-coarse",
+        "value": "(pointer: coarse)"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Rust painted button for the main action in a block.",
+      "html": "<button class=\"ds-btn\">Try it</button>",
+      "css": ".ds-btn { display: inline-flex; align-items: center; gap: 10px; font: 800 20px/1 \"Big Shoulders Display\", \"Arial Narrow\", sans-serif; text-transform: uppercase; letter-spacing: .06em; padding: 14px 22px; border: 0; border-radius: 0; cursor: pointer; background: #b03f24; color: #f4efe2; transition: transform .3s cubic-bezier(.16,1,.3,1), background .2s; } .ds-btn:hover { background: #1e4a35; transform: translateY(-2px); } .ds-btn:active { transform: translateY(1px); } .ds-btn:focus-visible { outline: 3px solid #e9b23c; outline-offset: 4px; }"
+    },
+    {
+      "name": "Quiet Button",
+      "kind": "button",
+      "refersTo": "button-quiet",
+      "description": "Outlined secondary action beside a primary button.",
+      "html": "<div style=\"background:#1c1a16;padding:16px\"><button class=\"ds-btn-quiet\">Source</button></div>",
+      "css": ".ds-btn-quiet { font: 800 20px/1 \"Big Shoulders Display\", \"Arial Narrow\", sans-serif; text-transform: uppercase; letter-spacing: .06em; padding: 14px 22px; border: 0; border-radius: 0; cursor: pointer; background: transparent; color: #f4efe2; box-shadow: inset 0 0 0 2px currentColor; transition: transform .3s cubic-bezier(.16,1,.3,1); } .ds-btn-quiet:hover { color: #e9b23c; transform: translateY(-2px); } .ds-btn-quiet:focus-visible { outline: 3px solid #e9b23c; outline-offset: 4px; }"
+    },
+    {
+      "name": "Arrow Plate Nav",
+      "kind": "nav",
+      "refersTo": "arrow-plate",
+      "description": "Navigation as a wrapping row of arrow plates under the hero scene, with distances.",
+      "html": "<nav class=\"ds-plates\"><a class=\"ds-plate\" href=\"#\"><span>Who's this</span><em>0.2 km</em><svg viewBox=\"0 0 40 24\"><path d=\"M2 12h30M24 3l10 9-10 9\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></a><a class=\"ds-plate ds-plate-rust\" href=\"#\"><span>The work trail</span><em>0.8 km</em><svg viewBox=\"0 0 40 24\"><path d=\"M2 12h30M24 3l10 9-10 9\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></a><a class=\"ds-plate ds-plate-mustard\" href=\"#\"><span>Feed the cat</span><em>1.4 km</em><svg viewBox=\"0 0 40 24\"><path d=\"M2 12h30M24 3l10 9-10 9\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></a></nav>",
+      "css": ".ds-plates { display: flex; flex-wrap: wrap; gap: 12px 14px; padding: 16px; background: #1c1a16; } .ds-plate { display: grid; grid-template-columns: 1fr auto 30px; align-items: center; gap: 14px; flex: 1 1 200px; min-width: 0; background: #1e4a35; color: #f4efe2; padding: 14px 36px 14px 20px; text-decoration: none; clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 50%, calc(100% - 22px) 100%, 0 100%); filter: drop-shadow(0 10px 14px rgba(0,0,0,.45)); transition: transform .35s cubic-bezier(.16,1,.3,1); } .ds-plate span { font: 800 26px/1 \"Big Shoulders Display\", sans-serif; text-transform: uppercase; letter-spacing: .02em; } .ds-plate em { font: 600 15px/1 \"Big Shoulders Display\", sans-serif; font-style: normal; letter-spacing: .08em; } .ds-plate svg { width: 30px; height: 18px; } .ds-plate:hover { transform: translateX(8px); } .ds-plate:focus-visible { outline: 3px solid #e9b23c; outline-offset: 4px; } .ds-plate-rust { background: #b03f24; } .ds-plate-mustard { background: #e9b23c; color: #1c1a16; }"
+    },
+    {
+      "name": "Enamel Board",
+      "kind": "card",
+      "refersTo": "enamel-board",
+      "description": "The trailhead board: painted border, green outline, corner bolts.",
+      "html": "<div style=\"background:#1c1a16;padding:16px\"><div class=\"ds-board\"><h1>Aswin Benny</h1><p>Backend engineer in Bangalore, from Wayanad.</p></div></div>",
+      "css": ".ds-board { position: relative; margin: 4px; background: #1e4a35; color: #f4efe2; border: 6px solid #f4efe2; outline: 4px solid #1e4a35; padding: 36px; box-shadow: 0 2px 0 rgba(0,0,0,.25), 0 18px 40px -18px rgba(0,0,0,.7); } .ds-board::before, .ds-board::after { content: \"\"; position: absolute; top: 12px; width: 10px; height: 10px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #d7d2c4, #6d6a62); } .ds-board::before { left: 12px; } .ds-board::after { right: 12px; } .ds-board h1 { font: 900 72px/.86 \"Big Shoulders Display\", \"Arial Narrow\", sans-serif; text-transform: uppercase; letter-spacing: .01em; margin: 0 0 20px; } .ds-board p { font: 400 20px/1.65 Figtree, system-ui, sans-serif; margin: 0; }"
+    },
+    {
+      "name": "Wayside Sign",
+      "kind": "custom",
+      "refersTo": "wayside-sign",
+      "description": "A small painted sign on a timber stake; green, mustard or rust.",
+      "html": "<div style=\"background:#1c1a16;padding:24px;display:flex;gap:24px;align-items:flex-end\"><div class=\"ds-way\"><div class=\"ds-face\"><h3>Treks</h3><p>Forest trails, steep climbs.</p></div></div><div class=\"ds-way ds-way-mustard\"><div class=\"ds-face\"><h3>Cats</h3><p>Firm believer.</p></div></div></div>",
+      "css": ".ds-way { display: flex; flex-direction: column; align-items: center; width: 220px; } .ds-way::after { content: \"\"; width: 12px; height: 40px; background: #5b4a35; box-shadow: inset -3px 0 0 rgba(0,0,0,.25); } .ds-face { position: relative; width: 100%; padding: 22px 22px 20px; background: #1e4a35; color: #f4efe2; transform: rotate(-1.2deg); box-shadow: 0 2px 0 rgba(0,0,0,.25), 0 16px 30px -16px rgba(0,0,0,.7); } .ds-face::before, .ds-face::after { content: \"\"; position: absolute; top: 9px; width: 8px; height: 8px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #d7d2c4, #6d6a62); } .ds-face::before { left: 9px; } .ds-face::after { right: 9px; } .ds-face h3 { font: 800 32px/1.05 \"Big Shoulders Display\", sans-serif; text-transform: uppercase; letter-spacing: .02em; margin: 0; } .ds-face p { font: 400 16px/1.5 Figtree, system-ui, sans-serif; margin: 6px 0 0; } .ds-way-mustard .ds-face { background: #e9b23c; color: #1c1a16; transform: rotate(1.4deg); } .ds-way-mustard .ds-face p { color: #3b2c10; } .ds-way-mustard .ds-face::before, .ds-way-mustard .ds-face::after { background: radial-gradient(circle at 35% 35%, #8a6a2a, #3b2c10); }"
+    },
+    {
+      "name": "Checkpoint Stamp",
+      "kind": "custom",
+      "refersTo": "checkpoint-stamp",
+      "description": "Rubber stamp in rust ink marking each stop on the trail line; same language for earned badges.",
+      "html": "<div style=\"background:#1c1a16;padding:24px\"><span class=\"ds-stamp\"><b>Hello</b></span></div>",
+      "css": ".ds-stamp { width: 84px; height: 84px; border-radius: 50%; border: 3px solid #e0694c; background: #1c1a16; color: #e0694c; display: grid; place-content: center; text-align: center; transform: rotate(-12deg); box-shadow: inset 0 0 0 4px #1c1a16, inset 0 0 0 5px #e0694c; } .ds-stamp b { font: 800 17px/1 \"Big Shoulders Stencil Display\", \"Big Shoulders Display\", sans-serif; letter-spacing: .06em; text-transform: uppercase; }"
+    },
+    {
+      "name": "Carved Year Post",
+      "kind": "custom",
+      "refersTo": "carved-post",
+      "description": "Mustard post with a peaked top carrying a timeline year.",
+      "html": "<div style=\"background:#1c1a16;padding:24px\"><span class=\"ds-post-when\">2025</span></div>",
+      "css": ".ds-post-when { display: block; width: 96px; font: 800 30px/1 \"Big Shoulders Stencil Display\", \"Big Shoulders Display\", sans-serif; color: #1c1a16; background: #e9b23c; padding: 18px 0 8px; text-align: center; clip-path: polygon(0 12px, 50% 0, 100% 12px, 100% 100%, 0 100%); }"
+    },
+    {
+      "name": "Signpost Sign",
+      "kind": "custom",
+      "refersTo": "arrow-plate",
+      "description": "Outbound link as a tilted arrow sign on a pole.",
+      "html": "<div style=\"background:#1c1a16;padding:24px\"><a class=\"ds-sign\" href=\"#\">GitHub<svg viewBox=\"0 0 40 24\"><path d=\"M2 12h30M24 3l10 9-10 9\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></a></div>",
+      "css": ".ds-sign { display: inline-flex; align-items: center; gap: 16px; font: 800 34px/1 \"Big Shoulders Display\", sans-serif; text-transform: uppercase; letter-spacing: .03em; padding: 14px 44px 14px 22px; text-decoration: none; color: #f4efe2; background: #1e4a35; clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 50%, calc(100% - 24px) 100%, 0 100%); transform: rotate(-3deg); transition: transform .35s cubic-bezier(.16,1,.3,1); } .ds-sign svg { width: 30px; height: 18px; } .ds-sign:hover { transform: translateX(10px) rotate(0); } .ds-sign:focus-visible { outline: 3px solid #e9b23c; outline-offset: 4px; }"
+    },
+    {
+      "name": "HUD",
+      "kind": "custom",
+      "refersTo": "hud-panel",
+      "description": "Night-panel game HUD cells over the scene: term over value, mustard progress cells.",
+      "html": "<div style=\"background:#1c1a16;padding:16px\"><div class=\"ds-hud\"><p><span>Score</span><b>120</b></p><p><span>Combo</span><b>x3</b></p><p><span>Next secret</span><b class=\"ds-bar\"><i class=\"on\"></i><i class=\"on\"></i><i></i></b></p></div></div>",
+      "css": ".ds-hud { display: flex; gap: 6px; } .ds-hud p { margin: 0; background: rgba(20,19,16,.88); border: 2px solid #4a443a; padding: 8px 14px; display: grid; gap: 2px; min-width: 84px; } .ds-hud span { font: 600 12px/1 \"Big Shoulders Display\", \"Arial Narrow\", sans-serif; letter-spacing: .14em; text-transform: uppercase; color: #b9b1a1; } .ds-hud b { font: 900 26px/1 \"Big Shoulders Display\", \"Arial Narrow\", sans-serif; color: #f4efe2; } .ds-bar { display: flex; gap: 3px; padding-top: 5px; } .ds-bar i { width: 22px; height: 12px; background: #3a342b; } .ds-bar i.on { background: #e9b23c; }"
+    },
+    {
+      "name": "Game Dialog",
+      "kind": "card",
+      "refersTo": "game-dialog",
+      "description": "Cream double-framed speech box at the foot of the scene; alert variant in rust-black.",
+      "html": "<div style=\"background:#1c1a16;padding:16px;display:grid;gap:16px\"><div class=\"ds-dialog\"><p class=\"ds-who\">Postgres the elephant · Database</p><p class=\"ds-say\">Thirty million rows and nobody noticed.</p><div class=\"ds-timer\"><i></i></div></div><div class=\"ds-dialog ds-alert\"><p class=\"ds-who\">Incident · level 2</p><p class=\"ds-say\">Rack three is on fire. Who fixes it?</p><div class=\"ds-timer\"><i></i></div></div></div>",
+      "css": ".ds-dialog { background: #f4efe2; color: #1c1a16; border: 4px solid #1c1a16; outline: 3px solid #f4efe2; padding: 16px 20px 14px; box-shadow: 0 20px 40px -14px rgba(0,0,0,.8); } .ds-dialog p { margin: 0; } .ds-who { font: 800 15px/1 \"Big Shoulders Display\", \"Arial Narrow\", sans-serif; letter-spacing: .12em; text-transform: uppercase; color: #b03f24; } .ds-say { font: 400 19px/1.45 Figtree, system-ui, sans-serif; margin-top: 8px !important; } .ds-timer { height: 8px; background: rgba(0,0,0,.25); margin-top: 12px; } .ds-timer i { display: block; height: 100%; width: 60%; background: #e9b23c; } .ds-alert { background: #2a1410; color: #f4efe2; outline-color: #e0694c; } .ds-alert .ds-who { color: #e0694c; } .ds-alert .ds-timer i { background: #e0694c; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Trailhead & Checkpoint Pass",
+    "overview": "The page is a trek through the Western Ghats, told in the material vocabulary of a forest department: enamel green boards with cream hand-painted capitals, mustard and rust arrow plates on a timber post, carved distance posts, rubber checkpoint stamps in rust ink, and a dashed mustard trail line running down warm, near-black loam. Every surface is a physical object you would pass on a path, and the reader moves down the trail line from board to checkpoint to signpost.\n\nThe trailhead is a clearing with a small server farm on it, built in CSS 3D: an isometric loam floor with a faint cream grid and a timber rim, racks as five-faced boxes with blinking LED columns, the enamel name board raised as a billboard on two timber legs, and flat-illustrated animals (each in a mustard hard hat) standing as camera-facing billboards with nameplates. Screen-space game UI sits over it in the same vocabulary: dark loam panels with a line border for the HUD, a cream double-framed dialog box for speech. Below it, the trail itself is gently three-dimensional: stops rise into place, signs sway in the wind of a fast scroll and lean toward the pointer, a cyclist rides the trail line with the scroll, and checkpoint stamps flip down as you reach them.\n\nDensity is low and the rhythm is long: each stop sits off the trail line with generous vertical travel between them. Type is tall condensed sign-painter capitals for everything that would be painted on a board, and a friendly humanist sans for everything that would be spoken. Objects are slightly hand-planted: signs tilt a degree or three, stamps are struck at an angle, stakes vary in height.\n\nIt rejects the hero-plus-cards developer homepage and the terminal costume of the previous version (archived at /v2/).",
+    "keyCharacteristics": [
+      "Dark trail ground, signage carries all the colour.",
+      "Square-cornered painted boards with bolted corners; circles only for stamps and bolts.",
+      "Arrow-plate silhouettes for anything that leads somewhere.",
+      "Condensed uppercase display type on signs; Figtree for prose.",
+      "Soft, downward lift under signage; no rounded cards, no glass, no gradient fills (gradients only shade the bolt heads and light the 3D scene's loam).",
+      "Real CSS 3D for depth: the hero scene is a perspective world; on the trail, 3D is motion only and never hides content."
+    ],
+    "rules": [
+      {
+        "name": "The Paint On Signs Rule",
+        "body": "Saturated colour lives only on objects (boards, plates, stamps, posts, buttons, LEDs); the ground itself stays loam. Ground may be lit in loam tones (the scene's light pool) but never tinted with a hue.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two Rusts Rule",
+        "body": "Rust is a fill under cream text; Rust Ink is a stroke or text colour on dark ground. Do not swap them: rust text on loam fails, rust-ink fill under cream fails.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Of Each Rule",
+        "body": "In a set of plates or signs, green is the default; rust and mustard appear once each to break the run.",
+        "section": "colors"
+      },
+      {
+        "name": "The Painted Caps Rule",
+        "body": "Every display-face string is uppercase. Figtree is never uppercased.",
+        "section": "typography"
+      },
+      {
+        "name": "The Stencil Is For Stamps Rule",
+        "body": "The stencil face marks things that were struck or carved (stamps, year posts, badge names). It never sets headlines or prose.",
+        "section": "typography"
+      },
+      {
+        "name": "The Standing Sign Rule",
+        "body": "Shadows fall down, never sideways, and only under objects that stand on the trail. No sign hovers on a halo. The carved extrusion is the one stepped shadow, and it belongs to headline lettering, never to a box.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Motion-Only 3D Rule",
+        "body": "On the trail, 3D transforms (rise, sway, tilt, stamp flip) animate content that is already visible; nothing waits on an observer or a 3D state to be readable, and all of it is skipped under prefers-reduced-motion.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do make every new surface an object you could pass on a trail: an enamel board, a plate, a post, a stamp, a stake.",
+      "Do keep boards square-cornered and give them corner bolts and the board or sign lift.",
+      "Do use the arrow-plate silhouette for anything that navigates or links out, and slide it along its arrow on hover.",
+      "Do set every display-face string in uppercase Big Shoulders; set prose in Figtree at 18px/1.65 in stone, with the lead in paint.",
+      "Do use rust as a fill under cream and rust-ink as a stroke or text on ground.",
+      "Do keep focus visible as the 3px mustard outline at 4px offset, and honour prefers-reduced-motion.",
+      "Do put screen-space game UI on night panels (88% loam, 2px line border, square) and speech on the cream double-framed dialog.",
+      "Do keep 3D on the trail motion-only: content is readable before and without any transform."
+    ],
+    "donts": [
+      "Don't use rounded rectangles or rounded cards; the only curves are full circles for stamps, badges and bolts.",
+      "Don't tint section backgrounds or put colour on the ground; colour belongs to signage.",
+      "Don't cast shadows sideways or add ambient glows to boards and signs; lift is downward only. The single glow in the system marks a golden fish in the cat game.",
+      "Don't reintroduce terminal styling, monospace costume, or the hero-plus-cards developer layout.",
+      "Don't use the stencil face for headlines or body text.",
+      "Don't use more than one rust and one mustard in a set of plates or signs."
+    ]
+  }
+}
