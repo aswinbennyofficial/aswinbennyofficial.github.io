@@ -4,13 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Aswin Benny</title>
-    <meta name="description" content="Aswin Benny, backend engineer. Animals run his server farm. Play the game to get the tea on him, then go feed the cat." />
+    <meta name="description" content="Aswin Benny, backend engineer. His backend team is a bunch of animals in a forest. Tap them to get the tea, then go feed the cat." />
     <meta name="author" content="Aswin Benny" />
     <meta name="theme-color" content="#1e4a35" />
     <link rel="icon" href="./res/favicon.ico" type="image/x-icon" />
 
     <meta property="og:title" content="Aswin Benny" />
-    <meta property="og:description" content="Backend engineer. Animals run his server farm. Play to get the tea." />
+    <meta property="og:description" content="Backend engineer. His backend team is a bunch of forest animals. Tap them to get the tea." />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -60,28 +60,19 @@
             </div>
             <span class="namesign-legs" aria-hidden="true"></span>
           </div>
-          <button class="critter" type="button" data-who="elephant" style="--x:84;--y:226;--w:118px" aria-label="Postgres, the elephant: database"><svg viewBox="0 0 92 80"><use href="#a-elephant"/></svg><span><kbd>1</kbd>Postgres</span></button>
-          <button class="critter" type="button" data-who="cow" style="--x:250;--y:200;--w:104px" aria-label="Nginx, the cow: front door"><svg viewBox="0 0 92 80"><use href="#a-cow"/></svg><span><kbd>2</kbd>Nginx</span></button>
-          <button class="critter" type="button" data-who="goat" style="--x:372;--y:200;--w:92px" aria-label="GC, the goat: garbage collector"><svg viewBox="0 0 92 80"><use href="#a-goat"/></svg><span><kbd>3</kbd>GC</span></button>
-          <button class="critter" type="button" data-who="croc" style="--x:112;--y:352;--w:130px" aria-label="Redis, the crocodile: cache"><svg viewBox="0 0 120 60"><use href="#a-croc"/></svg><span><kbd>4</kbd>Redis</span></button>
-          <button class="critter" type="button" data-who="snake" style="--x:254;--y:346;--w:84px" aria-label="Kafka, the snake: event stream"><svg viewBox="0 0 80 80"><use href="#a-snake"/></svg><span><kbd>5</kbd>Kafka</span></button>
-          <button class="critter" type="button" data-who="fox" style="--x:368;--y:312;--w:100px" aria-label="Vault, the fox: security"><svg viewBox="0 0 92 80"><use href="#a-fox"/></svg><span><kbd>6</kbd>Vault</span></button>
-          <button class="critter" type="button" data-who="gopher" style="--x:418;--y:446;--w:86px" aria-label="Gopher, the Go dev: Go services"><svg viewBox="0 0 92 80"><use href="#a-gopher"/></svg><span><kbd>7</kbd>Gopher</span></button>
-        </div>
-
-        <div class="hud" id="hud" hidden>
-          <p><span>Score</span><b id="score">0</b></p>
-          <p><span>Level</span><b id="level">1</b></p>
-          <p><span>Combo</span><b id="combo">x1</b></p>
-          <p class="lives"><span>Servers</span><b id="lives"></b></p>
-          <p class="next"><span>Next secret</span><b class="nextbar" id="nextbar" role="progressbar" aria-label="Fixes until the next secret" aria-valuemin="0" aria-valuemax="3" aria-valuenow="0"><i></i><i></i><i></i></b></p>
+          <button class="critter" type="button" data-who="elephant" style="--x:84;--y:226;--w:118px" aria-label="Postgres, the elephant: database"><svg viewBox="0 0 92 80"><use href="#a-elephant"/></svg><span>Postgres</span></button>
+          <button class="critter" type="button" data-who="cow" style="--x:250;--y:200;--w:104px" aria-label="Nginx, the cow: front door"><svg viewBox="0 0 92 80"><use href="#a-cow"/></svg><span>Nginx</span></button>
+          <button class="critter" type="button" data-who="goat" style="--x:372;--y:200;--w:92px" aria-label="GC, the goat: garbage collector"><svg viewBox="0 0 92 80"><use href="#a-goat"/></svg><span>GC</span></button>
+          <button class="critter" type="button" data-who="croc" style="--x:112;--y:352;--w:130px" aria-label="Redis, the crocodile: cache"><svg viewBox="0 0 120 60"><use href="#a-croc"/></svg><span>Redis</span></button>
+          <button class="critter" type="button" data-who="snake" style="--x:254;--y:346;--w:84px" aria-label="Kafka, the snake: event stream"><svg viewBox="0 0 80 80"><use href="#a-snake"/></svg><span>Kafka</span></button>
+          <button class="critter" type="button" data-who="fox" style="--x:368;--y:312;--w:100px" aria-label="WAF, the fox: firewall"><svg viewBox="0 0 92 80"><use href="#a-fox"/></svg><span>WAF</span></button>
+          <button class="critter" type="button" data-who="gopher" style="--x:418;--y:446;--w:86px" aria-label="Gopher, the Go dev: Go services"><svg viewBox="0 0 92 80"><use href="#a-gopher"/></svg><span>Gopher</span></button>
         </div>
 
         <div class="dialog" id="dialog">
-          <p class="dialog-who" id="who">Postgres the elephant · Database</p>
+          <p class="dialog-who" id="who">Forest Backend Co.</p>
           <p class="dialog-text" id="say"></p>
           <p class="dialog-note" id="note"></p>
-          <div class="timer" id="timer" hidden><i id="timerbar"></i></div>
           <div class="dialog-actions" id="actions"></div>
         </div>
 
@@ -92,7 +83,7 @@
       <nav class="plates" aria-label="Trail">
         <a class="plate" href="#who"><span>Who's this guy</span><em>0.2 km</em><svg><use href="#arrow"/></svg></a>
         <a class="plate plate-rust" href="#trail"><span>Work era</span><em>0.8 km</em><svg><use href="#arrow"/></svg></a>
-        <a class="plate plate-mustard" href="#cat"><span>Feed the cat</span><em>1.4 km</em><svg><use href="#arrow"/></svg></a>
+        <a class="plate plate-mustard" href="#cat"><span>Bug hunt</span><em>1.4 km</em><svg><use href="#arrow"/></svg></a>
         <a class="plate" href="#find"><span>Say hi</span><em>1.9 km</em><svg><use href="#arrow"/></svg></a>
       </nav>
     </header>
@@ -112,27 +103,36 @@
       <!-- Who -->
       <section id="who" class="stop">
         <span class="stamp" aria-hidden="true"><b>Hello</b></span>
-        <h2>Hi, I'm Aswin.</h2>
-        <p class="lead">I build the backend bits nobody notices until they break: queues, pipelines, and the plumbing that moves money and messages around.</p>
-        <p>When I'm not doing that, I'm probably at one of these:</p>
+        <h2>Meet Aswin.</h2>
+        <div class="narrate">
+          <div class="narrator narrator-cow" aria-hidden="true"><svg viewBox="0 0 92 80"><use href="#a-cow"/></svg></div>
+          <div class="say-bubble">
+            <p class="say-who">Nginx the cow · Front door</p>
+            <p>Moo, welcome in. I'm on the front door, so I meet everyone first. This is Aswin, our backend engineer. He builds the bits nobody notices until they break: queues, pipelines, the plumbing that moves money and messages around. Off the clock, you'll find him at one of these:</p>
+          </div>
+        </div>
 
         <ul class="wayside" aria-label="Things I like">
-          <li class="w-green"><div class="sign-face"><h3>Treks</h3><p>Uphill, sweaty, worth it for the view.</p></div></li>
-          <li class="w-mustard"><div class="sign-face"><h3>Cats</h3><p>I will stop mid-sentence to say hi to one.</p></div></li>
+          <li class="w-green"><div class="sign-face"><h3>Treks &amp; walks</h3><p>Uphill, sweaty, worth it. Long walks are where his bugs get solved.</p></div></li>
+          <li class="w-mustard"><div class="sign-face"><h3>Animals</h3><p>Cats first, but honestly all of them. Crocodiles and snakes included.</p></div></li>
           <li class="w-rust"><div class="sign-face"><h3>Solo travel</h3><p>One backpack, a loose plan, zero arguments.</p></div></li>
           <li class="w-green"><div class="sign-face"><h3>Cycling</h3><p>Early rides before the city wakes up.</p></div></li>
-          <li class="w-rust"><div class="sign-face"><h3>Long walks</h3><p>Where most of my bugs get solved.</p></div></li>
-          <li class="w-mustard"><div class="sign-face"><h3>All the animals</h3><p>All cute. Crocodiles and snakes included. No exceptions.</p></div></li>
-          <li class="w-green w-movies"><div class="sign-face"><h3>Movies</h3><p>Way too many. Fantastic Mr. Fox is up there. <a href="https://sh.aswinbenny.in/imdb" target="_blank" rel="noopener">My ratings</a></p></div></li>
-          <li class="w-green"><div class="sign-face"><h3>Tech</h3><p>How things work under the hood, usually found out by breaking them first.</p></div></li>
+          <li class="w-mustard w-movies"><div class="sign-face"><h3>Movies</h3><p>Way too many. Fantastic Mr. Fox is up there. <a href="https://sh.aswinbenny.in/imdb" target="_blank" rel="noopener">His ratings</a></p></div></li>
         </ul>
       </section>
 
+      <div class="ridge" aria-hidden="true"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0 120V70l40-30 30 22 45-44 40 36 35-24 50 40 40-30 45 26 40-46 50 44 35-20 45 30 40-38 45 34 40-22 50 36 35-28 45 30 40-42 50 40 35-18 45 28 40-34 45 32 40-20 V120z" fill="#1a2f23"/><path d="M0 120V92l55-24 40 18 60-30 45 26 50-20 55 28 45-22 60 26 40-16 55 24 50-28 45 22 55-18 50 26 45-20 55 24 40-14 50 22 55-26 45 20V120z" fill="#152419"/></svg></div>
       <!-- Work trail -->
       <section id="trail" class="stop">
         <span class="stamp" aria-hidden="true"><b>Work</b></span>
         <h2>The work era.</h2>
-        <p>Short version. The long one is on <a href="https://linkedin.com/in/aswinbenny" target="_blank" rel="noopener">LinkedIn</a>.</p>
+        <div class="narrate">
+          <div class="narrator narrator-elephant" aria-hidden="true"><svg viewBox="0 0 92 80"><use href="#a-elephant"/></svg></div>
+          <div class="say-bubble">
+            <p class="say-who">Postgres the elephant · Records</p>
+            <p>I keep the records around here, so let me pull his history, row by row. The full table is on <a href="https://linkedin.com/in/aswinbenny" target="_blank" rel="noopener">LinkedIn</a>.</p>
+          </div>
+        </div>
 
         <ol class="posts">
           <li>
@@ -145,14 +145,15 @@
           </li>
           <li>
             <span class="post-when">2025</span>
-            <div><h3>GreedyGame (PubScale)</h3><p>Came in as an intern, stayed as an Associate Software Engineer. I work on the backend of a rewarded-ads platform: offers, rewards, payouts. Highlights: a pipeline that eats <strong>7M+ events a day</strong>, a <strong>30M-row</strong> Postgres table moved without anyone noticing, and <strong>2nd place</strong> at the company hackathon with a prototype built in 3 days.</p></div>
+            <div><h3>GreedyGame (PubScale)</h3><p>Came in as an intern, stayed as an Associate Software Engineer. Works on the backend of a rewarded-ads platform: offers, rewards, payouts. Highlights: a pipeline that eats <strong>7M+ events a day</strong>, a <strong>30M-row</strong> Postgres table moved without anyone noticing, and <strong>2nd place</strong> at the company hackathon with a prototype built in 3 days.</p></div>
           </li>
         </ol>
 
         <article class="sushi">
+          <div class="sushi-gopher" aria-hidden="true"><svg viewBox="0 0 92 80"><use href="#a-gopher"/></svg></div>
           <div>
             <h3>SuSHi</h3>
-            <p>My side project. Save your SSH logins and open a real terminal in the browser, even from your phone.</p>
+            <p>His side project, and Gopher's favourite. Save your SSH logins and open a real terminal in the browser, even from your phone.</p>
           </div>
           <div class="sushi-links">
             <a class="btn" href="https://github.com/aswinbennyofficial/SuSHi" target="_blank" rel="noopener">See it on GitHub</a>
@@ -160,70 +161,63 @@
         </article>
       </section>
 
-      <!-- Cat queue -->
+      <div class="ridge" aria-hidden="true"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0 120V70l40-30 30 22 45-44 40 36 35-24 50 40 40-30 45 26 40-46 50 44 35-20 45 30 40-38 45 34 40-22 50 36 35-28 45 30 40-42 50 40 35-18 45 28 40-34 45 32 40-20 V120z" fill="#1a2f23"/><path d="M0 120V92l55-24 40 18 60-30 45 26 50-20 55 28 45-22 60 26 40-16 55 24 50-28 45 22 55-18 50 26 45-20 55 24 40-14 50 22 55-26 45 20V120z" fill="#152419"/></svg></div>
+      <!-- Bug hunt with the cat -->
       <section id="cat" class="stop">
         <span class="stamp" aria-hidden="true"><b>Cat</b></span>
-        <h2>Feed the trail cat.</h2>
-        <p>Basically my day job, but with fish. You toss, they queue, she eats them in order. Toss too many and watch the line back up.</p>
-
-        <div class="cat-yard">
-          <ol class="queue" id="queue" aria-label="Fish waiting in line"></ol>
-
-          <div class="cat-spot">
-            <p class="bubble" id="bubble" aria-hidden="true"></p>
-            <div class="hearts" id="hearts" aria-hidden="true"></div>
-            <button class="cat-btn" id="catbtn" type="button" aria-label="Pet the cat">
-              <svg class="cat" id="catsvg" viewBox="0 0 140 130" aria-hidden="true">
-                <path class="tail" d="M92 108c22 0 34-12 30-30" fill="none" stroke="#d9952a" stroke-width="9" stroke-linecap="round"/>
-                <ellipse cx="70" cy="92" rx="30" ry="30" fill="#e9a93a"/>
-                <path d="M52 82q18 8 36 0M50 96q20 8 40 0" stroke="#c47a1e" stroke-width="4" fill="none" stroke-linecap="round"/>
-                <g class="head">
-                  <path d="M46 38l4-24 16 14zM94 38l-4-24-16 14z" fill="#e9a93a"/>
-                  <path d="M51 32l2-11 8 7zM89 32l-2-11-8 7z" fill="#f2b9a6"/>
-                  <circle cx="70" cy="46" r="25" fill="#e9a93a"/>
-                  <path d="M58 26q12 6 24 0" stroke="#c47a1e" stroke-width="4" fill="none" stroke-linecap="round"/>
-                  <g class="eyes-open"><g class="pupils"><ellipse cx="60" cy="45" rx="3.5" ry="5" fill="#1c1a16"/><ellipse cx="80" cy="45" rx="3.5" ry="5" fill="#1c1a16"/></g></g>
-                  <path class="eyes-shut" d="M55 46q5 4 10 0M75 46q5 4 10 0" stroke="#1c1a16" stroke-width="2.6" fill="none" stroke-linecap="round"/>
-                  <path d="M67 54h6l-3 3z" fill="#b03f24"/>
-                  <ellipse class="mouth" cx="70" cy="61" rx="3.2" ry="3.6" fill="#5b2414"/>
-                  <path d="M46 52l-14-2M46 56l-14 3M94 52l14-2M94 56l14 3" stroke="#f4efe2" stroke-width="1.5" stroke-linecap="round"/>
-                </g>
-                <g class="zzz" fill="#b9b1a1" font-family="Big Shoulders Display, sans-serif" font-weight="800"><text x="98" y="22" font-size="14">z</text><text x="108" y="12" font-size="10">z</text></g>
-                <path d="M36 118h68l-8 10H44z" fill="#b03f24"/>
-                <ellipse cx="70" cy="118" rx="34" ry="5" fill="#a63a22"/>
-              </svg>
-            </button>
+        <h2>Bug hunt.</h2>
+        <div class="narrate">
+          <div class="narrator narrator-goat" aria-hidden="true"><svg viewBox="0 0 92 80"><use href="#a-goat"/></svg></div>
+          <div class="say-bubble">
+            <p class="say-who">GC the goat · Garbage collector</p>
+            <p>I eat garbage. She eats bugs. The cat is our entire QA team, and she is ruthless. Grab the laser and point her at the bugs. Fair warning: some of them fight dirty.</p>
           </div>
         </div>
 
-        <dl class="cat-stats">
-          <div><dt>Mood</dt><dd id="mood">Hungry</dd></div>
-          <div><dt>Eaten</dt><dd id="eaten">0</dd></div>
-          <div><dt>In line</dt><dd><span id="qcount">0</span>/8</dd></div>
-          <div><dt>Pets</dt><dd id="pets">0</dd></div>
-        </dl>
-
-        <div class="cat-controls">
-          <button class="btn" id="toss" type="button"><svg aria-hidden="true"><use href="#fish"/></svg>Toss a fish</button>
-          <button class="btn btn-quiet" id="burst" type="button">Toss 12 at once</button>
+        <div class="yard" id="yard" tabindex="0" role="application" aria-label="Bug hunt. Move the laser with your mouse, a tap, or the arrow keys. The cat chases it and pounces on bugs." aria-describedby="huntStatus">
+          <div class="hunter" id="hunter" aria-hidden="true">
+            <p class="bubble" id="bubble"></p>
+            <svg class="cat" id="catsvg" viewBox="0 0 140 124">
+              <path class="tail" d="M92 108c22 0 34-12 30-30" fill="none" stroke="#d9952a" stroke-width="9" stroke-linecap="round"/>
+              <ellipse cx="70" cy="92" rx="30" ry="30" fill="#e9a93a"/>
+              <path d="M52 82q18 8 36 0M50 96q20 8 40 0" stroke="#c47a1e" stroke-width="4" fill="none" stroke-linecap="round"/>
+              <g class="head">
+                <path d="M46 38l4-24 16 14zM94 38l-4-24-16 14z" fill="#e9a93a"/>
+                <path d="M51 32l2-11 8 7zM89 32l-2-11-8 7z" fill="#f2b9a6"/>
+                <circle cx="70" cy="46" r="25" fill="#e9a93a"/>
+                <path d="M58 26q12 6 24 0" stroke="#c47a1e" stroke-width="4" fill="none" stroke-linecap="round"/>
+                <g class="eyes-open"><g class="pupils"><ellipse cx="60" cy="45" rx="3.5" ry="5" fill="#1c1a16"/><ellipse cx="80" cy="45" rx="3.5" ry="5" fill="#1c1a16"/></g></g>
+                <path d="M67 54h6l-3 3z" fill="#b03f24"/>
+                <path d="M46 52l-14-2M46 56l-14 3M94 52l14-2M94 56l14 3" stroke="#f4efe2" stroke-width="1.5" stroke-linecap="round"/>
+              </g>
+            </svg>
+          </div>
+          <span class="laser" id="laser" aria-hidden="true"></span>
+          <p class="yard-hint" id="yardHint">Move here to switch on the laser</p>
         </div>
-        <p class="cat-status" id="status" role="status" aria-live="polite">She's hungry. Tap her, or toss a fish.</p>
 
-        <h3 class="badges-title">Stamps collected <span id="badgecount">0</span>/6</h3>
+        <p class="hunt-status"><span class="cat-tally"><b id="squashed">0</b> bugs squashed · best <span id="best">0</span></span><span id="huntStatus" role="status" aria-live="polite">The bugs are out. She's watching.</span></p>
+
+        <h3 class="badges-title">Stamps <span id="badgecount">0</span>/3</h3>
         <ul class="badges" id="badges">
-          <li data-badge="first"><b>First bite</b><span>Feed her once</span></li>
-          <li data-badge="purr"><b>Purr</b><span>10 pets. She's obsessed.</span></li>
-          <li data-badge="golden"><b>Golden</b><span>She eats a golden one</span></li>
-          <li data-badge="backpressure"><b>Backpressure</b><span>Overflow the line. Oops.</span></li>
-          <li data-badge="nap"><b>Nap time</b><span>Ignore her till she naps</span></li>
-          <li data-badge="regular"><b>Regular</b><span>50 fish. Certified regular.</span></li>
+          <li data-badge="first"><b>First bug</b><span>Squash one</span></li>
+          <li data-badge="race"><b>Race won</b><span>Catch both halves</span></li>
+          <li data-badge="heisen"><b>Heisenbug</b><span>Catch the shy one</span></li>
         </ul>
       </section>
 
+      <div class="ridge" aria-hidden="true"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0 120V70l40-30 30 22 45-44 40 36 35-24 50 40 40-30 45 26 40-46 50 44 35-20 45 30 40-38 45 34 40-22 50 36 35-28 45 30 40-42 50 40 35-18 45 28 40-34 45 32 40-20 V120z" fill="#1a2f23"/><path d="M0 120V92l55-24 40 18 60-30 45 26 50-20 55 28 45-22 60 26 40-16 55 24 50-28 45 22 55-18 50 26 45-20 55 24 40-14 50 22 55-26 45 20V120z" fill="#152419"/></svg></div>
       <!-- Find me -->
       <section id="find" class="stop stop-end">
         <span class="stamp" aria-hidden="true"><b>Summit</b></span>
         <h2>Say hi.</h2>
+        <div class="narrate">
+          <div class="narrator narrator-fox" aria-hidden="true"><svg viewBox="0 0 92 80"><use href="#a-fox"/></svg></div>
+          <div class="say-bubble">
+            <p class="say-who">WAF the fox · Firewall</p>
+            <p>End of the trail. You've been through every checkpoint and you're clearly not a bot, so I'm letting you through. Here's where to find him:</p>
+          </div>
+        </div>
         <div class="signpost">
           <a class="sign s1" href="https://github.com/aswinbennyofficial" target="_blank" rel="noopener">GitHub<svg aria-hidden="true"><use href="#arrow"/></svg></a>
           <a class="sign s2" href="https://blog.aswinbenny.in/" target="_blank" rel="noopener">Blog<svg aria-hidden="true"><use href="#arrow"/></svg></a>
@@ -232,34 +226,37 @@
           <a class="sign s4" href="https://leetcode.com/aswinbenny" target="_blank" rel="noopener">LeetCode<svg aria-hidden="true"><use href="#arrow"/></svg></a>
           <span class="pole" aria-hidden="true"></span>
         </div>
-        <p class="mail-line">Or email me: <a href="mailto:portfolio@aswinbenny.anonaddy.com">portfolio@aswinbenny.anonaddy.com</a></p>
+        <p class="mail-line">Or email him: <a href="mailto:portfolio@aswinbenny.anonaddy.com">portfolio@aswinbenny.anonaddy.com</a></p>
       </section>
     </main>
 
     <footer class="foot">
-      <p>© 2026 Aswin Benny. Past eras: <a href="./v2/index.html">the terminal one</a> · <a href="./v1/index.html">the OG one</a></p>
+      <p><span class="foot-goat" aria-hidden="true"><svg viewBox="0 0 92 80"><use href="#a-goat"/></svg></span>GC the goat wanted to eat the old versions of this site. Aswin kept them anyway: <a href="./v2/index.html">the terminal one</a> · <a href="./v1/index.html">the OG one</a>.</p>
+      <p class="fine-print">© 2026 Aswin Benny · Forest Backend Co.</p>
     </footer>
 
 
-    <!-- fake captcha: a vibe check on first visit, always skippable -->
+    <!-- fake captcha: "select all the cute animals" (spoiler: all of them). First visit only, always skippable -->
     <div class="captcha" id="captcha" role="dialog" aria-modal="true" aria-labelledby="capTitle" aria-describedby="capSub" hidden>
       <div class="captcha-card">
         <h2 class="captcha-title" id="capTitle">Sus traffic detected</h2>
-        <p class="captcha-sub" id="capSub">Quick vibe check: build this PC to prove you're not a bot. Pick a part, then tap the slot it fits.</p>
-        <div class="mobo" id="mobo">
-          <button type="button" class="slot slot-cpu" data-slot="cpu" aria-label="Square socket"></button>
-          <button type="button" class="slot slot-ram" data-slot="ram" aria-label="Long thin slot"></button>
-          <button type="button" class="slot slot-gpu" data-slot="gpu" aria-label="Wide slot"></button>
-          <button type="button" class="slot slot-ssd" data-slot="ssd" aria-label="Short slot"></button>
-        </div>
-        <div class="tray" id="tray">
-          <button type="button" class="part" data-part="ram"><svg viewBox="0 0 120 30" aria-hidden="true"><rect x="2" y="4" width="116" height="20" rx="2" fill="#1e4a35"/><rect x="10" y="8" width="14" height="12" fill="#1c1a16"/><rect x="30" y="8" width="14" height="12" fill="#1c1a16"/><rect x="50" y="8" width="14" height="12" fill="#1c1a16"/><rect x="70" y="8" width="14" height="12" fill="#1c1a16"/><rect x="90" y="8" width="14" height="12" fill="#1c1a16"/><path d="M6 24v4M14 24v4M22 24v4M30 24v4M38 24v4M46 24v4M54 24v4M66 24v4M74 24v4M82 24v4M90 24v4M98 24v4M106 24v4M114 24v4" stroke="#e9b23c" stroke-width="2"/></svg><span>RAM</span></button>
-          <button type="button" class="part" data-part="gpu"><svg viewBox="0 0 120 50" aria-hidden="true"><rect x="2" y="4" width="116" height="38" rx="3" fill="#3a342b"/><circle cx="36" cy="23" r="14" fill="#1c1a16"/><circle cx="84" cy="23" r="14" fill="#1c1a16"/><path d="M36 11v24M24 23h24M84 11v24M72 23h24" stroke="#5c564b" stroke-width="3"/><rect x="10" y="42" width="60" height="6" fill="#e9b23c"/></svg><span>GPU</span></button>
-          <button type="button" class="part" data-part="cpu"><svg viewBox="0 0 60 60" aria-hidden="true"><rect x="8" y="8" width="44" height="44" rx="3" fill="#b9b1a1"/><rect x="18" y="18" width="24" height="24" fill="#6d6a62"/><path d="M14 4v4M22 4v4M30 4v4M38 4v4M46 4v4M14 52v4M22 52v4M30 52v4M38 52v4M46 52v4M4 14h4M4 22h4M4 30h4M4 38h4M4 46h4M52 14h4M52 22h4M52 30h4M52 38h4M52 46h4" stroke="#e9b23c" stroke-width="2"/></svg><span>CPU</span></button>
-          <button type="button" class="part" data-part="ssd"><svg viewBox="0 0 80 24" aria-hidden="true"><rect x="2" y="4" width="72" height="16" rx="2" fill="#1e4a35"/><rect x="10" y="7" width="22" height="10" fill="#1c1a16"/><rect x="38" y="7" width="22" height="10" fill="#1c1a16"/><rect x="72" y="8" width="6" height="8" fill="#e9b23c"/></svg><span>SSD</span></button>
+        <p class="captcha-sub" id="capSub">Quick vibe check. Select all the <b>cute animals</b>.</p>
+        <div class="cap-grid" id="capGrid">
+          <button type="button" class="tile" data-name="cat" aria-pressed="false" aria-label="cat"><svg viewBox="0 0 140 124" aria-hidden="true"><path d="M92 108c22 0 34-12 30-30" fill="none" stroke="#d9952a" stroke-width="9" stroke-linecap="round"/><ellipse cx="70" cy="92" rx="30" ry="30" fill="#e9a93a"/><path d="M46 38l4-24 16 14zM94 38l-4-24-16 14z" fill="#e9a93a"/><circle cx="70" cy="46" r="25" fill="#e9a93a"/><ellipse cx="60" cy="45" rx="3.5" ry="5" fill="#1c1a16"/><ellipse cx="80" cy="45" rx="3.5" ry="5" fill="#1c1a16"/><path d="M67 54h6l-3 3z" fill="#b03f24"/></svg></button>
+          <button type="button" class="tile" data-name="crocodile" aria-pressed="false" aria-label="crocodile"><svg viewBox="0 0 120 60" aria-hidden="true"><use href="#a-croc"/></svg></button>
+          <button type="button" class="tile" data-name="cow" aria-pressed="false" aria-label="cow"><svg viewBox="0 0 92 80" aria-hidden="true"><use href="#a-cow"/></svg></button>
+          <button type="button" class="tile" data-name="snake" aria-pressed="false" aria-label="snake"><svg viewBox="0 0 80 80" aria-hidden="true"><use href="#a-snake"/></svg></button>
+          <button type="button" class="tile" data-name="bug" aria-pressed="false" aria-label="bug"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M8 12l-6-4M8 20H1M8 28l-6 4M32 12l6-4M32 20h7M32 28l6 4" stroke="#1c1a16" stroke-width="2.5" stroke-linecap="round"/><ellipse cx="20" cy="22" rx="12" ry="14" fill="#b03f24"/><circle cx="20" cy="8" r="6" fill="#1c1a16"/></svg></button>
+          <button type="button" class="tile" data-name="elephant" aria-pressed="false" aria-label="elephant"><svg viewBox="0 0 92 80" aria-hidden="true"><use href="#a-elephant"/></svg></button>
+          <button type="button" class="tile" data-name="goat" aria-pressed="false" aria-label="goat"><svg viewBox="0 0 92 80" aria-hidden="true"><use href="#a-goat"/></svg></button>
+          <button type="button" class="tile" data-name="fox" aria-pressed="false" aria-label="fox"><svg viewBox="0 0 92 80" aria-hidden="true"><use href="#a-fox"/></svg></button>
+          <button type="button" class="tile" data-name="gopher" aria-pressed="false" aria-label="gopher"><svg viewBox="0 0 92 80" aria-hidden="true"><use href="#a-gopher"/></svg></button>
         </div>
         <p class="captcha-msg" id="capMsg" role="status" aria-live="polite"></p>
-        <button type="button" class="captcha-skip" id="capSkip">I'm a bot, let me in anyway</button>
+        <div class="cap-actions">
+          <button type="button" class="btn" id="capVerify">Verify</button>
+          <button type="button" class="captcha-skip" id="capSkip">I'm a bot, let me in</button>
+        </div>
       </div>
     </div>
     <script src="script.js"></script>

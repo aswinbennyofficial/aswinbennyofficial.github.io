@@ -85,341 +85,260 @@ const Sound = (function () {
   };
 })();
 
-// The trail cat: a bounded FIFO queue with one consumer who has moods.
-// Hunger rises over time; eating lowers it. A stuffed cat eats slower, so the line backs up.
+// Bug hunt: point the laser, the cat chases it and pounces on bugs.
+// Bug types unlock as you go; a few fight dirty. No timer and no losing.
 (function () {
-  const CAP = 8;
+  const yard = document.getElementById('yard');
+  if (!yard) return;
   const $ = id => document.getElementById(id);
-  const queueEl = $('queue');
-  if (!queueEl) return;
-  const cat = $('catsvg'), catBtn = $('catbtn'), bubble = $('bubble'), hearts = $('hearts');
-  const status = $('status');
+  const hunter = $('hunter'), cat = $('catsvg'), laser = $('laser'), hint = $('yardHint'), bubble = $('bubble'), status = $('huntStatus');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const fishSvg = '<svg aria-hidden="true"><use href="#fish"/></svg>';
-  const heartSvg = '<svg viewBox="0 0 20 18" aria-hidden="true"><path d="M10 17S1 11 1 5.5A4.5 4.5 0 0 1 10 3a4.5 4.5 0 0 1 9 2.5C19 11 10 17 10 17z" fill="currentColor"/></svg>';
+  const store = {
+    get(k, d) { try { const v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } },
+    set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+  };
 
-  const state = { queue: [], eaten: 0, pets: 0, hunger: 80, busy: false, asleep: false, lastPoke: Date.now(), petTimes: [] };
-  let nextId = 1;
+  // label, colour, unlocks after N squashes, speed multiplier, catch lines
+  const TYPES = {
+    nil:   { label: 'nil pointer',    color: '#b03f24', at: 0, speed: 1,   lines: ['nil? Not anymore.', 'Dereferenced.', 'Got it.'] },
+    off:   { label: 'off-by-one',     color: '#6a8f3c', at: 0, speed: 1.1, lines: ['Off by none.', 'Counted it. Once.', 'Mrrp.'] },
+    race:  { label: 'race condition', color: '#c47a1e', at: 3, speed: 1.4, lines: ['It split!', 'Two of them now.'] },
+    half:  { label: 'race (half)',    color: '#c47a1e', at: 99, speed: 1.9, lines: ['One half down.', 'Race won.'] },
+    leak:  { label: 'memory leak',    color: '#5c7fa6', at: 5, speed: .7,  lines: ['Leak plugged.', 'Garbage collected. GC is jealous.'] },
+    flaky: { label: 'flaky test',     color: '#8a6aa6', at: 7, speed: 1.2, lines: ['Caught it while it was passing.', 'Not flaky now.'] },
+    heisen:{ label: 'heisenbug',      color: '#2e7a5a', at: 10, speed: 1.3, lines: ["Caught it without looking at it. Big brain.", 'Observed AND squashed.'] }
+  };
+  const bugSvg = c => `<svg viewBox="0 0 40 40" aria-hidden="true"><path d="M8 12l-6-4M8 20H1M8 28l-6 4M32 12l6-4M32 20h7M32 28l6 4" stroke="#1c1a16" stroke-width="2.5" stroke-linecap="round"/><ellipse cx="20" cy="22" rx="12" ry="14" fill="${c}"/><path d="M20 9v27" stroke="rgba(0,0,0,.35)" stroke-width="2"/><circle cx="20" cy="8" r="6" fill="#1c1a16"/><path d="M17 3l-3-4M23 3l3-4" stroke="#1c1a16" stroke-width="2" stroke-linecap="round"/><circle cx="15" cy="18" r="2.4" fill="rgba(255,255,255,.4)"/></svg>`;
 
-  // ---- badges (remembered per browser; the page works without storage) ----
-  const BADGES = ['first', 'purr', 'golden', 'backpressure', 'nap', 'regular'];
-  let got = new Set();
-  try { got = new Set(JSON.parse(localStorage.getItem('trailcat-badges') || '[]')); } catch (e) {}
-  function award(id, msg) {
+  let W = 0, H = 0, running = false, last = 0, raf = 0;
+  const catPos = { x: 80, y: 0 }, target = { x: 0, y: 0, on: false };
+  let bugs = [], squashed = 0, best = store.get('hunt-best', 0), racePending = 0, pounceUntil = 0, facing = 1;
+  const got = new Set(store.get('hunt-badges', []));
+
+  function size() { const r = yard.getBoundingClientRect(); W = r.width; H = r.height; catPos.y = catPos.y || H - 70; }
+  function catSize() { return W < 500 ? 64 : 92; }
+  const edge = () => (W < 500 ? 56 : 64); // keep bugs (and their name tags) inside the clearing
+
+  function say(text) { status.textContent = text; }
+  let bubbleT;
+  function speak(text) { bubble.textContent = text; bubble.classList.add('show'); clearTimeout(bubbleT); bubbleT = setTimeout(() => bubble.classList.remove('show'), 1400); }
+
+  function award(id, name) {
     if (got.has(id)) return;
-    got.add(id);
-    try { localStorage.setItem('trailcat-badges', JSON.stringify([...got])); } catch (e) {}
+    got.add(id); store.set('hunt-badges', [...got]);
     const li = document.querySelector(`[data-badge="${id}"]`);
-    li.classList.add('got', 'new');
-    if (!reduced) s.querySelector('.stamp')?.classList.add('stamped');
-    setTimeout(() => li.classList.remove('new'), 600);
-    renderBadges();
-    say(`Stamp collected: ${msg}!`);
+    if (li) { li.classList.add('got', 'new'); setTimeout(() => li.classList.remove('new'), 600); }
+    $('badgecount').textContent = got.size;
+    say(`Stamp collected: ${name}!`);
   }
   function renderBadges() {
-    BADGES.forEach(id => document.querySelector(`[data-badge="${id}"]`).classList.toggle('got', got.has(id)));
+    document.querySelectorAll('[data-badge]').forEach(li => li.classList.toggle('got', got.has(li.dataset.badge)));
     $('badgecount').textContent = got.size;
   }
 
-  // ---- mood ----
-  function mood() {
-    if (state.asleep) return 'Asleep';
-    if (state.hunger > 65) return 'Hungry';
-    if (state.hunger > 20) return 'Content';
-    return 'Stuffed';
+  function spawn(type, x, y) {
+    const t = TYPES[type];
+    const el = document.createElement('div');
+    el.className = 'bug bug-' + type;
+    el.innerHTML = bugSvg(t.color) + `<span>${t.label}</span>`;
+    yard.appendChild(el);
+    const a = Math.random() * Math.PI * 2;
+    const m = edge();
+    const b = { type, el, x: x ?? m + Math.random() * (W - 2 * m), y: y ?? 30 + Math.random() * (H - 90), a, size: type === 'half' ? .75 : 1, born: performance.now(), hop: 0 };
+    if (Math.hypot(b.x - catPos.x, b.y - catPos.y) < 120) b.x = catPos.x > W / 2 ? m : W - m; // don't spawn on her nose
+    bugs.push(b);
+    return b;
   }
-  const eatMs = () => (mood() === 'Stuffed' ? 2200 : 900); // stuffed consumer = slow consumer
-
-  // ---- queue ----
-  // returns false when the line is full (backpressure)
-  function offer(gold) {
-    if (state.queue.length >= CAP) return false;
-    state.queue.push({ id: nextId++, gold });
-    return true;
+  function pickType() {
+    const open = Object.entries(TYPES).filter(([k, t]) => t.at <= squashed && k !== 'half').map(([k]) => k);
+    const fresh = open.filter(k => TYPES[k].at > 0 && TYPES[k].at > squashed - 3); // newly unlocked types show up first
+    return fresh.length && Math.random() < .6 ? fresh[Math.floor(Math.random() * fresh.length)] : open[Math.floor(Math.random() * open.length)];
   }
+  const wanted = () => Math.min(2 + Math.floor(squashed / 4), 6);
 
-  function render() {
-    let html = '';
-    for (let i = 0; i < CAP; i++) {
-      const f = state.queue[i];
-      html += f ? `<li class="fish${f.gold ? ' gold' : ''}">${fishSvg}</li>` : '<li class="slot"></li>';
+  function squash(b) {
+    const t = TYPES[b.type];
+    b.el.classList.add('squashed');
+    setTimeout(() => b.el.remove(), 400);
+    bugs = bugs.filter(x => x !== b);
+    squashed++;
+    if (squashed > best) { best = squashed; store.set('hunt-best', best); }
+    $('squashed').textContent = squashed; $('best').textContent = best;
+    pounceUntil = performance.now() + 350;
+    cat.classList.remove('happy'); void cat.getBoundingClientRect(); cat.classList.add('happy');
+    if (typeof Sound !== 'undefined') Sound.meow(1.35, .3);
+    speak(t.lines[Math.floor(Math.random() * t.lines.length)]);
+    award('first', 'First bug');
+    if (b.type === 'race') {
+      racePending = 2;
+      spawn('half', b.x - 20, b.y); spawn('half', b.x + 20, b.y);
+      say('The race condition split in two. Get both!');
+    } else if (b.type === 'half') {
+      racePending--;
+      if (racePending <= 0) award('race', 'Race won');
+    } else if (b.type === 'heisen') {
+      award('heisen', 'Heisenbug');
+    } else {
+      say(`${t.label} squashed. ${squashed} down.`);
     }
-    queueEl.innerHTML = html;
-    queueEl.classList.toggle('full', state.queue.length >= CAP);
-    $('qcount').textContent = state.queue.length;
-    $('eaten').textContent = state.eaten;
-    $('pets').textContent = state.pets;
-    $('mood').textContent = mood();
   }
 
-  function say(msg, warn) {
-    status.textContent = msg;
-    status.classList.toggle('warn', !!warn);
-  }
-  let bubbleTimer;
-  function speak(text, ms = 1600) {
-    bubble.textContent = text;
-    bubble.classList.add('show');
-    clearTimeout(bubbleTimer);
-    bubbleTimer = setTimeout(() => bubble.classList.remove('show'), ms);
-  }
-  function flash(cls, ms) {
-    cat.classList.add(cls);
-    setTimeout(() => cat.classList.remove(cls), ms);
-  }
+  function step(now) {
+    raf = requestAnimationFrame(step);
+    const dt = Math.min(0.05, (now - last) / 1000 || 0); last = now;
+    const cs = catSize();
+    // the cat chases the laser (or idles near the middle if it's off)
+    // she aims her body (not her feet) at the dot
+    const gx = target.on ? target.x : W * .5, gy = target.on ? target.y + cs * .5 : H - 60;
+    const dx = gx - catPos.x, dy = gy - catPos.y, d = Math.hypot(dx, dy);
+    const sp = (target.on ? 300 : 60) * (reduced ? .6 : 1);
+    if (d > 4) { catPos.x += dx / d * Math.min(d, sp * dt); catPos.y += dy / d * Math.min(d, sp * dt); }
+    if (Math.abs(dx) > 6) facing = dx > 0 ? -1 : 1;
+    catPos.x = Math.max(cs / 2, Math.min(W - cs / 2, catPos.x));
+    catPos.y = Math.max(cs * .6, Math.min(H - 10, catPos.y));
+    hunter.style.transform = `translate(${catPos.x - cs / 2}px, ${catPos.y - cs}px)`;
+    cat.style.transform = `scaleX(${facing})` + (now < pounceUntil ? ' translateY(-10px) scale(1.08)' : '');
+    if (target.on) laser.style.transform = `translate(${target.x - 20}px, ${target.y - 20}px)`;
 
-  function wake() {
-    state.lastPoke = Date.now();
-    if (!state.asleep) return false;
-    state.asleep = false;
-    cat.classList.remove('asleep');
-    speak('!?');
-    Sound.meow(1.5, 0.25);
-    render();
-    return true;
-  }
-
-  function eatLoop() {
-    if (state.busy || !state.queue.length || state.asleep) return;
-    state.busy = true;
-    cat.classList.add('eating');
-    setTimeout(() => {
-      const f = state.queue.shift();
-      state.eaten++;
-      state.hunger = Math.max(0, state.hunger - (f.gold ? 30 : 12));
-      cat.classList.remove('eating');
-      if (f.gold) { flash('happy', 500); speak('GOLDEN!'); Sound.meow(1.4, 0.4); award('golden', 'Golden'); }
-      award('first', 'First bite');
-      if (state.eaten >= 50) award('regular', 'Regular');
-      render();
-      const m = mood();
-      if (m === 'Stuffed' && state.queue.length) say(`She's stuffed, so she's eating slower. ${state.queue.length} still waiting. That's how queues back up.`);
-      else if (state.queue.length) say(`Ate fish #${f.id}. ${state.queue.length} still in line.`);
-      else say(m === 'Stuffed' ? 'Line empty. She is very, very full.' : `Fish #${f.id}, gone. She's staring at you now.`);
-      state.busy = false;
-      setTimeout(eatLoop, 250);
-    }, eatMs());
-  }
-
-  function toss(n) {
-    const woke = wake();
-    let accepted = 0, golds = 0;
-    for (let i = 0; i < n; i++) {
-      const gold = Math.random() < 0.1;
-      if (offer(gold)) { accepted++; if (gold) golds++; }
+    const level = 1 + squashed / 10;
+    for (const b of bugs) {
+      const t = TYPES[b.type];
+      b.a += (Math.random() - .5) * 3 * dt * 2; // wander
+      // bugs nervously scurry away from the cat when she's close
+      const cx = b.x - catPos.x, cy = b.y - (catPos.y - cs / 2), cd = Math.hypot(cx, cy);
+      if (cd < 110) b.a = Math.atan2(cy, cx) + (Math.random() - .5) * .6;
+      const v = 38 * t.speed * level * (reduced ? .6 : 1) * (cd < 110 ? 1.6 : 1);
+      b.x += Math.cos(b.a) * v * dt; b.y += Math.sin(b.a) * v * dt;
+      const m = edge();
+      if (b.x < m || b.x > W - m) { b.a = Math.PI - b.a; b.x = Math.max(m, Math.min(W - m, b.x)); }
+      if (b.y < 20 || b.y > H - 30) { b.a = -b.a; b.y = Math.max(20, Math.min(H - 30, b.y)); }
+      if (b.type === 'leak') b.size = Math.min(1.9, b.size + dt * .04);
+      let visible = true;
+      if (b.type === 'flaky') { visible = Math.floor((now - b.born) / 1100) % 2 === 0; b.el.classList.toggle('blink', !visible); }
+      if (b.type === 'heisen' && target.on && Math.hypot(b.x - target.x, b.y - target.y) < 70 && now - b.hop > 900) {
+        b.hop = now; b.x = m + Math.random() * (W - 2 * m); b.y = 30 + Math.random() * (H - 90); // it knows you're looking
+        b.el.classList.remove('poof'); void b.el.offsetWidth; b.el.classList.add('poof');
+      }
+      b.el.style.transform = `translate(${b.x - 20}px, ${b.y - 20}px) rotate(${b.a + Math.PI / 2}rad) scale(${b.size})`;
+      b.el.querySelector('span').style.transform = `rotate(${-(b.a + Math.PI / 2)}rad)`;
+      if (visible && cd < 40 + 12 * b.size) { squash(b); break; }
     }
-    render();
-    const turnedAway = n - accepted;
-    if (turnedAway) {
-      say(`Line's full. ${turnedAway} fish turned away. That's backpressure. Slow down, she'll catch up.`, true);
-      speak('TOO MANY');
-      Sound.meow(0.8, 0.7);
-      award('backpressure', 'Backpressure');
-    } else if (golds) {
-      say('A golden fish! She has definitely noticed.');
-    } else if (!woke) {
-      say(n === 1 ? 'Fish in line. She has noticed.' : `${n} fish in line. She is very interested.`);
-    }
-    eatLoop();
+    while (bugs.length < wanted() && racePending <= 0) spawn(pickType());
   }
 
-  function pet(e) {
-    if (wake()) { say('You woke her up. She forgives you. Probably.'); return; }
-    const now = Date.now();
-    state.petTimes = state.petTimes.filter(t => now - t < 2500).concat(now);
-    if (state.petTimes.length > 6) {
-      flash('swat', 700);
-      speak('ENOUGH.');
-      Sound.beep([220, 160], 0.1, 'sawtooth', 0.05);
-      say("Okay, that's enough petting for now.", true);
-      state.petTimes = [];
-      return;
-    }
-    state.pets++;
-    cat.classList.add('purring');
-    clearTimeout(pet.t);
-    pet.t = setTimeout(() => cat.classList.remove('purring'), 900);
-    speak(state.hunger > 65 ? 'mrrp? fish?' : 'prrrr', 1100);
-    if (state.hunger > 65) Sound.meow(1.3, 0.3); else Sound.purr();
-    if (!reduced) spawnHeart(e);
-    if (state.pets >= 10) award('purr', 'Purr');
-    say(state.hunger > 65 ? 'She purrs, then glances at the bowl.' : 'Purring.');
-    render();
+  function start() { if (running) return; running = true; size(); last = performance.now(); raf = requestAnimationFrame(step); }
+  function stop() { running = false; cancelAnimationFrame(raf); }
+  // only run while the yard is on screen (observer, plus a cheap scroll check as a fallback)
+  function check() { const r = yard.getBoundingClientRect(); (r.bottom > 0 && r.top < innerHeight) ? start() : stop(); }
+  new IntersectionObserver(check, { threshold: [0, .2] }).observe(yard);
+  addEventListener('scroll', check, { passive: true });
+  addEventListener('resize', () => { size(); check(); });
+  check();
+
+  function aim(e) {
+    start();
+    const r = yard.getBoundingClientRect();
+    target.x = Math.max(8, Math.min(r.width - 8, e.clientX - r.left));
+    target.y = Math.max(8, Math.min(r.height - 8, e.clientY - r.top));
+    if (!target.on) { target.on = true; yard.classList.add('lasering'); hint.hidden = true; }
   }
+  yard.addEventListener('pointermove', e => { if (e.pointerType === 'mouse' || e.buttons) aim(e); });
+  yard.addEventListener('pointerdown', aim);
+  yard.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') { target.on = false; yard.classList.remove('lasering'); } });
+  yard.addEventListener('keydown', e => {
+    const k = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] }[e.key];
+    if (!k) return;
+    e.preventDefault();
+    if (!target.on) { target.x = catPos.x; target.y = catPos.y - 40; target.on = true; yard.classList.add('lasering'); hint.hidden = true; }
+    target.x = Math.max(8, Math.min(W - 8, target.x + k[0] * 28));
+    target.y = Math.max(8, Math.min(H - 8, target.y + k[1] * 28));
+  });
+  yard.addEventListener('blur', () => { if (!yard.matches(':hover')) { target.on = false; yard.classList.remove('lasering'); } });
 
-  function spawnHeart(e) {
-    const box = hearts.getBoundingClientRect();
-    const h = document.createElement('span');
-    h.className = 'heart';
-    const x = e && e.clientX ? e.clientX - box.left : box.width / 2;
-    h.style.left = Math.max(0, Math.min(box.width - 20, x - 10 + (Math.random() * 30 - 15))) + 'px';
-    h.style.top = box.height * 0.25 + 'px';
-    h.innerHTML = heartSvg;
-    hearts.appendChild(h);
-    setTimeout(() => h.remove(), 1200);
-  }
-
-  // eyes follow the pointer
-  if (!reduced) {
-    const pupils = cat.querySelector('.pupils');
-    addEventListener('pointermove', e => {
-      const r = cat.getBoundingClientRect();
-      const dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height * 0.35);
-      const d = Math.hypot(dx, dy) || 1;
-      pupils.style.transform = `translate(${(dx / d) * 2.5}px, ${(dy / d) * 2}px)`;
-    }, { passive: true });
-  }
-
-  // she only meows when you can see her
-  let catVisible = false;
-  new IntersectionObserver(([e]) => { catVisible = e.isIntersecting; }, { threshold: 0.25 }).observe(document.querySelector('.cat-yard'));
-  function meow(text, pitch) {
-    flash('meow', 700);
-    speak(text, 1300);
-    Sound.meow(pitch || (state.hunger > 90 ? 0.95 : 1.1));
-  }
-
-  // the clock: hunger rises, idle cats nap, hungry cats meow
-  setInterval(() => {
-    if (!state.asleep) state.hunger = Math.min(100, state.hunger + 1.5);
-    const idle = Date.now() - state.lastPoke;
-    if (!state.asleep && !state.queue.length && !state.busy && idle > 20000) {
-      state.asleep = true;
-      cat.classList.add('asleep');
-      say('Nobody was paying attention, so she fell asleep. Tap her or toss a fish.');
-      award('nap', 'Nap time');
-    } else if (!state.asleep && catVisible && state.hunger > 65 && !state.queue.length && !state.busy && Math.random() < 0.3) {
-      meow(state.hunger > 90 ? 'MEOW!' : 'meow?');
-    }
-    render();
-  }, 1500);
-
-  catBtn.addEventListener('click', pet);
-  $('toss').addEventListener('click', () => toss(1));
-  $('burst').addEventListener('click', () => toss(12));
-
-  // self-check: the line is FIFO and bounded
-  (function () {
-    for (let i = 0; i < CAP + 3; i++) offer(false);
-    console.assert(state.queue.length === CAP, 'line should cap at', CAP);
-    console.assert(state.queue[0].id < state.queue[1].id, 'line should be FIFO');
-    state.queue.length = 0; nextId = 1;
-  })();
+  // self-check: every bug type has a label and lines
+  console.assert(Object.values(TYPES).every(t => t.label && t.lines.length), 'bug types need labels and lines');
+  $('best').textContent = best;
   renderBadges();
-  render();
 })();
 
-
-// The server farm: the animals introduce themselves; play the incident game and every 3 fixes one of them tells you something about Aswin.
+// The server farm: Aswin's backend team. Tap any animal and it tells you about him from its own job.
+// No timer, nothing to fail: meet all seven and you've heard the whole story.
 (function () {
   const scene = document.getElementById('scene');
   if (!scene) return;
   const $ = id => document.getElementById(id);
-  const world = $('world'), dialog = $('dialog'), who = $('who'), say = $('say'), actions = $('actions');
-  const hud = $('hud'), timer = $('timer'), timerbar = $('timerbar'), live = $('live');
+  const world = $('world'), who = $('who'), say = $('say'), actions = $('actions'), note = $('note'), live = $('live');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const coarse = matchMedia('(pointer: coarse)').matches;
   const store = {
     get(k, d) { try { const v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } },
     set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
   };
 
   const STAFF = {
-    elephant: { name: 'Postgres', kind: 'the elephant', job: 'Database', does: 'remembers everything, forever', rz: -52 },
-    cow:      { name: 'Nginx', kind: 'the cow', job: 'Front door', does: 'herds incoming traffic across the servers', rz: -38 },
-    goat:     { name: 'GC', kind: 'the goat', job: 'Garbage collector', does: 'eats anything nobody is using anymore', rz: -24 },
-    croc:     { name: 'Redis', kind: 'the crocodile', job: 'Cache', does: 'answers the same questions in a snap', rz: -48 },
-    snake:    { name: 'Kafka', kind: 'the snake', job: 'Event stream', does: 'carries messages end to end, in order', rz: -36 },
-    fox:      { name: 'Vault', kind: 'the fox', job: 'Security', does: 'checks every ID and guards every secret', rz: -26 },
-    gopher:   { name: 'Gopher', kind: 'the Go dev', job: 'Go services', does: 'writes the code that ties it all together', rz: -40 }
+    elephant: { name: 'Postgres', kind: 'the elephant', job: 'Database', rz: -52 },
+    cow:      { name: 'Nginx', kind: 'the cow', job: 'Front door', rz: -38 },
+    goat:     { name: 'GC', kind: 'the goat', job: 'Garbage collector', rz: -24 },
+    croc:     { name: 'Redis', kind: 'the crocodile', job: 'Cache', rz: -48 },
+    snake:    { name: 'Kafka', kind: 'the snake', job: 'Event stream', rz: -36 },
+    fox:      { name: 'WAF', kind: 'the fox', job: 'Firewall', rz: -26 },
+    gopher:   { name: 'Gopher', kind: 'the Go dev', job: 'Go services', rz: -40 }
   };
-  const ORDER = ['elephant', 'cow', 'goat', 'croc', 'snake', 'fox', 'gopher'];
+  const ORDER = Object.keys(STAFF);
   const critters = Object.fromEntries(ORDER.map(k => [k, world.querySelector(`[data-who="${k}"]`)]));
 
-  const INTRO = [
-    ['elephant', "Oh hey, a visitor! Welcome to Aswin's server farm. Animals run everything here. I'm Postgres, the database. I never forget. Ever."],
-    ['cow', "Moo. Nginx. Front door. I herd the traffic so no server gets trampled."],
-    ['goat', "GC. Garbage collector. If nobody's using it, I'm eating it."],
-    ['croc', "Redis. Cache. Ask me twice and I'll answer in a snap."],
-    ['snake', "Kafka. Messages go in one end and out the other. In order. Always."],
-    ['fox', "Vault. Security. I check IDs and keep secrets. A few of them are about Aswin."],
-    ['gopher', "Gopher. I write the Go that holds this whole place together."],
-    ['elephant', "Want the tea on Aswin? Play a quick game. Stuff breaks, you send the right one of us to fix it. Every 3 fixes, someone spills."]
-  ];
-  const FACTS = [
-    ['cow', "He lives in Bangalore. Grew up in Wayanad, up in the hills of Kerala."],
-    ['gopher', "He builds backend systems: pipelines, queues, the bits that move money around. Basically, he's our boss."],
-    ['goat', "He climbs hills for fun. Treks, long walks, early bike rides. Respect."],
-    ['elephant', "He's an Associate Software Engineer at GreedyGame, on PubScale's backend. Started there as an intern."],
-    ['croc', "He thinks every animal is cute. Even me. The man has taste."],
-    ['elephant', "He moved a 30-million-row Postgres table and nobody noticed. Zero downtime. I remember every row."],
-    ['fox', "He loves Fantastic Mr. Fox. That's how I got this job. Don't tell anyone."],
-    ['snake', "He designed a pipeline that swallows 7 million+ events a day. Relatable."],
-    ['snake', "He travels solo and watches way too many movies. His ratings are down the trail."],
-    ['fox', "Before GreedyGame he was at a stealth startup. I'd tell you more, but, you know. Stealth."],
-    ['gopher', "He built SuSHi: SSH from your browser, even on your phone. It's on his GitHub."],
-    ['croc', "2nd place at his company hackathon, with a prototype he built in 3 days."],
-    ['elephant', "Computer Science at LPU, Punjab. Oh, and there's a cat down the trail. Go say hi, she's lowkey the main character."]
-  ];
-  const INCIDENTS = [
-    ['elephant', 'Queries are crawling. Someone forgot an index.'],
-    ['elephant', 'A customer says their order history vanished.'],
-    ['elephant', 'A report takes 40 seconds to load.'],
-    ['elephant', 'Two tables disagree about how many users exist.'],
-    ['elephant', 'Someone ran DELETE without a WHERE. We need yesterday\'s backup.'],
-    ['cow', 'Traffic just went 10x. One server is melting while the others nap.'],
-    ['cow', 'Every request is hitting the same poor server.'],
-    ['cow', 'A flash sale just started. Everyone arrived at once.'],
-    ['cow', 'One server died and requests keep getting sent to it anyway.'],
-    ['cow', 'Users in one region are getting all the lag.'],
-    ['goat', 'Memory keeps creeping up and never comes back down.'],
-    ['goat', 'The app freezes for a moment every few minutes, then recovers.'],
-    ['goat', 'Old sessions from last year are still hogging memory.'],
-    ['goat', 'Thousands of abandoned uploads are filling up storage.'],
-    ['goat', 'Leftover temp files have filled the whole disk.'],
-    ['croc', 'The homepage asks the database for the same data 1,000 times a second.'],
-    ['croc', 'Every page load recalculates the same leaderboard from scratch.'],
-    ['croc', 'Prices changed an hour ago but users still see the old ones.'],
-    ['croc', 'The product page takes 2 seconds, and its data barely ever changes.'],
-    ['croc', 'Every user\'s profile is fetched fresh on every single click.'],
-    ['snake', 'Messages are arriving faster than anyone can read them.'],
-    ['snake', 'Two services are shouting at each other directly. They need a go-between.'],
-    ['snake', 'Welcome emails are being sent twice.'],
-    ['snake', 'Orders are being processed out of order.'],
-    ['snake', 'A slow payment service is making every request wait. Let the work line up instead.'],
-    ['fox', 'Someone is trying 10,000 passwords a minute.'],
-    ['fox', 'A login token from 2019 just showed up. Suspicious.'],
-    ['fox', 'Someone signed up with the name "; DROP TABLE users;".'],
-    ['fox', 'An API key was pushed to a public repo.'],
-    ['fox', 'Someone can see other people\'s accounts by changing the ID in the URL.'],
-    ['gopher', 'Product wants a new API endpoint by Friday.'],
-    ['gopher', 'A bug in the code applies the discount twice.'],
-    ['gopher', 'A function panics on an empty list. Someone forgot a nil check.'],
-    ['gopher', 'The build is red. A test is failing on main.'],
-    ['gopher', 'A loop makes one database call per item. Rewrite it to batch.']
-  ];
+  // each animal talks about Aswin from its own job; the first line is its running joke
+  const LINES = {
+    elephant: [
+      n => `I'm Postgres, the database. I remember everything. For the record, you've tapped me ${n} time${n === 1 ? '' : 's'}.`,
+      () => "He's an Associate Software Engineer at GreedyGame, on PubScale's backend. Started as an intern. I have the records.",
+      () => "He moved a 30-million-row table of mine to a new home with zero downtime. I didn't even feel it."
+    ],
+    cow: [
+      () => "Nginx. Front door. I'd normally send you to someone else, but fine, you can stay.",
+      () => 'He lives in Bangalore. Grew up in Wayanad, up in the hills of Kerala.',
+      () => 'He rides a hybrid bike, early, before the city wakes up. Moo.'
+    ],
+    goat: [
+      () => "GC. I eat whatever nobody's using. I tried eating the old versions of this site. He kept backups. Rude.",
+      () => 'He treks. Uphill, sweaty, worth it for the view. Goat-approved.',
+      () => 'He studied Computer Science at LPU, in Punjab.'
+    ],
+    croc: [
+      (n, forgot) => forgot ? "Redis. Sorry, have we met? I forget things after a few seconds. It's a feature." : 'Redis, the cache. Ask me the same thing twice and I answer in a snap.',
+      () => "He thinks every animal is cute. Even crocodiles. Even me. The man has taste.",
+      () => '2nd place at his company hackathon, with a prototype he built in 3 days. I cached the trophy.'
+    ],
+    snake: [
+      () => 'Kafka. Messages go in one end and come out the other. In order. Always.',
+      () => 'He designed a pipeline that takes in over 7 million events a day. Relatable.',
+      () => 'Before GreedyGame he did backend at a stealth startup: live updates over Redis Streams. Very hush-hush.'
+    ],
+    fox: [
+      () => "WAF. Firewall. Sketchy requests don't get past me. You seem fine.",
+      () => "He loves Fantastic Mr. Fox. That's how I got this job. Don't tell anyone.",
+      () => 'He travels solo and watches way too many movies. His ratings are down the trail.'
+    ],
+    gopher: [
+      () => 'Gopher. I write the Go that holds this whole place together.',
+      () => "He builds the bits nobody notices until they break: queues, pipelines, the money stuff. Basically our boss.",
+      () => 'He built SuSHi: SSH from your browser, even on your phone. My favourite project.'
+    ]
+  };
 
-  // ---- sound effects (shared Sound module) ----
+  // ---- sound ----
   const muteBtn = $('mute');
   function setMute(m) { Sound.muted = m; muteBtn.setAttribute('aria-pressed', m); muteBtn.setAttribute('aria-label', m ? 'Unmute sound' : 'Mute sound'); }
   setMute(Sound.muted);
   muteBtn.addEventListener('click', () => setMute(!Sound.muted));
-  const beep = Sound.beep;
-  const sfx = {
-    blip: () => beep([660], 0.05, 'square', 0.03),
-    right: () => beep([523, 659, 784], 0.07),
-    wrong: () => beep([180, 140], 0.12, 'sawtooth', 0.04),
-    alarm: () => beep([880, 660], 0.08, 'square', 0.03),
-    down: () => beep([300, 200, 120], 0.14, 'sawtooth', 0.05),
-    level: () => beep([523, 659, 784, 1047], 0.09, 'triangle', 0.06)
-  };
+  const blip = () => Sound.beep([660], 0.05, 'square', 0.03);
+  const chime = () => Sound.beep([523, 659, 784, 1047], 0.08, 'triangle', 0.05);
 
   // ---- camera ----
   let baseS = 1, zoom = 1, rz = -38, rx = 58;
   function fit() {
     const r = scene.getBoundingClientRect();
-    // fit the floor plus the name sign into the space between the HUD and the dialog box
-    baseS = Math.max(0.5, Math.min(1.4, Math.min(r.width / 720, (r.height - 280) / 600)));
+    // fit the floor plus the name sign into the space above the dialog box
+    baseS = Math.max(0.5, Math.min(1.4, Math.min(r.width / 720, (r.height - 240) / 600)));
     cam();
   }
   function cam() {
@@ -427,11 +346,11 @@ const Sound = (function () {
     world.style.setProperty('--inv', (1 / (baseS * zoom)).toFixed(3)); // keeps nameplates readable when the scene shrinks
     world.style.setProperty('--rz', rz + 'deg');
     world.style.setProperty('--rx', rx + 'deg');
-    world.style.setProperty('--ty', (110 * baseS * zoom - 60) + 'px');
+    world.style.setProperty('--ty', (110 * baseS * zoom - 80) + 'px');
   }
   addEventListener('resize', fit);
   fit();
-  let mouseRz = 0, dragX = null;
+  let dragX = null;
   if (!reduced) {
     scene.addEventListener('pointermove', e => {
       if (e.pointerType === 'mouse') {
@@ -444,16 +363,13 @@ const Sound = (function () {
     scene.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse') dragX = e.clientX; });
     addEventListener('pointerup', () => { dragX = null; });
   }
-  function look(k, z) { rz = STAFF[k].rz; zoom = z || 1.08; cam(); }
-  function lookHome() { rz = -38; zoom = 1; cam(); }
+  function look(k) { rz = STAFF[k].rz; zoom = 1.06; cam(); }
 
   // ---- dialog ----
   let typing = null;
-  function talk(k, text, { alert = false, label } = {}) {
+  function talk(k, text) {
     Object.values(critters).forEach(c => c.classList.toggle('talking', c === critters[k]));
-    scene.classList.toggle('scene-dim', !!k && !alert);
-    dialog.classList.toggle('alert', alert);
-    who.textContent = label || (k ? `${STAFF[k].name} ${STAFF[k].kind} · ${STAFF[k].job}` : '');
+    who.textContent = k ? `${STAFF[k].name} ${STAFF[k].kind} · ${STAFF[k].job}` : 'Forest Backend Co.';
     live.textContent = (k ? STAFF[k].name + ': ' : '') + text;
     clearInterval(typing);
     if (reduced) { say.textContent = text; return; }
@@ -461,196 +377,62 @@ const Sound = (function () {
     say.textContent = '';
     typing = setInterval(() => { n += 2; say.textContent = text.slice(0, n); if (n >= text.length) clearInterval(typing); }, 16);
   }
-  const note = $('note');
-  function feedback(text, bad) {
-    note.textContent = text;
-    note.classList.toggle('bad', !!bad);
-    live.textContent = text;
-  }
-  function buttons(list, focusTo) {
+  function buttons(list) {
     const hadFocus = actions.contains(document.activeElement); // rebuilding must not drop keyboard focus
     actions.innerHTML = '';
     list.forEach(([label, fn, quiet]) => {
       const b = document.createElement('button');
-      b.type = 'button'; b.className = 'btn' + (quiet ? ' btn-quiet' : ''); b.textContent = label;
-      b.addEventListener('click', () => { sfx.blip(); fn(); });
+      b.type = 'button'; b.className = quiet ? 'text-action' : 'btn'; b.textContent = label;
+      b.addEventListener('click', () => { blip(); fn(); });
       actions.appendChild(b);
     });
-    if (hadFocus) (focusTo || actions.firstChild)?.focus();
-  }
-
-  // ---- intro ----
-  let step = 0;
-  function intro() {
-    const [k, text] = INTRO[step];
-    note.textContent = '';
-    look(k);
-    talk(k, text);
-    const last = step === INTRO.length - 1;
-    buttons(last ? [['Play to get to know me', startGame], ['Just walk the trail', toTrail, true]]
-                 : [['Next', () => { step++; intro(); }], ['Skip intro', () => { step = INTRO.length - 1; intro(); }, true]]);
+    if (hadFocus && actions.firstChild) actions.firstChild.focus();
   }
   function toTrail() { document.getElementById('who').scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' }); }
 
-  // ---- the game ----
-  const racks = [...world.querySelectorAll('.rack')];
-  const g = { on: false, score: 0, lives: 3, level: 1, combo: 1, solved: 0, inc: null, raf: 0, facts: store.get('farm-facts', 0) };
-  function hudRender() {
-    $('score').textContent = g.score;
-    $('level').textContent = g.level;
-    $('combo').textContent = 'x' + g.combo;
-    const toNext = g.solved % 3;
-    document.querySelectorAll('#nextbar i').forEach((el, i) => el.classList.toggle('on', i < toNext));
-    $('nextbar').setAttribute('aria-valuenow', toNext);
-    $('lives').innerHTML = [0, 1, 2].map(i => `<svg class="pip${i < g.lives ? '' : ' off'}" viewBox="0 0 12 16" aria-hidden="true"><rect x="1" y="1" width="10" height="14" rx="1"/><circle cx="6" cy="5" r="1.6"/></svg>`).join('') + `<span class="sr-only">${g.lives} of 3 servers up</span>`;
-  }
-  function startGame() {
-    Object.assign(g, { on: true, score: 0, lives: 3, level: 1, combo: 1, solved: 0 });
-    racks.forEach(r => r.classList.remove('down', 'alarm'));
-    hud.hidden = false; timer.hidden = false;
-    scene.classList.add('playing');
-    lookHome();
-    hudRender();
-    nextIncident();
-  }
-  const limit = () => Math.max(3, 9 - (g.level - 1) * 1.2); // seconds per incident, shrinking each level
-  function nextIncident() {
-    const up = racks.filter(r => !r.classList.contains('down'));
-    // shuffle-bag: every incident comes up once before any repeats
-    if (!g.bag || !g.bag.length) g.bag = INCIDENTS.slice().sort(() => Math.random() - 0.5);
-    const [owner, text] = g.bag.pop();
-    const rack = up[Math.floor(Math.random() * up.length)];
-    racks.forEach(r => r.classList.remove('alarm'));
-    rack.classList.add('alarm');
-    g.inc = { owner, rack, t0: performance.now(), ms: limit() * 1000 };
-    arm(g.inc.ms);
-    talk(null, text, { alert: true, label: `Incident · level ${g.level}` });
-    feedback(`Who fixes this? ${coarse ? 'Tap' : 'Click or press 1-7 for'} the right animal.`);
-    live.textContent = `Incident: ${text} Who fixes this?`;
-    buttons([['Stop playing', () => gameOver(true), true]], critters[ORDER[0]]); // focus the animals, not the quit button
-    sfx.alarm();
-    cancelAnimationFrame(g.raf);
-    tick();
-  }
-  // the deadline is a plain timer; animation frames only draw the bar
-  function arm(ms) { clearTimeout(g.deadline); g.deadline = setTimeout(timeout, Math.max(0, ms)); }
-  function tick() {
-    if (!g.on || !g.inc) return;
-    const left = 1 - (performance.now() - g.inc.t0) / g.inc.ms;
-    timerbar.style.transform = `scaleX(${Math.max(0, left)})`;
-    g.raf = requestAnimationFrame(tick);
-  }
-  function timeout() {
-    if (!g.on || !g.inc) return;
-    g.inc.rack.classList.remove('alarm');
-    g.inc.rack.classList.add('down');
-    g.lives--; g.combo = 1; g.inc = null;
-    sfx.down();
-    hudRender();
-    if (g.lives <= 0) return gameOver();
-    talk(null, 'Too slow. A server went down. That one\'s an L. The animals are judging you.', { alert: true, label: 'Server down' });
-    feedback(`${g.lives} of 3 servers still up.`, true);
-    setTimeout(() => g.on && nextIncident(), 1400);
-  }
-  function assign(k) {
-    if (!g.on || !g.inc) return;
-    const c = critters[k];
-    if (k === g.inc.owner) {
-      const left = Math.max(0, 1 - (performance.now() - g.inc.t0) / g.inc.ms);
-      g.score += 100 * g.combo + Math.round(left * 100);
-      g.combo = Math.min(5, g.combo + 1);
-      g.solved++;
-      g.inc.rack.classList.remove('alarm');
-      g.inc = null;
-      clearTimeout(g.deadline);
-      c.classList.add('right'); setTimeout(() => c.classList.remove('right'), 600);
-      hud.classList.remove('bump'); void hud.offsetWidth; hud.classList.add('bump');
-      sfx.right();
-      hudRender();
-      if (g.solved % 3 === 0) return levelUp(); // a new fact every 3 answers
-      talk(k, `${STAFF[k].name} fixed it. ${['Easy.', 'W.', 'Clean.', 'We love to see it.', 'Slay.'][Math.floor(Math.random() * 5)]} Combo x${g.combo}.`, { alert: false });
-      feedback(`${3 - (g.solved % 3)} more fix${3 - (g.solved % 3) === 1 ? '' : 'es'} until the next secret.`);
-      setTimeout(() => g.on && nextIncident(), 700);
-    } else {
-      g.combo = 1;
-      g.inc.t0 -= 1000; // wrong page costs a second
-      arm(g.inc.ms - (performance.now() - g.inc.t0));
-      c.classList.add('wrong'); setTimeout(() => c.classList.remove('wrong'), 700);
-      sfx.wrong();
-      hudRender();
-      feedback(`${STAFF[k].name} looks at the problem, then at you. Not a ${STAFF[k].job.toLowerCase()} problem. Try again.`, true);
-    }
-  }
-  function levelUp() {
-    cancelAnimationFrame(g.raf);
-    clearTimeout(g.deadline);
-    g.level++;
-    hudRender();
-    sfx.level();
-    let k, text;
-    if (g.facts < FACTS.length) {
-      [k, text] = FACTS[g.facts];
-      g.facts++;
-      store.set('farm-facts', g.facts);
-      text = `Level ${g.level}! ${text}`;
-    } else {
-      [k, text] = FACTS[Math.floor(Math.random() * FACTS.length)];
-      text = `Level ${g.level}! You've heard all our gossip. A rerun: ${text}`;
-    }
-    look(k);
-    feedback(`Secret ${g.facts} of ${FACTS.length} unlocked.`);
-    talk(k, text); // last, so screen readers announce the fact itself
-    timerbar.style.transform = 'scaleX(1)';
-    buttons([['Keep playing', () => { lookHome(); nextIncident(); }], ['Read the rest on the trail', () => { gameOver(true); toTrail(); }, true]]);
-  }
-  function gameOver(quit) {
-    g.on = false; g.inc = null;
-    clearTimeout(g.deadline);
-    cancelAnimationFrame(g.raf);
-    racks.forEach(r => r.classList.remove('alarm'));
-    timer.hidden = true;
-    scene.classList.remove('playing');
-    const best = store.get('farm-best', 0);
-    const isBest = g.score > best;
-    if (isBest) store.set('farm-best', g.score);
-    look('elephant', 1);
-    talk('elephant', quit && g.score === 0
-      ? 'Stopped already? No judgement. Well, a little.'
-      : `${quit ? 'Game over' : 'Game over. Every server is down, it\'s giving outage'}. Score ${g.score}${isBest ? ' (a new best!)' : `, best ${Math.max(best, g.score)}`}. Secrets unlocked: ${g.facts} of ${FACTS.length}. I'll remember where you left off.`);
-    const verdictLine = live.textContent;
-    feedback(g.facts < FACTS.length ? 'Play again for more secrets.' : 'You know everything we know. Honestly impressive.');
-    live.textContent = verdictLine + ' ' + note.textContent;
-    buttons([['Play again', startGame], ['Walk the trail', toTrail, true]]);
-    if (!quit) sfx.down();
+  // ---- interview state (remembered per browser) ----
+  const met = new Set(store.get('farm-met', []));
+  const step = Object.fromEntries(ORDER.map(k => [k, 0]));
+  let taps = store.get('farm-taps', 0), crocLast = 0;
+  function progress() {
+    ORDER.forEach(k => critters[k].classList.toggle('met', met.has(k)));
+    note.textContent = met.size === ORDER.length ? 'You met the whole team. Respect.' : `Met ${met.size} of ${ORDER.length}. Tap anyone to ask about Aswin.`;
   }
 
-  ORDER.forEach((k, i) => critters[k].addEventListener('click', () => {
-    if (g.on) return assign(k);
+  function ask(k) {
+    const lines = LINES[k];
+    const i = step[k] % lines.length;
+    step[k]++;
+    if (k === 'elephant') { taps++; store.set('farm-taps', taps); }
+    const forgot = k === 'croc' && Date.now() - crocLast > 5000; // Redis expires you after 5 seconds
+    if (k === 'croc') crocLast = Date.now();
     look(k);
-    talk(k, `I'm ${STAFF[k].name}, ${STAFF[k].kind}. ${STAFF[k].job}: I ${STAFF[k].does}. Play the game and I might spill something about Aswin.`);
-    buttons([['Play to get to know me', startGame], ['Hear the intro again', () => { step = 0; intro(); }, true]]);
-  }));
-  addEventListener('keydown', e => {
-    if (!g.on || e.target.closest('input, textarea')) return;
-    const n = parseInt(e.key, 10);
-    if (n >= 1 && n <= ORDER.length) { e.preventDefault(); assign(ORDER[n - 1]); }
-  });
+    talk(k, lines[i](taps, forgot));
+    const firstMeet = !met.has(k);
+    met.add(k);
+    store.set('farm-met', [...met]);
+    progress();
+    if (firstMeet && met.size === ORDER.length) {
+      chime();
+      buttons([['Walk the trail', toTrail]]);
+    } else {
+      buttons([[`Ask ${STAFF[k].name} more`, () => ask(k)], ['Walk the trail', toTrail, true]]);
+    }
+  }
+  ORDER.forEach(k => critters[k].addEventListener('click', () => ask(k)));
 
-  // self-checks
-  console.assert(INCIDENTS.every(([o]) => STAFF[o]) && FACTS.every(([o]) => STAFF[o]), 'every line needs a speaker on staff');
-  intro();
+  // ---- welcome: one line, then the farm is yours to explore ----
+  talk('elephant', met.size
+    ? `Welcome back! We remember you. You've met ${met.size} of us so far. Tap anyone to keep the gossip going.`
+    : "Welcome to Forest Backend Co. We're Aswin's backend team. Tap any of us to ask about him, or just walk the trail.");
+  buttons([['Walk the trail', toTrail, true]]);
+  progress();
 })();
 
-// The trail itself: sections rise into place in 3D, signs tilt toward the pointer, and reaching each checkpoint stamps it.
+// The trail itself: sections rise into place in 3D, the cyclist rides the line, and reaching each checkpoint stamps it.
 (function () {
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const stops = [...document.querySelectorAll('.stop')];
-  const names = { who: 'Hello', trail: 'Work', cat: 'Cat', find: 'Summit' };
-  const bar = document.createElement('div');
-  bar.className = 'progress';
-  bar.setAttribute('aria-hidden', 'true');
-  bar.innerHTML = `<p>Trail<b id="trailcount">0/${stops.length}</b></p><ol>${stops.map(s => `<li data-stop="${s.id}" title="${names[s.id] || s.id}"></li>`).join('')}</ol>`;
-  document.body.appendChild(bar);
   const seen = new Set();
 
   if (!reduced) stops.forEach(s => { s.classList.add('rise'); if (s.getBoundingClientRect().top > innerHeight) s.classList.add('pre'); });
@@ -661,16 +443,9 @@ const Sound = (function () {
     s.classList.remove('pre');
     if (seen.has(s.id)) return;
     seen.add(s.id);
-    const li = bar.querySelector(`[data-stop="${s.id}"]`);
-    li.classList.add('got', 'new');
     if (!reduced) s.querySelector('.stamp')?.classList.add('stamped');
-    bar.querySelector('#trailcount').textContent = seen.size === stops.length ? 'Done!' : `${seen.size}/${stops.length}`;
   }), { threshold: 0.2 });
   stops.forEach(s => io.observe(s));
-  // show the trail counter once you leave the farm
-  const hero = document.querySelector('.hero');
-  new IntersectionObserver(([e]) => bar.classList.toggle('on', !e.isIntersecting), { threshold: 0.15 }).observe(hero);
-
   // the rider: position follows scroll progress through the trail; wheels turn with distance travelled
   const trail = document.querySelector('.trail'), rider = document.getElementById('rider');
   const wheels = [['wheelR', 15], ['wheelF', 57]].map(([id, cx]) => [document.getElementById(id), cx]);
@@ -698,20 +473,10 @@ const Sound = (function () {
   addEventListener('resize', ride);
   ride();
 
-  if (!reduced && matchMedia('(pointer: fine)').matches) {
-    document.querySelectorAll('.wayside li, .sushi, .cat-yard').forEach(el => {
-      el.classList.add('tilt');
-      el.addEventListener('pointermove', e => {
-        const r = el.getBoundingClientRect();
-        const x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
-        el.style.transform = `perspective(700px) rotateY(${x * 10}deg) rotateX(${y * -10}deg) translateZ(10px)`;
-      });
-      el.addEventListener('pointerleave', () => { el.style.transform = ''; });
-    });
-  }
 })();
 
-// Fake captcha: "sus traffic detected", build the PC to get in. Shows once; always skippable.
+// Fake captcha: "select all the cute animals". The trick: every animal is cute, so the answer is all of them.
+// Shows once per browser; always skippable.
 (function () {
   const box = document.getElementById('captcha');
   if (!box) return;
@@ -719,60 +484,53 @@ const Sound = (function () {
   try { done = localStorage.getItem('captcha-done') === '1'; } catch (e) {}
   if (done || /[?&]nocaptcha/.test(location.search)) return;
   const msg = document.getElementById('capMsg');
-  const parts = [...box.querySelectorAll('.part')], slots = [...box.querySelectorAll('.slot')];
+  const tiles = [...box.querySelectorAll('.tile')];
   const before = document.activeElement;
-  let picked = null, placed = 0;
-  const NOPE = ["nah, that's not it chief", 'respectfully, no', "it's giving wrong slot", 'close. but no'];
+  const ROASTS = {
+    crocodile: 'Crocodiles are cute. Look at that smile.',
+    snake: 'Snakes are cute. Little danger noodles.',
+    bug: 'Bugs are cute too. (The cat down the trail thinks they are also snacks.)',
+    goat: 'Goats are cute. Chaotic, but cute.',
+    cow: 'Cows are cute. This is not up for debate.',
+    gopher: 'The gopher is cute and writes Go. Double cute.',
+    fox: 'The fox is cute and knows it.',
+    elephant: 'Elephants are cute. Big, but cute.',
+    cat: 'You skipped the CAT? Bold.'
+  };
 
   function close(text) {
     try { localStorage.setItem('captcha-done', '1'); } catch (e) {}
     msg.textContent = text || '';
-    setTimeout(() => { box.hidden = true; if (before && before.focus) before.focus(); }, text ? 1300 : 0);
+    setTimeout(() => { box.hidden = true; if (before && before.focus) before.focus(); }, text ? 1500 : 0);
   }
-  function pick(p) {
-    parts.forEach(x => x.setAttribute('aria-pressed', x === p ? 'true' : 'false'));
-    picked = p;
+  tiles.forEach(t => t.addEventListener('click', () => {
+    t.setAttribute('aria-pressed', t.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
+    t.classList.remove('missed');
+  }));
+  document.getElementById('capVerify').addEventListener('click', () => {
+    const missed = tiles.filter(t => t.getAttribute('aria-pressed') !== 'true');
     msg.className = 'captcha-msg';
-    msg.textContent = `${p.dataset.part.toUpperCase()} selected. Where does it go?`;
-  }
-  function drop(slot) {
-    if (slot.classList.contains('filled')) return;
-    if (!picked) { msg.textContent = 'Pick a part first, bestie.'; return; }
-    if (picked.dataset.part !== slot.dataset.slot) {
-      slot.classList.remove('nope'); void slot.offsetWidth; slot.classList.add('nope');
-      msg.className = 'captcha-msg bad';
-      msg.textContent = NOPE[Math.floor(Math.random() * NOPE.length)];
-      return;
+    if (missed.length === tiles.length) { msg.textContent = 'Bestie, you have to pick at least one.'; return; }
+    if (!missed.length) {
+      if (typeof Sound !== 'undefined') Sound.meow(1.3, .35);
+      msg.textContent = "Correct. They're ALL cute. You're human, no cap.";
+      return close(msg.textContent);
     }
-    slot.classList.add('filled');
-    slot.innerHTML = picked.querySelector('svg').outerHTML;
-    slot.setAttribute('aria-label', picked.dataset.part.toUpperCase() + ' installed');
-    picked.classList.add('used');
-    picked.setAttribute('aria-pressed', 'false');
-    picked = null;
-    placed++;
-    msg.className = 'captcha-msg';
-    if (placed === slots.length) {
-      if (typeof Sound !== 'undefined') Sound.beep([523, 659, 784, 1047], 0.08, 'triangle', 0.05);
-      close("PC built. You're human, no cap. Come on in.");
-    } else {
-      msg.textContent = ['Clean.', 'Slay.', 'Okay, engineer.'][placed - 1] || 'Nice.';
-      const next = parts.find(x => !x.classList.contains('used'));
-      if (next) next.focus();
-    }
-  }
-  parts.forEach(p => p.addEventListener('click', () => pick(p)));
-  slots.forEach(sl => sl.addEventListener('click', () => drop(sl)));
-  document.getElementById('capSkip').addEventListener('click', () => close("Fine. Bots welcome too, I guess."));
+    missed.forEach(t => { t.classList.remove('missed'); void t.offsetWidth; t.classList.add('missed'); });
+    msg.classList.add('bad');
+    const name = missed[0].dataset.name;
+    msg.textContent = `You missed the ${name}. ${ROASTS[name]} Try again.`;
+  });
+  document.getElementById('capSkip').addEventListener('click', () => close('Fine. Bots welcome too, I guess.'));
   box.addEventListener('keydown', e => {
     if (e.key === 'Escape') close();
     if (e.key === 'Tab') { // keep focus inside the card
-      const f = [...box.querySelectorAll('button:not(.used):not([disabled])')];
+      const f = [...box.querySelectorAll('button')];
       const i = f.indexOf(document.activeElement);
       if (e.shiftKey && i <= 0) { e.preventDefault(); f[f.length - 1].focus(); }
       else if (!e.shiftKey && i === f.length - 1) { e.preventDefault(); f[0].focus(); }
     }
   });
   box.hidden = false;
-  parts[0].focus();
+  tiles[0].focus();
 })();
